@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Upload Source Code</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <h1>Upload Source Code</h1>
+    <form
+      action="upload_source_code.php"
+      method="POST"
+      enctype="multipart/form-data"
+    >
+      <label for="title">Title:</label><br />
+      <input type="text" id="title" name="title" required /><br /><br />
+
+      <label for="description">Description:</label><br />
+      <textarea id="description" name="description" rows="4" required></textarea
+      ><br /><br />
+
+      <label for="price">Price (USD):</label><br />
+      <input
+        type="number"
+        id="price"
+        name="price"
+        step="0.01"
+        required
+      /><br /><br />
+
+      <label for="file">Source Code File:</label><br />
+      <input type="file" id="file" name="file" required /><br /><br />
+
+      <button type="submit">Upload</button>
+    </form>
+  </body>
+</html>

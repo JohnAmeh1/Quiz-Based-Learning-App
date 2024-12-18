@@ -1,0 +1,190 @@
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Leaderboard
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+ </head>
+ <body class="bg-gray-100 font-roboto">
+  <div class="container mx-auto p-4">
+   <header class="flex justify-between items-center py-4">
+    <h1 class="text-2xl font-bold">
+     Leaderboard
+    </h1>
+    <nav>
+     <ul class="flex space-x-4">
+      <li>
+       <a class="text-blue-500" href="#">
+        Home
+       </a>
+      </li>
+      <li>
+       <a class="text-blue-500" href="#">
+        Profile
+       </a>
+      </li>
+      <li>
+       <a class="text-blue-500" href="#">
+        Settings
+       </a>
+      </li>
+     </ul>
+    </nav>
+   </header>
+   <main>
+    <!-- Filters -->
+    <div class="mb-4 flex justify-between items-center">
+     <div>
+      <select class="p-2 border border-gray-300 rounded-lg">
+       <option>
+        Global
+       </option>
+       <option>
+        Regional
+       </option>
+       <option>
+        Friends
+       </option>
+      </select>
+     </div>
+     <div>
+      <select class="p-2 border border-gray-300 rounded-lg">
+       <option>
+        All Languages
+       </option>
+       <option>
+        Python
+       </option>
+       <option>
+        JavaScript
+       </option>
+       <option>
+        C++
+       </option>
+       <option>
+        Java
+       </option>
+      </select>
+     </div>
+    </div>
+    <!-- Leaderboard Table -->
+    <div class="bg-white p-4 rounded-lg shadow-md">
+     <h2 class="text-xl font-semibold mb-4">
+      Top Rankings
+     </h2>
+     <table class="w-full table-auto">
+      <thead>
+       <tr class="bg-gray-200">
+        <th class="px-4 py-2">
+         Rank
+        </th>
+        <th class="px-4 py-2">
+         User
+        </th>
+        <th class="px-4 py-2">
+         Points
+        </th>
+        <th class="px-4 py-2">
+         Badges
+        </th>
+       </tr>
+      </thead>
+      <tbody>
+       <tr class="bg-gray-100">
+        <td class="border px-4 py-2">
+         1
+        </td>
+        <td class="border px-4 py-2 flex items-center">
+         <img alt="User avatar of John Doe" class="w-10 h-10 rounded-full mr-3" height="50" src="https://storage.googleapis.com/a1aa/image/mKVIY3gc40bgEtHZx8RuJ9l3Mjrw7cy0DAOcjqK81QBA1e9JA.jpg" width="50"/>
+         John Doe
+        </td>
+        <td class="border px-4 py-2">
+         1500
+        </td>
+        <td class="border px-4 py-2">
+         <i class="fas fa-medal text-yellow-500 mr-1">
+         </i>
+         <i class="fas fa-trophy text-yellow-500 mr-1">
+         </i>
+         <i class="fas fa-star text-yellow-500">
+         </i>
+        </td>
+       </tr>
+       <tr>
+        <td class="border px-4 py-2">
+         2
+        </td>
+        <td class="border px-4 py-2 flex items-center">
+         <img alt="User avatar of Jane Smith" class="w-10 h-10 rounded-full mr-3" height="50" src="https://storage.googleapis.com/a1aa/image/mKVIY3gc40bgEtHZx8RuJ9l3Mjrw7cy0DAOcjqK81QBA1e9JA.jpg" width="50"/>
+         Jane Smith
+        </td>
+        <td class="border px-4 py-2">
+         1400
+        </td>
+        <td class="border px-4 py-2">
+         <i class="fas fa-medal text-yellow-500 mr-1">
+         </i>
+         <i class="fas fa-trophy text-yellow-500 mr-1">
+         </i>
+        </td>
+       </tr>
+       <tr class="bg-gray-100">
+        <td class="border px-4 py-2">
+         3
+        </td>
+        <td class="border px-4 py-2 flex items-center">
+         <img alt="User avatar of Alice Johnson" class="w-10 h-10 rounded-full mr-3" height="50" src="https://storage.googleapis.com/a1aa/image/mKVIY3gc40bgEtHZx8RuJ9l3Mjrw7cy0DAOcjqK81QBA1e9JA.jpg" width="50"/>
+         Alice Johnson
+        </td>
+        <td class="border px-4 py-2">
+         1300
+        </td>
+        <td class="border px-4 py-2">
+         <i class="fas fa-medal text-yellow-500 mr-1">
+         </i>
+        </td>
+       </tr>
+       <tr>
+        <td class="border px-4 py-2">
+         4
+        </td>
+        <td class="border px-4 py-2 flex items-center">
+         <img alt="User avatar of Bob Brown" class="w-10 h-10 rounded-full mr-3" height="50" src="https://storage.googleapis.com/a1aa/image/mKVIY3gc40bgEtHZx8RuJ9l3Mjrw7cy0DAOcjqK81QBA1e9JA.jpg" width="50"/>
+         Bob Brown
+        </td>
+        <td class="border px-4 py-2">
+         1200
+        </td>
+        <td class="border px-4 py-2">
+         <i class="fas fa-medal text-yellow-500 mr-1">
+         </i>
+        </td>
+       </tr>
+       <tr class="bg-gray-100">
+        <td class="border px-4 py-2">
+         5
+        </td>
+        <td class="border px-4 py-2 flex items-center">
+         <img alt="User avatar of Charlie Davis" class="w-10 h-10 rounded-full mr-3" height="50" src="https://storage.googleapis.com/a1aa/image/mKVIY3gc40bgEtHZx8RuJ9l3Mjrw7cy0DAOcjqK81QBA1e9JA.jpg" width="50"/>
+         Charlie Davis
+        </td>
+        <td class="border px-4 py-2">
+         1100
+        </td>
+        <td class="border px-4 py-2">
+         <i class="fas fa-medal text-yellow-500 mr-1">
+         </i>
+        </td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+   </main>
+  </div>
+ </body>
+</html>
