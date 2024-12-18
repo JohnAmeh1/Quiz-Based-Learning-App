@@ -24,7 +24,7 @@ if ($conn->connect_error) {
 }
 
 // Get top 2 users
-$topUsersQuery = "SELECT username, score FROM users ORDER BY score DESC LIMIT 5";
+$topUsersQuery = "SELECT username, score FROM users ORDER BY score DESC LIMIT 3";
 $topUsersResult = $conn->query($topUsersQuery);
 
 // Get current user's position (replace 1 with your user's ID)

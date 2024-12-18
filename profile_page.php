@@ -5,9 +5,9 @@ include("./Php/submit.php");
 
 $postnew = new Submit();
 $pp = $postnew->user_pp();
-// $user_data = getUser();
+$user_data = getUser();
 
-// $user_id = $user_data['id'];
+$user_id = $user_data['id'];
 ?>
 
 
@@ -314,6 +314,7 @@ $pp = $postnew->user_pp();
     </div>
     <?php include("./assets/footer_1.php") ?>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         function update_Profile() {
             const userId = <?= $user_id ?>;
