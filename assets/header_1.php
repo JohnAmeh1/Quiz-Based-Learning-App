@@ -34,7 +34,7 @@ $user_id = $user_data['id'];
                 </div>
                 <!-- Primary Nav -->
                 <div class="hidden md:flex items-center space-x-1">
-                    <a class="py-5 px-3 text-gray-700 hover:text-gray-900" href="#">
+                    <a class="py-5 px-3 text-gray-700 hover:text-gray-900" href="./dashboard.php">
                         Home
                     </a>
                     <a class="py-5 px-3 text-gray-700 hover:text-gray-900" href="#">
