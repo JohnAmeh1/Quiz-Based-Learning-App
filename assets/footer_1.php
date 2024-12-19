@@ -110,7 +110,7 @@
         </div>
         <div class="container mx-auto text-center mt-10">
             <p>
-                © 2023 Learn Programming. All rights reserved.
+                © 2024 EduQuest. All rights reserved.
             </p>
         </div>
     </footer>
