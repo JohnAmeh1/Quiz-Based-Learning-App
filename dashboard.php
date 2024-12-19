@@ -20,7 +20,7 @@
 
 <body class="bg-gray-100 text-gray-800">
     <?php include("./assets/header_1.php") ?>
-    <section class="container mx-auto p-5">
+    <section class="container mx-auto mt-5 p-5">
         <div class="flex flex-col md:flex-row items-center">
             <div class="md:w-1/2">
                 <h1 class="text-4xl font-bold mb-4">

@@ -19,12 +19,13 @@ class Login
             $row = $result[0];
             $_SESSION['username'] = $row;
             $col = $_SESSION['username']['username'];
+            $check = $_SESSION['username']['account_type'];
 
             $row = "SELECT * FROM users WHERE username = '$col' LIMIT 1";
 
             $DB = new Database();
             $result = $DB->read($row);
-            // return $result;
+            
             if (!empty($result)) {
                 $row = $result[0];
 
@@ -32,15 +33,14 @@ class Login
             }
 
             if ($username == $row['username']) {
-                //create session data
 
                 $_SESSION['la'] = $row['username'];
             }
 
             if ($password == $row['password']) {
-                //create session data
 
                 $_SESSION['la'] = $row['username'];
+                
             } else {
                 $this->error .= "Invalid Credientials!<br>";
             }
@@ -72,4 +72,5 @@ class Login
         $result = $DB->read($query, [$id]);
         return $result ? $result[0] : null;
     }
+    
 }

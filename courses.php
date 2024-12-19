@@ -1,3 +1,4 @@
+<?php include("./assets/header_1.php") ?>
 <html lang="en">
 
 <head>
@@ -10,7 +11,7 @@
     </script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet" />
-    <link rel="icon" href="./img/eduquest-logo__1_-removebg-preview.png">
+    
     <style>
         body {
             font-family: 'Roboto', sans-serif;
@@ -19,7 +20,6 @@
 </head>
 
 <body class="bg-gray-100">
-    <?php include("./assets/header_1.php") ?>
     <div class="min-h-screen flex flex-col">
         <!-- Main Content -->
         <div class="container mx-auto flex flex-1 py-6">

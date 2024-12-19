@@ -92,7 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
             <?php } ?>
 
-            <div id="loginForm" >
+            <div id="loginForm">
                 <form method="post">
                     <div class="mb-4">
                         <label class="block text-gray-700" for="sername">
