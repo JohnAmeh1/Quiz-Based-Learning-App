@@ -2066,3 +2066,48 @@ print("Hello, World!")
 </body>
 
 </html>
+
+
+<!-- paystack  -->
+<?php
+$prices = "8000";
+$email = $_SESSION['username']["email"];
+$username = $_SESSION['username']['username'];
+
+?>
+<script src="https://js.paystack.co/v1/inline.js"></script>
+<script>
+    function payWithPaystack() {
+        const api = "pk_test_fdeb97ce15dc119e28cc589fcb24fac669b14f81";
+        var handler = PaystackPop.setup({
+            key: api,
+            email: '<?php echo $email; ?>',
+            amount: <?php echo $prices * 100; ?>,
+            currency: "NGN",
+            ref: '' + Math.floor((Math.random() * 1000000000) + 1),
+            firstname: "<?php echo $username; ?>",
+            metadata: {
+                custom_fields: [{
+                    display_name: "<?php echo $username; ?>",
+                }]
+            },
+            callback: function(response) {
+                const referenced = response.reference;
+                // const randomCode = generateRandomCode();
+                window.location.href = 'home.php';
+            },
+            onClose: function() {
+                alert('window closed');
+            }
+        });
+
+        handler.openIframe();
+    }
+
+    // function generateRandomCode() {
+    //     // Generate a random code using a UUID library or another suitable method
+    //     // For demonstration purposes, using a simple random string generator
+    //     const randomString = Math.random().toString(36).substring(7);
+    //     return randomString;
+    // }
+</script>
