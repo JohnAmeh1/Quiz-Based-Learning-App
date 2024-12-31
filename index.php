@@ -1,6 +1,7 @@
 <?php
 // session_start();
 include("./php/all_files.php");
+include("./assets/user_auth.php");
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST["username"]) && isset($_POST["password"])) {
@@ -21,18 +22,40 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             header("location: index.php?error=$em");
             exit;
         }
-
+        
         $login = new Login();
         $results = $login->evaluate($_POST);
 
+        // if ($results != "") {
+        //     $em = "Incorrect Details, Please try again";
+        //     header("location: index.php?error=$em");
+        //     exit;
+        // } elseif ($results == "") {
+        //     header("location: ./dashboard.php");
+        //     die;
+        // }
         if ($results != "") {
             $em = "Incorrect Details, Please try again";
             header("location: index.php?error=$em");
             exit;
-        } elseif ($results == "") {
-            header("location: ./dashboard.php");
-            die;
+        } else {
+            // Assuming $results contains user data after successful evaluation
+            $user_data = getUser();// Method to fetch user data from DB
+
+            if ($user_data['account_type'] === 'mentor') {
+                header("location: ./mentor.php");
+                die;
+            } 
+            if ($user_data['account_type'] === 'admin') {
+                header("location: ./admin.php");
+                die;
+            }
+            else {
+                header("location: ./dashboard.php");
+                die;
+            }
         }
+
     }
 }
 

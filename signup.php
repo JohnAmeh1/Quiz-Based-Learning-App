@@ -148,6 +148,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <input class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" id="signupEmail" name="email" placeholder="Enter your email" type="email" />
                     </div>
                     <div class="mb-4">
+                        <label class="block text-gray-700" for="signupRole">
+                            Role
+                        </label>
+                        <select
+                            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            id="signupRole"
+                            name="account_type">
+                            <option value="" disabled selected>Select your role</option>
+                            <!-- <option value="admin">Admin</option> -->
+                            <option value="learner">Learner</option>
+                            <option value="mentor">Mentor</option>
+                        </select>
+
+                    </div>
+                    <div class="mb-4">
                         <label class="block text-gray-700" for="signupPassword">
                             Password
                         </label>
