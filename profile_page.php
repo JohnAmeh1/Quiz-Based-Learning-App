@@ -270,7 +270,7 @@ $user_id = $user_data['id'];
                     Leaderboard
                 </h3>
                 <h6 class="text-2xl font-bold text-gray-800 mb-4 text-lg">
-                    Top 2 Users
+                    Top 3 Users
                 </h6>
                 <ul class="list-decimal list-inside text-gray-700 mb-4">
                     <?php if ($topUsersResult->num_rows > 0): ?>

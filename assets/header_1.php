@@ -20,36 +20,47 @@ $user_id = $user_data['id'];
 </head>
 
 <body>
-
     <nav class="bg-white shadow-lg">
         <div class="max-w-6xl mx-auto px-4">
             <div class="flex justify-between">
                 <div class="flex space-x-4">
                     <!-- Logo -->
                     <div>
-                        <a class="flex items-center py-5 px-2 text-gray-700 hover:text-gray-900" href="#">
+                        <a class="flex items-center py-5 px-2 text-gray-700 hover:text-gray-900" href="../dashboard.php">
                             <img alt="Logo of the website" class="h-8 mr-2" height="20" src="./img/eduquest-sololearn-inspired.jpg" width="300" />
                         </a>
                     </div>
                     <!-- Primary Nav -->
                     <div class="hidden md:flex items-center space-x-1">
-                        <a class="py-5 px-3 text-gray-700 hover:text-gray-900" href="./dashboard.php">
+                        <a class="py-5 px-3 text-gray-700 hover:text-gray-900" href="../dashboard.php">
                             Home
                         </a>
-                        <a class="py-5 px-3 text-gray-700 hover:text-gray-900" href="#">
-                            About
+
+                        <a class="py-5 px-3 text-gray-700 hover:text-gray-900" href="../courses.php">
+                            Courses
                         </a>
-                        <a class="py-5 px-3 text-gray-700 hover:text-gray-900" href="#">
-                            Services
-                        </a>
-                        <a class="py-5 px-3 text-gray-700 hover:text-gray-900" href="#">
-                            Contact
+                        <!-- About Dropdown -->
+                        <div class="relative">
+                            <button id="pagesDropdownButton" class="py-5 px-3 text-gray-700 hover:text-gray-900 focus:outline-none">
+                                pages
+                                <i class="fas fa-chevron-down ml-2"></i>
+                            </button>
+                            <div id="pagesDropdownMenu" class="absolute hidden bg-white shadow-lg rounded-lg mt-2 w-48 z-10 border border-gray-300">
+                                <a href="./pages/about.php" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">About Us</a>
+                                <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Our Team</a>
+                                <a href="./pages/contact.php" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Contact Us</a>
+                                <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Company History</a>
+                            </div>
+                        </div>
+
+                        <a class="py-5 px-3 text-gray-700 hover:text-gray-900" href="./pages/Learner_Mentor.php">
+                            Connect With Mentor
                         </a>
                     </div>
                 </div>
+
                 <!-- Secondary Nav -->
                 <div class="md:flex items-center space-x-1 hidden">
-
                     <a class="py-2 px-3 bg-blue-500 text-white rounded hover:bg-blue-400" href="./logout.php">
                         logout
                     </a>
@@ -57,6 +68,7 @@ $user_id = $user_data['id'];
                         <i class="fas fa-user-circle text-gray pe-2"></i><?= $user_data['username'] ?>
                     </a>
                 </div>
+
                 <!-- Mobile Button -->
                 <div class="md:hidden flex items-center">
                     <button id="mobileMenuButton" class="mobile-menu-button">
@@ -65,31 +77,58 @@ $user_id = $user_data['id'];
                 </div>
             </div>
         </div>
+
         <!-- Mobile Menu -->
         <div id="mobileMenu" class="mobile-menu hidden md:hidden">
-            <a class="block py-2 px-4 text-sm hover:bg-gray-200" href="#">
+            <a class="block py-2 px-4 text-sm hover:bg-gray-200" href="./dashboard.php">
                 Home
             </a>
-            <a class="block py-2 px-4 text-sm hover:bg-gray-200" href="#">
-                About
+
+            <a class="block py-2 px-4 text-sm hover:bg-gray-200" href="./courses.php">
+                Courses
             </a>
-            <a class="block py-2 px-4 text-sm hover:bg-gray-200" href="#">
-                Services
-            </a>
-            <a class="block py-2 px-4 text-sm hover:bg-gray-200" href="#">
-                Contact
+            
+            <div class="block py-2 px-4 text-sm hover:bg-gray-200">
+                <button id="pagesDropdownButton" class="py-5 px-3 text-gray-700 hover:text-gray-900 focus:outline-none">
+                    pages
+                    <i class="fas fa-chevron-down ml-2"></i>
+                </button>
+                <div id="pagesDropdownMenu" class="absolute hidden bg-white shadow-lg rounded-lg mt-2 w-48 z-10 border border-gray-300">
+                    <a href="./pages/about.php" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">About Us</a>
+                    <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Our Team</a>
+                    <a href="./pages/contact.php" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Contact Us</a>
+                    <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Company History</a>
+                </div>
+            </div>
+            <a class="block py-2 px-4 text-sm hover:bg-gray-200" href="./pages/learner_mentor.php">
+                Connect With Mentor
             </a>
             <a class="block py-2 px-4 text-sm hover:bg-gray-200" href="./logout.php">
                 logout
             </a>
             <a href="./profile_page.php" class="block py-2 px-4 text-sm hover:bg-gray-200">
+                Profile
                 <i class="fas fa-user-circle text-gray pe-2"></i><?= $user_data['username'] ?>
             </a>
-
         </div>
     </nav>
 
     <script>
+        // Dropdown toggle function
+        const pagesDropdownButton = document.getElementById('pagesDropdownButton');
+        const pagesDropdownMenu = document.getElementById('pagesDropdownMenu');
+
+        pagesDropdownButton.addEventListener('click', () => {
+            pagesDropdownMenu.classList.toggle('hidden'); // Toggle the dropdown visibility
+        });
+
+        // Close the dropdown if clicked outside
+        document.addEventListener('click', (event) => {
+            if (!event.target.closest('.relative')) {
+                pagesDropdownMenu.classList.add('hidden');
+            }
+        });
+
         // Mobile menu toggle function
         const mobileMenuButton = document.getElementById('mobileMenuButton');
         const mobileMenu = document.getElementById('mobileMenu');

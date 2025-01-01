@@ -88,7 +88,7 @@
                 </h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     <!-- Course Card -->
-                    <div class="bg-gray-100 p-4 rounded-lg shadow">
+                    <div class="bg-gray-100 p-4 rounded-lg shadow transition-transform transform hover:scale-105">
                         <img alt="Thumbnail of a web development course, showing a computer screen with code" class="w-full h-40 object-cover rounded mb-4" height="200" src="https://storage.googleapis.com/a1aa/image/OozDBMYeBv3VQCcCZUKmYM3SPny2YwQ5TGZfZ2AVzqxk1I7TA.jpg" width="300" />
                         <h3 class="text-xl font-bold mb-2">
                             Web Development
@@ -101,7 +101,7 @@
                         </button>
                     </div>
                     <!-- Course Card -->
-                    <div class="bg-gray-100 p-4 rounded-lg shadow">
+                    <div class="bg-gray-100 p-4 rounded-lg shadow transition-transform transform hover:scale-105">
                         <img alt="Thumbnail of a data science course, showing a graph and data points" class="w-full h-40 object-cover rounded mb-4" height="200" src="https://storage.googleapis.com/a1aa/image/TD77mkfKkn0ncCAjjjN21rAuMDCDUmjO8UjjdgTE6aLxak9JA.jpg" width="300" />
                         <h3 class="text-xl font-bold mb-2">
                             Data Science
@@ -114,7 +114,7 @@
                         </button>
                     </div>
                     <!-- Course Card -->
-                    <div class="bg-gray-100 p-4 rounded-lg shadow">
+                    <div class="bg-gray-100 p-4 rounded-lg shadow transition-transform transform hover:scale-105">
                         <img alt="Thumbnail of a machine learning course, showing a neural network diagram" class="w-full h-40 object-cover rounded mb-4" height="200" src="https://storage.googleapis.com/a1aa/image/f8w1hTQXwTVyQyiVanoSxvkEFlvzun4ca68Uug6l88eg1I7TA.jpg" width="300" />
                         <h3 class="text-xl font-bold mb-2">
                             Machine Learning
@@ -127,7 +127,7 @@
                         </button>
                     </div>
                     <!-- Course Card -->
-                    <div class="bg-gray-100 p-4 rounded-lg shadow">
+                    <div class="bg-gray-100 p-4 rounded-lg shadow transition-transform transform hover:scale-105">
                         <img alt="Thumbnail of a mobile development course, showing a smartphone with app icons" class="w-full h-40 object-cover rounded mb-4" height="200" src="https://storage.googleapis.com/a1aa/image/BUzArCyvLYYqClw4r97hHFAYBv3ZaNWmEwIm0QkFmNFXNyeJA.jpg" width="300" />
                         <h3 class="text-xl font-bold mb-2">
                             Mobile Development
@@ -140,7 +140,7 @@
                         </button>
                     </div>
                     <!-- Course Card -->
-                    <div class="bg-gray-100 p-4 rounded-lg shadow">
+                    <div class="bg-gray-100 p-4 rounded-lg shadow transition-transform transform hover:scale-105">
                         <img alt="Thumbnail of a game development course, showing a game controller and a game scene" class="w-full h-40 object-cover rounded mb-4" height="200" src="https://storage.googleapis.com/a1aa/image/JZ8tAI1ozGZfWqMTfEufwxlPWhpCQuLVZROpjDib6dIKrR2nA.jpg" width="300" />
                         <h3 class="text-xl font-bold mb-2">
                             Game Development
@@ -153,7 +153,7 @@
                         </button>
                     </div>
                     <!-- Course Card -->
-                    <div class="bg-gray-100 p-4 rounded-lg shadow">
+                    <div class="bg-gray-100 p-4 rounded-lg shadow transition-transform transform hover:scale-105">
                         <img alt="Thumbnail of a cyber security course, showing a lock and a shield" class="w-full h-40 object-cover rounded mb-4" height="200" src="https://storage.googleapis.com/a1aa/image/VNvYg8IJObKdMZBUrx5tPKaTwiOgTtZsW0d5fBEKbL5vak9JA.jpg" width="300" />
                         <h3 class="text-xl font-bold mb-2">
                             Cyber Security
@@ -166,7 +166,7 @@
                         </button>
                     </div>
                     <!-- Course Card -->
-                    <div class="bg-gray-100 p-4 rounded-lg shadow">
+                    <div class="bg-gray-100 p-4 rounded-lg shadow transition-transform transform hover:scale-105">
                         <img alt="Thumbnail of a cloud computing course, showing a cloud icon and server racks" class="w-full h-40 object-cover rounded mb-4" height="200" src="https://storage.googleapis.com/a1aa/image/JsfMnBfIryt0UEmopyu1NyccXk6mSDkIUOHY1z6wSfpDrR2nA.jpg" width="300" />
                         <h3 class="text-xl font-bold mb-2">
                             Cloud Computing
@@ -179,7 +179,7 @@
                         </button>
                     </div>
                     <!-- Course Card -->
-                    <div class="bg-gray-100 p-4 rounded-lg shadow">
+                    <div class="bg-gray-100 p-4 rounded-lg shadow transition-transform transform hover:scale-105">
                         <img alt="Thumbnail of a DevOps course, showing a DevOps lifecycle diagram" class="w-full h-40 object-cover rounded mb-4" height="200" src="https://storage.googleapis.com/a1aa/image/4QIDaZWXqextdiyQKGkPVUaCCHKaDpsPfUGPbDSNMYFj1I7TA.jpg" width="300" />
                         <h3 class="text-xl font-bold mb-2">
                             DevOps
@@ -192,7 +192,7 @@
                         </button>
                     </div>
                     <!-- Course Card -->
-                    <div class="bg-gray-100 p-4 rounded-lg shadow">
+                    <div class="bg-gray-100 p-4 rounded-lg shadow transition-transform transform hover:scale-105">
                         <img alt="Thumbnail of an AI &amp; Robotics course, showing a robot and AI brain" class="w-full h-40 object-cover rounded mb-4" height="200" src="https://storage.googleapis.com/a1aa/image/A24F6vVVcW5KLpF8E4dBrDShXaPLQ66ebtABmTLKxr2tak9JA.jpg" width="300" />
                         <h3 class="text-xl font-bold mb-2">
                             AI &amp; Robotics
@@ -205,7 +205,7 @@
                         </button>
                     </div>
                     <!-- Course Card -->
-                    <div class="bg-gray-100 p-4 rounded-lg shadow">
+                    <div class="bg-gray-100 p-4 rounded-lg shadow transition-transform transform hover:scale-105">
                         <img alt="Thumbnail of a blockchain course, showing a blockchain network diagram" class="w-full h-40 object-cover rounded mb-4" height="200" src="https://storage.googleapis.com/a1aa/image/sWPdvXpuV95jF14P2l8gXLtSkZZfZjhWLKharuo9vfqd1I7TA.jpg" width="300" />
                         <h3 class="text-xl font-bold mb-2">
                             Blockchain
