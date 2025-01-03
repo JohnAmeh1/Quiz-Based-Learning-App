@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "ecommerce";
+$dbname = "learning_app";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -13,7 +13,7 @@ if ($conn->connect_error) {
 }
 
 // Fetch jobs
-$sql = "SELECT id, title, description FROM jobs";
+$sql = "SELECT id, title, description, link FROM jobs";
 $result = $conn->query($sql);
 ?>
 
@@ -40,6 +40,7 @@ $result = $conn->query($sql);
                 <div class='card'>
                     <h2>" . htmlspecialchars($row['title']) . "</h2>
                     <p>" . htmlspecialchars($row['description']) . "</p>
+                    <a href=' " .  htmlspecialchars($row['link']) . " >Apply Now</a>
                 </div>";
             }
         } else {

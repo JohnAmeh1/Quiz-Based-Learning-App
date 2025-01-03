@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $price = $_POST["price"];
     $user_id = $user_data["user_id"]; // Replace with logged-in user ID
 
-    $target_dir = "uploads/";
+    $target_dir = "uploads/codes";
     $target_file = $target_dir . basename($_FILES["file"]["name"]);
 
     if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_file)) {
