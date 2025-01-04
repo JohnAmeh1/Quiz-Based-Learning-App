@@ -47,7 +47,7 @@ include("./assets/leaderboard_page_inc.php");
 
                     <?php echo htmlspecialchars($row['username']); ?>
                   </td>
-                  <td class="border px-4 py-3 text-center"><?php echo htmlspecialchars($row['score']); ?> XP</td>
+                  <td class="border px-4 py-3 text-center"><?php echo htmlspecialchars($row['score']); ?><span class="text-amber-500">XP</span></td>
                 </tr>
               <?php endwhile; ?>
             </tbody>

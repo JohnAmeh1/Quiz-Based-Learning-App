@@ -27,7 +27,7 @@ $user_id = $user_data['id'];
     <link rel="icon" href="./img/brain.jpg">
 </head>
 
-<body class="bg-gray-100 font-roboto">
+<body class="bg-gradient-to-r from-blue-50 to-blue-100 font-roboto">
     <?php  ?>
 
     <div class="container mx-auto p-4">
@@ -49,7 +49,7 @@ $user_id = $user_data['id'];
                     <span class="text-3xl font-bold">
                         hi,
                     </span>
-                    <i class="font-medium"> <?= $user_data['username'] ?></i>!
+                    <i class="font-medium"> <?= $user_data['username'] ?></i> !
                 </div>
 
                 <p class="text-gray-600">
@@ -72,64 +72,106 @@ $user_id = $user_data['id'];
         <!-- Navigation Tabs -->
         <div class="mt-6 bg-white shadow-lg rounded-lg">
             <nav class="flex flex-col md:flex-row">
-                <a class="py-4 px-6 text-center text-gray-700 hover:bg-gray-200 hover:text-gray-900 border-b md:border-b-0 md:border-r" onclick="openModal()">
+                <a class="py-4 px-6 text-center text-gray-700 hover:bg-gray-200 hover:text-gray-900 border-b md:border-b-0 md:border-r cursor-pointer" onclick="openModal()">
                     Edit Profile
                 </a>
-                <a class="py-4 px-6 text-center text-gray-700 hover:bg-gray-200 hover:text-gray-900" href="#">
+                <a class="py-4 px-6 text-center text-gray-700 hover:bg-gray-200 hover:text-gray-900" onclick="openSettingsModal()">
                     Settings
                 </a>
             </nav>
         </div>
         <!-- edit profile  -->
-        <div class="inset-2 flex items-center justify-center bg-black bg-opacity-50 z-50 hidden" id="editProfileModal">
-            <div class="bg-white rounded-lg shadow-lg w-full max-w-md p-6">
-                <div class="flex justify-between items-center border-b pb-3">
-                    <h2 class="text-xl font-semibold">Edit Profile</h2>
-                    <button class="text-gray-500 hover:text-gray-700" onclick="closeModal()">
+        <div id="editProfileModal" class="hidden fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div class="bg-white p-6 rounded-lg shadow-lg w-11/12 sm:w-2/3 lg:w-1/3">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-lg font-semibold">Edit Profile</h2>
+                    <button class="text-gray-500 hover:text-gray-800" onclick="closeModal()">×</button>
+                </div>
+                <form class="mt-2" id="edit-profile-form" method="post">
+                    <div id="response-message" class="mt-2"></div>
+
+                    <!-- Username Field -->
+                    <div class="mb-2 flex space-x-4">
+                        <!-- Username Field -->
+                        <div class="w-1/2">
+                            <label class="block text-sm font-medium text-gray-700" for="username">Username</label>
+                            <input type="text" id="username" name="username" class="mt-1 block w-full border rounded-md py-2 px-3" placeholder="<?= $user_data['username'] ?>">
+                        </div>
+
+                        <!-- Email Field -->
+                        <div class="w-1/2">
+                            <label class="block text-sm font-medium text-gray-700" for="email">Email</label>
+                            <input type="email" id="email" name="email" class="mt-1 block w-full border rounded-md py-2 px-3" placeholder="<?= $user_data['email'] ?>">
+                        </div>
+                    </div>
+
+                    <!-- Bio Field -->
+                    <div class="mb-2">
+                        <label class="block text-sm font-medium text-gray-700" for="bio">Bio</label>
+                        <textarea id="bio" name="bio" rows="4" class="mt-1 block w-full border rounded-md py-2 px-3" placeholder="<?= $user_data['bio'] ?>"></textarea>
+                    </div>
+
+                    <!-- Social Media Fields -->
+                    <div class="mb-2">
+                        <label class="block text-sm font-medium text-gray-700" for="fb">Facebook Link</label>
+                        <input type="text" id="fb" name="fb" class="block w-full border rounded-md py-2 px-3" placeholder="<?= $user_data['fb'] ?>">
+                    </div>
+
+                    <div class="mb-2">
+                        <label class="block text-sm font-medium text-gray-700" for="tw">Twitter Link</label>
+                        <input type="text" id="tw" name="tw" class="block w-full border rounded-md py-2 px-3" placeholder="<?= $user_data['tw'] ?>">
+                    </div>
+
+                    <div class="mb-2">
+                        <label class="block text-sm font-medium text-gray-700" for="yt">YouTube Link</label>
+                        <input type="text" id="yt" name="yt" class="block w-full border rounded-md py-2 px-3" placeholder="<?= $user_data['yt'] ?>">
+                    </div>
+
+                    <!-- Save Changes Button -->
+                    <button type="button" class="w-full px-6 py-3 text-white bg-gradient-to-r 
+                    from-blue-500 to-indigo-600 rounded-lg shadow-md hover:from-indigo-600 
+                    hover:to-blue-500 transition-transform transform hover:scale-105 
+                    focus:outline-none focus:ring-2 focus:ring-blue-400" onclick="update_Profile()">Save Changes</button>
+                </form>
+            </div>
+        </div>
+        <div id="settingsModal" class="hidden fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div class="bg-white p-6 rounded-lg shadow-lg w-11/12 sm:w-2/3 lg:w-1/3">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-lg font-semibold">Settings</h2>
+                    <button onclick="closeSettingsModal()" class="text-gray-500 hover:text-gray-700">
                         <i class="fas fa-times"></i>
                     </button>
                 </div>
-                <form class="mt-4" id="edit-profile-form" method="post">
-                    <div id="response-message" class="mt-3"></div>
 
-                    <div class="mb-4">
-                        <label class="block text-sm font-medium text-gray-700" for="username">Username</label>
-                        <input type="text" id="username" name="username" class="mt-1 block w-full border rounded-md py-2 px-3"
-                            placeholder="<?= $user_data['username'] ?>">
-                    </div>
+                <!-- Profile Settings -->
+                <div class="mb-4">
+                    <label for="deactivateAccount" class="block text-sm font-medium text-gray-700">Deactivate Account</label>
+                    <p class="text-xs text-gray-500">Deactivating your account will permanently disable it.</p>
+                    <button id="deactivateAccount" class="w-full inline-block px-6 py-3 mt-2 text-white bg-red-500 rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400">
+                        Deactivate Account
+                    </button>
+                </div>
 
-                    <div class="mb-4">
-                        <label class="block text-sm font-medium text-gray-700" for="email">Email</label>
-                        <input type="email" id="email" name="email" class="mt-1 block w-full border rounded-md py-2 px-3"
-                            placeholder="<?= $user_data['email'] ?>">
-                    </div>
+                <!-- Notification Settings -->
+                <!-- <div class="mb-4">
+                    <label for="notifications" class="block text-sm font-medium text-gray-700">Email Notifications</label>
+                    <select id="notifications" name="notifications" class="mt-1 block w-full border rounded-md py-2 px-3">
+                        <option value="all">All</option>
+                        <option value="mentions">Mentions Only</option>
+                        <option value="none">None</option>
+                    </select>
+                </div> -->
 
-                    <div class="mb-4">
-                        <label class="block text-sm font-medium text-gray-700" for="bio">Bio</label>
-                        <textarea id="bio" name="bio" rows="4" class="mt-1 block w-full border rounded-md py-2 px-3"
-                            placeholder="<?= $user_data['bio'] ?>"></textarea>
-                    </div>
+                <!-- Theme Settings -->
+                <div class="mb-4">
+                    <label for="theme" class="block text-sm font-medium text-gray-700">Select Theme</label>
+                    <select id="theme" name="theme" class="mt-1 block w-full border rounded-md py-2 px-3">
+                        <option value="light">Light</option>
+                        <option value="dark">Dark</option>
+                    </select>
+                </div>
 
-                    <div class="mb-4">
-                        <label class="block text-sm font-medium text-gray-700" for="fb">Facebook Link</label>
-                        <input type="text" id="fb" name="fb" class="block w-full border rounded-md py-2 px-3"
-                            placeholder="<?= $user_data['fb'] ?>">
-                    </div>
-
-                    <div class="mb-4">
-                        <label class="block text-sm font-medium text-gray-700" for="tw">Twitter Link</label>
-                        <input type="text" id="tw" name="tw" class="block w-full border rounded-md py-2 px-3"
-                            placeholder="<?= $user_data['tw'] ?>">
-                    </div>
-
-                    <div class="mb-4">
-                        <label class="block text-sm font-medium text-gray-700" for="yt">YouTube Link</label>
-                        <input type="text" id="yt" name="yt" class="block w-full border rounded-md py-2 px-3"
-                            placeholder="<?= $user_data['yt'] ?>">
-                    </div>
-
-                    <button type="button" class="bg-indigo-600 text-white py-2 px-4 rounded-md" onclick="update_Profile()">Save Changes</button>
-                </form>
             </div>
         </div>
 
@@ -144,6 +186,7 @@ $user_id = $user_data['id'];
                 <p class="text-gray-700 mb-4">
                     <?= $user_data['bio'] ?>
                 </p>
+
                 <h3 class="text-2xl font-bold text-gray-800 mb-4">
                     Skills
                 </h3>
@@ -266,7 +309,7 @@ $user_id = $user_data['id'];
                 <h6 class="text-2xl font-bold text-gray-800 mb-4 text-lg">
                     Top 3 Users
                 </h6>
-                <ul class="list-decimal list-inside text-gray-700 mb-4">
+                <ul class="list-decimal list-inside text-gray-600 mb-4">
                     <?php if ($topUsersResult->num_rows > 0): ?>
                         <?php
                         $rowCount = 0; // Initialize a counter
@@ -276,8 +319,8 @@ $user_id = $user_data['id'];
                             <?php $rowCount++; // Increment the counter 
                             ?>
                             <li>
-                                <span class="font-bold text-gray-700"><b><?php echo htmlspecialchars($row['username']); ?></b></span>
-                                <span class=""><i class="fas fa-trophy text-orange-500"></i> - <b><?php echo htmlspecialchars($row['score']); ?><span class="text-amber-500">XP</span></b></span>
+                                <span class=""><b><?php echo htmlspecialchars($row['username']); ?></b></span>
+                                <span class=""> - <b><?php echo htmlspecialchars($row['score']); ?><span class="text-amber-500">XP</span></b></span>
                                 <br>
                                 <br>
                             </li>
@@ -294,8 +337,8 @@ $user_id = $user_data['id'];
                     <?php if ($currentUserResult->num_rows > 0): ?>
                         <?php while ($row = $currentUserResult->fetch_assoc()): ?>
                             <div class="user_score">
-                                <span class="font-bold text-gray-700"><b><?php echo htmlspecialchars($row['username']); ?></b> (Position: <?php echo htmlspecialchars($row['position']); ?>)</span>
-                                <span class=""><i class="fas fa-trophy text-orange-500"></i> - <b><?php echo htmlspecialchars($row['score']); ?><span class="text-amber-500">XP</span></b></span>
+                                <span class=""><b><?php echo htmlspecialchars($row['username']); ?></b> (Position: <?php echo htmlspecialchars($row['position']); ?>)</span>
+                                <span class=""> - <b><?php echo htmlspecialchars($row['score']); ?><span class="text-amber-500">XP</span></b></span>
                             </div>
                         <?php endwhile; ?>
                     <?php else: ?>
@@ -360,11 +403,43 @@ $user_id = $user_data['id'];
 
         function openModal() {
             document.getElementById('editProfileModal').classList.remove('hidden');
+            document.getElementById('editProfileModal').classList.add('flex');
         }
 
+        // Function to close modal
         function closeModal() {
+            document.getElementById('editProfileModal').classList.remove('flex');
             document.getElementById('editProfileModal').classList.add('hidden');
         }
+
+        function openSettingsModal() {
+            document.getElementById('settingsModal').classList.remove('hidden');
+        }
+
+        // Function to close the settings modal
+        function closeSettingsModal() {
+            document.getElementById('settingsModal').classList.add('hidden');
+        }
+        $(document).ready(function () {
+            $("#deactivateAccount").click(function () {
+                if (confirm("Are you sure you want to deactivate your account? This action cannot be undone.")) {
+                    $.ajax({
+                        type: "POST",
+                        url: "./assets/delete_account.php",
+                        success: function (response) {
+                            if (response === "success") {
+                                window.location.location = "./index.php";
+                            } else {
+                                alert("Error deleting account: " + response);
+                            }
+                        },
+                        error: function (error) {
+                            console.log("Error: " + error);
+                        }
+                    });
+                }
+            });
+        });
     </script>
 </body>
 

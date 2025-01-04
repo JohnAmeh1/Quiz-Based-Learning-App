@@ -20,7 +20,7 @@
 
 <body class="bg-gray-100 text-gray-800">
 
-    <footer class="bg-gray-800 text-white py-10 mt-10">
+    <footer class="bg-gray-800 text-white p-4 py-10 mt-10">
         <div class="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-6">
             <div>
                 <h3 class="text-xl font-bold mb-4">
@@ -31,7 +31,10 @@
                     Our courses are designed to be engaging, interactive, and comprehensive.
                 </p>
                 <button id="toTopButton"
-                    class="fixed bottom-4 right-4 p-5 bg-blue-500 text-white rounded-sm shadow-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300 transition">
+                    class="fixed bottom-4 right-4 p-5 inline-block px-6 py-3 text-white bg-gradient-to-r 
+                    from-blue-500 to-indigo-600 rounded-lg shadow-md hover:from-indigo-600 
+                    hover:to-blue-500 transition-transform transform hover:scale-105 
+                    focus:outline-none focus:ring-2 focus:ring-blue-400">
                     ↑
                 </button>
             </div>
@@ -56,7 +59,7 @@
                         </a>
                     </li>
                     <li class="mb-2">
-                        <a class="hover:underline" href="../pages/reviews_page.php">
+                        <a class="hover:underline" href="./pages/reviews_page.php">
                             Leave a review
                         </a>
                     </li>

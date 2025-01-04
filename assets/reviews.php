@@ -29,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 } elseif ($_SERVER["REQUEST_METHOD"] == "GET") {
     // Handle GET request (Fetch reviews)
-    $sql = "SELECT * FROM reviews ORDER BY created_at DESC LIMIT 3"; // Make sure to have a `created_at` field in the table
+    $sql = "SELECT * FROM reviews WHERE rating >= 4 ORDER BY Rand() DESC LIMIT 3"; // Make sure to have a `created_at` field in the table
     $result = $conn->query($sql);
 
     $reviews = [];

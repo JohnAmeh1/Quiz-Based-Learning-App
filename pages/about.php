@@ -14,7 +14,7 @@ include("./assets/header_pages.php");
     <link rel="icon" href="./img/brain.jpg">
 </head>
 
-<body class="bg-gray-50 font-roboto leading-relaxed">
+<body class="bg-gradient-to-r from-blue-50 to-blue-100 font-roboto leading-relaxed">
 
     <main class="container mx-auto px-4 py-16">
         <!-- Header Section -->

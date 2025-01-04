@@ -18,71 +18,62 @@
     </style>
 </head>
 
-<body class="bg-gray-100 text-gray-800">
+<body class="bg-gradient-to-r from-blue-50 to-blue-100 font-roboto">
     <?php include("./assets/header_1.php") ?>
-    <section class="container mx-auto mt-5 p-5">
-        <div class="flex flex-col md:flex-row items-center">
-            <div class="md:w-1/2">
-                <h1 class="text-4xl font-bold mb-4">
-                    Master Programming with Our Expert-Led Courses
-                </h1>
-                <p class="mb-4">
-                    Join thousands of learners and start your journey to becoming a programming expert. Our courses are designed to be engaging, interactive, and comprehensive.
-                </p>
-                <a class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700" href="./courses.php">
-                    Get Started
-                </a>
-            </div>
-            <div class="md:w-1/2 mt-5 md:mt-0">
-                <img alt="A group of diverse people learning programming together on laptops and whiteboards" height="400" src="https://storage.googleapis.com/a1aa/image/No3oX7jKvuLnIV1FCeUVehk76jVj2MJcf09uYTPY2KbwrM3nA.jpg" width="600" />
-            </div>
+    <section class="relative bg-blue-600 text-white">
+        <img
+            alt="A group of diverse people learning programming together on laptops and whiteboards"
+            class="w-full h-full object-cover opacity-50"
+            height="600"
+            src="https://storage.googleapis.com/a1aa/image/No3oX7jKvuLnIV1FCeUVehk76jVj2MJcf09uYTPY2KbwrM3nA.jpg"
+            width="1920" />
+        <div class="absolute inset-0 flex flex-col justify-center items-center text-center p-5">
+            <lottie-player src="https://assets9.lottiefiles.com/packages/lf20_uaxzlx1d.json" background="transparent" speed="1" loop autoplay style="width: 200px; height: 200px;"></lottie-player>
+            <h1 class="text-4xl md:text-6xl font-bold">Master Programming with Our Expert-Led Courses</h1>
+            <p class="mt-4 text-lg md:text-2xl">
+                Join thousands of learners and start your journey to becoming a programming expert. Our courses are designed to be engaging, interactive, and comprehensive.
+            </p>
+            <a class="mt-6 px-6 py-3 bg-white text-blue-600 font-bold rounded-full hover:bg-gray-200" href="./courses.php">
+                Get Started
+            </a>
         </div>
     </section>
+
     <section class="bg-white py-10">
         <div class="container mx-auto">
             <h2 class="text-3xl font-bold text-center mb-6">
                 Our Popular Courses
             </h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
                 <div class="bg-gray-100 p-5 rounded shadow">
-                    <img alt="A person coding on a laptop with code visible on the screen" class="mb-4" height="200" src="https://storage.googleapis.com/a1aa/image/hUTFf7AVTxSrPq9PejefX5XQtDee3RxUYeXSYkfp3RWwzVm7TA.jpg" width="500" />
-                    <h3 class="text-xl font-bold mb-2">
-                        Web Development
-                    </h3>
-                    <p class="mb-4">
+                    <img alt="A person working on a data analysis project with charts and graphs on the screen" class="mb-4 w-full h-auto" src="https://storage.googleapis.com/a1aa/image/hUTFf7AVTxSrPq9PejefX5XQtDee3RxUYeXSYkfp3RWwzVm7TA.jpg" />
+                    <h3 class="text-xl font-bold mb-2">Web Development</h3>
+                    <p class="mb-4 text-sm md:text-base">
                         Learn to build modern, responsive websites using HTML, CSS, and JavaScript.
                     </p>
-                    <a class="text-blue-600 hover:underline" href="#">
-                        Learn More
-                    </a>
+                    <a class="text-blue-600 hover:underline text-sm md:text-base" href="#">Learn More</a>
                 </div>
                 <div class="bg-gray-100 p-5 rounded shadow">
-                    <img alt="A person working on a data analysis project with charts and graphs on the screen" class="mb-4" height="200" src="https://storage.googleapis.com/a1aa/image/UrfdtoEbKXQQH6EuH8fnGzPqtzzVEVjzpqdApxDuUw62Vm7TA.jpg" width="500" />
-                    <h3 class="text-xl font-bold mb-2">
-                        Data Science
-                    </h3>
-                    <p class="mb-4">
+                    <img alt="A person working on a data analysis project with charts and graphs on the screen" class="mb-4 w-full h-auto" src="https://storage.googleapis.com/a1aa/image/UrfdtoEbKXQQH6EuH8fnGzPqtzzVEVjzpqdApxDuUw62Vm7TA.jpg" />
+                    <h3 class="text-xl font-bold mb-2">Data Science</h3>
+                    <p class="mb-4 text-sm md:text-base">
                         Master data analysis, visualization, and machine learning with Python.
                     </p>
-                    <a class="text-blue-600 hover:underline" href="#">
-                        Learn More
-                    </a>
+                    <a class="text-blue-600 hover:underline text-sm md:text-base" href="#">Learn More</a>
                 </div>
                 <div class="bg-gray-100 p-5 rounded shadow">
-                    <img alt="A person developing a mobile app with code and design tools on the screen" class="mb-4" height="200" src="https://storage.googleapis.com/a1aa/image/EbQGP7agl0rZA9TpIzW4k25HlhaonGfGgVelVSzvSf9krM3nA.jpg" width="500" />
-                    <h3 class="text-xl font-bold mb-2">
-                        Mobile Development
-                    </h3>
-                    <p class="mb-4">
+                    <img alt="A person developing a mobile app with code and design tools on the screen" class="mb-4 w-full h-auto" src="https://storage.googleapis.com/a1aa/image/EbQGP7agl0rZA9TpIzW4k25HlhaonGfGgVelVSzvSf9krM3nA.jpg" />
+                    <h3 class="text-xl font-bold mb-2">Mobile Development</h3>
+                    <p class="mb-4 text-sm md:text-base">
                         Create stunning mobile applications for Android and iOS using Flutter and React Native.
                     </p>
-                    <a class="text-blue-600 hover:underline" href="#">
-                        Learn More
-                    </a>
+                    <a class="text-blue-600 hover:underline text-sm md:text-base" href="#">Learn More</a>
                 </div>
             </div>
         </div>
     </section>
+
     <section class="bg-gray-600 text-white py-10">
         <div class="container mx-auto">
             <h2 class="text-3xl font-bold text-center mb-6">
@@ -166,6 +157,11 @@
         <div class="reviews-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <!-- Reviews will be injected here by AJAX -->
         </div>
+        <a href="./pages/reviews_page.php"
+            class="inline-block px-6 py-3 mt-4 text-white bg-gradient-to-r 
+                    from-blue-500 to-indigo-600 rounded-lg shadow-md hover:from-indigo-600 
+                    hover:to-blue-500 transition-transform transform hover:scale-105 
+                    focus:outline-none focus:ring-2 focus:ring-blue-400">More</a>
     </section>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

@@ -71,7 +71,7 @@ $user_id = $user_data['id'];
                     </div>
 
                     <!-- Primary Nav -->
-                    <div class="hidden md:flex items-center space-x-1">
+                    <div class="hidden lg:flex items-center space-x-1">
                         <a class="py-4 px-5 text-gray-800 hover:text-blue-600 transition-all duration-300 ease-in-out font-semibold text-lg" href="../dashboard.php">
                             Home
                         </a>
@@ -87,14 +87,14 @@ $user_id = $user_data['id'];
                                 <i class="fas fa-chevron-down ml-2"></i>
                             </button>
                             <div id="pagesDropdownMenu" class="absolute hidden bg-white shadow-lg rounded-lg mt-2 w-48 z-10 border border-gray-300">
-                                <a href="..about.php" class="block font-semibold px-4 py-2 text-gray-700 hover:bg-gray-100">About Us</a>
+                                <a href="./about.php" class="block font-semibold px-4 py-2 text-gray-700 hover:bg-gray-100">About Us</a>
                                 <a href="#" class="block font-semibold px-4 py-2 text-gray-700 hover:bg-gray-100">Our Team</a>
-                                <a href="..contact.php" class="block font-semibold px-4 py-2 text-gray-700 hover:bg-gray-100">Contact Us</a>
+                                <a href="./contact.php" class="block font-semibold px-4 py-2 text-gray-700 hover:bg-gray-100">Contact Us</a>
                                 <a href="#" class="block font-semibold px-4 py-2 text-gray-700 hover:bg-gray-100">Company History</a>
                             </div>
                         </div>
 
-                        <a class="py-4 px-5 text-gray-800 hover:text-blue-600 transition-all duration-300 ease-in-out font-semibold text-lg" href="..Learner_Mentor.php">
+                        <a class="py-4 px-5 text-gray-800 hover:text-blue-600 transition-all duration-300 ease-in-out font-semibold text-lg" href="./Learner_Mentor.php">
                             Mentorship
                         </a>
 
@@ -106,7 +106,7 @@ $user_id = $user_data['id'];
                 </div>
 
                 <!-- Secondary Nav -->
-                <div class="md:flex items-center space-x-1 hidden">
+                <div class="lg:flex items-center space-x-1 hidden">
                     <a href="../profile_page.php" class="flex items-center gap-4 py-3 px-4 rounded-lg shadow-md border border-blue-500 bg-blue-50 hover:bg-blue-100 hover:shadow-lg transition-all duration-300 ease-in-out space-x-3">
                         <span class="text-lg font-semibold text-blue-600 hover:text-blue-800">
                             <i class="fas fa-user-circle text-gray pe-2"></i><?= $user_data['username'] ?>
@@ -118,7 +118,7 @@ $user_id = $user_data['id'];
                 </div>
 
                 <!-- Mobile Button -->
-                <div class="md:hidden flex items-center">
+                <div class="lg:hidden flex items-center">
                     <button id="mobileMenuButton" class="mobile-menu-button">
                         <i class="fas fa-bars text-gray-700"></i>
                     </button>
@@ -127,7 +127,7 @@ $user_id = $user_data['id'];
         </div>
 
         <!-- Mobile Menu -->
-        <div id="mobileMenu" class="mobile-menu hidden md:hidden bg-gray-800 text-white">
+        <div id="mobileMenu" class="mobile-menu hidden lg:hidden bg-gray-800 text-white">
             <a class="block py-3 px-5 text-lg hover:bg-gray-700 transition-all duration-300" href="../dashboard.php">
                 Home
             </a>

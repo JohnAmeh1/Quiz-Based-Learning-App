@@ -18,7 +18,7 @@ $user_id = $user_data['id'];
     <title>Contact Us</title>
 </head>
 
-<body class="bg-gray-100">
+<body class="bg-gradient-to-r from-blue-50 to-blue-100 font-roboto">
 
     <!-- Contact Section -->
     <section class="py-16 px-4">
@@ -41,19 +41,22 @@ $user_id = $user_data['id'];
                     <label for="message" class="block text-gray-700 text-lg mb-2">Your Message</label>
                     <textarea id="message" name="message" rows="4" class="w-full p-3 border border-gray-300 rounded-md" required></textarea>
                 </div>
-                <button type="submit" class="w-full bg-blue-500 text-white py-3 rounded-lg hover:bg-blue-400" onclick="contact()">Send Message</button>
+                <button type="submit" class="w-full inline-block px-6 py-3 mt-4 text-white bg-gradient-to-r 
+                    from-blue-500 to-indigo-600 rounded-lg shadow-md hover:from-indigo-600 
+                    hover:to-blue-500 transition-transform transform hover:scale-105 
+                    focus:outline-none focus:ring-2 focus:ring-blue-400" onclick="contact()">Send Message</button>
             </form>
 
             <!-- Contact Info -->
-            <!-- <div class="mt-12">
+            <div class="mt-12">
                 <h2 class="text-2xl font-semibold text-gray-900 mb-4">Our Contact Information</h2>
                 <p class="text-lg text-gray-700">If you'd prefer, you can reach us via the following methods:</p>
                 <ul class="mt-4 space-y-3">
                     <li class="text-lg text-gray-700"><i class="fas fa-phone-alt mr-2"></i>+123 456 7890</li>
                     <li class="text-lg text-gray-700"><i class="fas fa-envelope mr-2"></i>support@eduquest.com</li>
-                    <li class="text-lg text-gray-700"><i class="fas fa-map-marker-alt mr-2"></i>1234 Learning St, Education City, Country</li>
+                    <!-- <li class="text-lg text-gray-700"><i class="fas fa-map-marker-alt mr-2"></i>1234 Learning St, Education City, Country</li> -->
                 </ul>
-            </div> -->
+            </div>
         </div>
     </section>
 

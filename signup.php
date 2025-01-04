@@ -127,7 +127,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             Profile Picture
                         </label>
                         <input type="file" id="image_path" name="image_path" accept="image/*"
-                            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+
+                            class=" w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                     </div>
                     <div class="mb-4">
                         <label class="block text-gray-700" for="signupUsername">
@@ -168,7 +169,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         </label>
                         <input class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" id="signupPassword" name="password" placeholder="Create a password" maxlength="8" type="password" />
                     </div>
-
                     <div class="flex items-center justify-between mb-4">
                         <div class="flex items-center">
                             <input class="h-4 w-4 text-blue-600" id="rememberMe" type="checkbox" />
@@ -180,7 +180,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             Login Here
                         </a>
                     </div>
-                    <input type="submit" name="signup" class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600" value="Sign-Up"
+                    <input type="submit" name="signup" class="w-full inline-block px-6 py-3 mt-4 text-white bg-gradient-to-r 
+                    from-blue-500 to-indigo-600 rounded-lg shadow-md hover:from-indigo-600 
+                    hover:to-blue-500 transition-transform transform hover:scale-105 
+                    focus:outline-none focus:ring-2 focus:ring-blue-400" value="Sign-Up"
                         style="font-size: 20px;">
                 </form>
                 <div class="text-center mt-6">

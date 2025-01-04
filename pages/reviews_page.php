@@ -11,7 +11,7 @@ $user_id = $user_data['id'];
 <head>
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-  <title>Reviews</title>
+  <title>EduQuest - Reviews</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
@@ -21,7 +21,7 @@ $user_id = $user_data['id'];
     rel="stylesheet" />
 </head>
 
-<body class="bg-gray-100 font-roboto">
+<body class="bg-gradient-to-r from-blue-50 to-blue-100 font-roboto">
   <div class="container mx-auto p-4">
 
     <main class="grid grid-cols-1 lg:grid-cols-3 gap-4">
@@ -76,7 +76,10 @@ $user_id = $user_data['id'];
               rows="4"></textarea>
           </div>
           <div class="text-center">
-            <button type="button" class="bg-blue-500 text-white px-4 py-2 rounded-lg" onclick="review()">
+            <button type="button" class="inline-block px-6 py-3 mt-4 text-white bg-gradient-to-r 
+                    from-blue-500 to-indigo-600 rounded-lg shadow-md hover:from-indigo-600 
+                    hover:to-blue-500 transition-transform transform hover:scale-105 
+                    focus:outline-none focus:ring-2 focus:ring-blue-400" onclick=" review()">
               Submit Review
             </button>
           </div>
@@ -87,13 +90,13 @@ $user_id = $user_data['id'];
       <section class="lg:col-span-2 bg-white p-4 rounded-lg shadow-md">
 
         <h2 class="text-3xl font-bold text-center mb-6">
-            User Reviews
+          User Reviews
         </h2>
         <div class="reviews-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            <!-- Reviews will be injected here by AJAX -->
+          <!-- Reviews will be injected here by AJAX -->
         </div>
-    </section>
-    
+      </section>
+
     </main>
   </div>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -159,19 +162,37 @@ $user_id = $user_data['id'];
             reviews.forEach((review) => {
               // Build the HTML structure for each review
               reviewsHtml += `
-              <div class="bg-gray-100 p-4 rounded-lg">
-                <div class="flex flex-col items-start mb-2">
-                    <img alt="User avatar of ${review.name}" class="w-10 h-10 rounded-full mr-3" height="50" src="https://storage.googleapis.com/a1aa/image/mKVIY3gc40bgEtHZx8RuJ9l3Mjrw7cy0DAOcjqK81QBA1e9JA.jpg" width="50" />
-                    <div>
-                    <p class="text-sm font-medium">${review.name}</p>
-                    <p class="text-xs text-gray-500">${review.created_at}</p> <!-- Adjust for your date format -->
-                    </div>
-                </div>
-                <p>${review.message}</p>
-                <div class="flex items-start mb-2">
-                    ${getStars(review.rating)}
-                </div>
-                </div>
+              <div class="bg-gray-100 p-4 rounded-lg cursor-pointer" onclick="openModal('${review.name}', '${review.created_at}', '${review.message}', ${review.rating})">
+    <div class="flex flex-col items-start mb-2">
+        <img 
+            alt="User avatar of ${review.name}" 
+            class="w-10 h-10 rounded-full mr-3" 
+            height="50" 
+            src="https://storage.googleapis.com/a1aa/image/mKVIY3gc40bgEtHZx8RuJ9l3Mjrw7cy0DAOcjqK81QBA1e9JA.jpg" 
+            width="50" 
+        />
+        <div>
+            <p class="text-sm font-medium">${review.name}</p>
+            <p class="text-xs text-gray-500">${review.created_at}</p>
+        </div>
+    </div>
+    <p>${review.message}</p>
+    <div class="flex items-start mb-2">
+        ${getStars(review.rating)}
+    </div>
+</div>
+<div id="reviewModal" class="hidden fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-11/12 sm:w-2/3 lg:w-1/3">
+        <div class="flex justify-between items-center mb-4">
+            <h2 id="modalName" class="text-lg font-semibold"></h2>
+            <button class="text-gray-500 hover:text-gray-800" onclick="closeModal()">×</button>
+        </div>
+        <p id="modalDate" class="text-xs text-gray-500 mb-2"></p>
+        <p id="modalMessage" class="text-sm mb-4"></p>
+        <div id="modalRating" class="flex mb-4"></div>
+        <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" onclick="closeModal()">Close</button>
+    </div>
+</div>
 
             `;
             });
@@ -203,6 +224,22 @@ $user_id = $user_data['id'];
     $(document).ready(function() {
       fetchReviews();
     });
+
+    function openModal(name, date, message, rating) {
+      document.getElementById("modalName").textContent = name;
+      document.getElementById("modalDate").textContent = date;
+      document.getElementById("modalMessage").textContent = message;
+
+      const ratingContainer = document.getElementById("modalRating");
+      ratingContainer.innerHTML = getStars(rating); // Call your getStars function for the rating display
+
+      document.getElementById("reviewModal").classList.remove("hidden");
+    }
+
+    // Close modal
+    function closeModal() {
+      document.getElementById("reviewModal").classList.add("hidden");
+    }
   </script>
   <?php include("./assets/footer_pages.php") ?>
 

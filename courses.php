@@ -11,7 +11,7 @@
     </script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet" />
-    
+
     <style>
         body {
             font-family: 'Roboto', sans-serif;
@@ -23,64 +23,7 @@
     <div class="min-h-screen flex flex-col">
         <!-- Main Content -->
         <div class="container mx-auto flex flex-1 py-6">
-            <!-- Sidebar -->
-            <aside class="w-1/4 bg-white shadow-lg rounded-lg p-4">
-                <h2 class="text-xl font-bold mb-4">
-                    Categories
-                </h2>
-                <ul class="space-y-2">
-                    <li>
-                        <a class="block p-2 rounded hover:bg-gray-200" href="#">
-                            Web Development
-                        </a>
-                    </li>
-                    <li>
-                        <a class="block p-2 rounded hover:bg-gray-200" href="#">
-                            Data Science
-                        </a>
-                    </li>
-                    <li>
-                        <a class="block p-2 rounded hover:bg-gray-200" href="#">
-                            Machine Learning
-                        </a>
-                    </li>
-                    <li>
-                        <a class="block p-2 rounded hover:bg-gray-200" href="#">
-                            Mobile Development
-                        </a>
-                    </li>
-                    <li>
-                        <a class="block p-2 rounded hover:bg-gray-200" href="#">
-                            Game Development
-                        </a>
-                    </li>
-                    <li>
-                        <a class="block p-2 rounded hover:bg-gray-200" href="#">
-                            Cyber Security
-                        </a>
-                    </li>
-                    <li>
-                        <a class="block p-2 rounded hover:bg-gray-200" href="#">
-                            Cloud Computing
-                        </a>
-                    </li>
-                    <li>
-                        <a class="block p-2 rounded hover:bg-gray-200" href="#">
-                            DevOps
-                        </a>
-                    </li>
-                    <li>
-                        <a class="block p-2 rounded hover:bg-gray-200" href="#">
-                            AI &amp; Robotics
-                        </a>
-                    </li>
-                    <li>
-                        <a class="block p-2 rounded hover:bg-gray-200" href="#">
-                            Blockchain
-                        </a>
-                    </li>
-                </ul>
-            </aside>
+
             <!-- Main Dashboard -->
             <main class="flex-1 bg-white shadow-lg rounded-lg p-6 ml-6">
                 <h2 class="text-2xl font-bold mb-4">
@@ -96,7 +39,7 @@
                         <p class="text-gray-700 mb-4">
                             Learn the basics of HTML, CSS, and JavaScript to build your own websites.
                         </p>
-                        <button class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
+                        <button class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 focus:ring">
                             Start Course
                         </button>
                     </div>
@@ -109,7 +52,7 @@
                         <p class="text-gray-700 mb-4">
                             Dive into data analysis, visualization, and machine learning with Python.
                         </p>
-                        <button class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
+                        <button class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 focus:ring">
                             Start Course
                         </button>
                     </div>
@@ -122,7 +65,7 @@
                         <p class="text-gray-700 mb-4">
                             Understand the fundamentals of machine learning and build your own models.
                         </p>
-                        <button class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
+                        <button class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 focus:ring">
                             Start Course
                         </button>
                     </div>
@@ -135,7 +78,7 @@
                         <p class="text-gray-700 mb-4">
                             Create mobile applications for Android and iOS using modern frameworks.
                         </p>
-                        <button class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
+                        <button class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 focus:ring">
                             Start Course
                         </button>
                     </div>
@@ -148,7 +91,7 @@
                         <p class="text-gray-700 mb-4">
                             Learn to design and develop your own video games using Unity and Unreal Engine.
                         </p>
-                        <button class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
+                        <button class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 focus:ring">
                             Start Course
                         </button>
                     </div>
@@ -161,7 +104,7 @@
                         <p class="text-gray-700 mb-4">
                             Protect systems and networks from cyber threats and attacks.
                         </p>
-                        <button class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
+                        <button class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 focus:ring">
                             Start Course
                         </button>
                     </div>
@@ -174,7 +117,7 @@
                         <p class="text-gray-700 mb-4">
                             Explore cloud services and architecture with AWS, Azure, and Google Cloud.
                         </p>
-                        <button class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
+                        <button class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 focus:ring">
                             Start Course
                         </button>
                     </div>
@@ -187,7 +130,7 @@
                         <p class="text-gray-700 mb-4">
                             Implement continuous integration and delivery pipelines with DevOps tools.
                         </p>
-                        <button class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
+                        <button class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 focus:ring">
                             Start Course
                         </button>
                     </div>
@@ -200,7 +143,7 @@
                         <p class="text-gray-700 mb-4">
                             Build intelligent systems and robots using AI and machine learning.
                         </p>
-                        <button class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
+                        <button class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 focus:ring">
                             Start Course
                         </button>
                     </div>
@@ -213,7 +156,7 @@
                         <p class="text-gray-700 mb-4">
                             Understand blockchain technology and develop decentralized applications.
                         </p>
-                        <button class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
+                        <button class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 focus:ring">
                             Start Course
                         </button>
                     </div>
@@ -221,15 +164,15 @@
             </main>
         </div>
     </div>
-    <?php include("./assets/footer_1.php") ?>
-    <script>
+    <!-- <script>
         const btn = document.querySelector("button.mobile-menu-button");
         const menu = document.querySelector(".mobile-menu");
 
         btn.addEventListener("click", () => {
             menu.classList.toggle("hidden");
         });
-    </script>
+    </script> -->
+    <?php include("./assets/footer_1.php") ?>
 </body>
 
 </html>

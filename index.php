@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             header("location: index.php?error=$em");
             exit;
         }
-        
+
         $login = new Login();
         $results = $login->evaluate($_POST);
 
@@ -40,22 +40,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             exit;
         } else {
             // Assuming $results contains user data after successful evaluation
-            $user_data = getUser();// Method to fetch user data from DB
+            $user_data = getUser(); // Method to fetch user data from DB
 
             if ($user_data['account_type'] === 'mentor') {
                 header("location: ./mentor.php");
                 die;
-            } 
+            }
             if ($user_data['account_type'] === 'admin') {
                 header("location: ./admin.php");
                 die;
-            }
-            else {
+            } else {
                 header("location: ./dashboard.php");
                 die;
             }
         }
-
     }
 }
 
@@ -141,7 +139,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         </a>
                     </div>
 
-                    <input type="submit" name="login" class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600" value="Login" style="font-size: 20px;">
+                    <input type="submit" name="login" class="w-full inline-block px-6 py-3 mt-4 text-white bg-gradient-to-r 
+                    from-blue-500 to-indigo-600 rounded-lg shadow-md hover:from-indigo-600 
+                    hover:to-blue-500 transition-transform transform hover:scale-105 
+                    focus:outline-none focus:ring-2 focus:ring-blue-400" value="Login" style="font-size: 20px;">
                 </form>
             </div>
         </div>

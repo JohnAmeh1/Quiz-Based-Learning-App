@@ -48,10 +48,24 @@ $conn->close();
 <body class="bg-gray-100 p-4">
 
     <div class="min-h-screen flex justify-center items-center bg-gray-50 px-4 sm:px-6 lg:px-8">
-        <div class="bg-white shadow-2xl rounded-xl w-full max-w-4xl px-6 py-8 border-4 border-blue-500 relative">
+        <div class="bg-gray-100 shadow-2xl rounded-xl w-full max-w-4xl px-6 py-8 border-4 border-blue-500 relative">
             <!-- Certificate Header -->
             <div class="text-center mb-6">
-                <img src="./img/brain.jpg" alt="Logo" class="mx-auto mb-4 rounded-full shadow-lg border-2 border-blue-400 p-1" style="width: 84px; height: 84px;"> <!-- Icon-sized Logo -->
+                <div class="flex items-center justify-center">
+                    <span
+                        class="flex items-center mx-auto py-3 px-4 w-50 rounded-full shadow-md border border-blue-500 bg-blue-50">
+                        <!-- Logo Section -->
+                        <img
+                            alt="EduQuest Logo"
+                            class="w-12 h-12 rounded-full border border-blue-400 shadow-sm"
+                            src="./img/brain.jpg" />
+                        <!-- Brand Name -->
+                        <span class="ml-4 text-lg font-semibold text-blue-600 hover:text-blue-800">
+                            EduQuest
+                        </span>
+                    </span>
+                </div>
+
                 <h1 class="text-4xl sm:text-5xl font-extrabold text-blue-600 mb-2">Certificate of Completion</h1>
                 <p class="text-lg sm:text-xl font-medium text-gray-700">This is to certify that</p>
             </div>
@@ -61,19 +75,17 @@ $conn->close();
                 <h2 class="text-5xl sm:text-6xl font-semibold text-blue-800 mb-4" style="font-family: 'Dancing Script', cursive;"><?php echo $user_name; ?></h2> <!-- Cursive for name -->
                 <p class="text-xl sm:text-2xl text-gray-600 mb-4">Has successfully completed the course</p>
                 <h3 class="text-3xl sm:text-4xl font-bold text-blue-600 mb-4">Web Development 101</h3>
-                <p class="text-lg text-gray-500">Course Duration: 6 Weeks</p>
+                <!-- <p class="text-lg text-gray-500">Course Duration: 6 Weeks</p> -->
             </div>
 
             <!-- Certificate Footer -->
-            <div class="flex justify-between mt-10 border-t-2 pt-6">
-                <div class="text-left">
-                    <p class="text-sm sm:text-base text-gray-600">Date of Completion: <?php echo date("F d, Y"); ?></p>
-                </div>
+            <div class="block mt-10 border-t-2 pt-6">
+                <!-- Signature Section -->
                 <div class="text-right space-y-4">
-                    <div class="flex items-center">
-                        <span class="border-b-2 border-gray-800 text-sm sm:text-base">Signature</span>
+                    <div class="flex items-center justify-end space-x-4">
+                        <span class="text-sm sm:text-base border-b-2 border-gray-800 pb-1">Signature</span>
+                        <span class="text-xs text-gray-600">Instructor</span>
                     </div>
-                    <div class="text-xs text-gray-600">Instructor</div>
                 </div>
             </div>
 
