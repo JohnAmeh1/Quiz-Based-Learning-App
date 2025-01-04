@@ -29,7 +29,7 @@
                 <p class="mb-4">
                     Join thousands of learners and start your journey to becoming a programming expert. Our courses are designed to be engaging, interactive, and comprehensive.
                 </p>
-                <a class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700" href="#">
+                <a class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700" href="./courses.php">
                     Get Started
                 </a>
             </div>
@@ -40,7 +40,7 @@
     </section>
     <section class="bg-white py-10">
         <div class="container mx-auto">
-            <h2 class="text-3xl font-bold text-center mb-6" >
+            <h2 class="text-3xl font-bold text-center mb-6">
                 Our Popular Courses
             </h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -122,7 +122,7 @@
             </div>
         </div>
     </section>
-    <section class="container mx-auto py-10">
+    <!-- <section class="container mx-auto py-10">
         <h2 class="text-3xl font-bold text-center mb-6">
             What Our Students Say
         </h2>
@@ -155,7 +155,87 @@
                 </p>
             </div>
         </div>
+    </section> -->
+
+    <!-- Reviews Section -->
+    <section class="lg:col-span-2 bg-white p-4 rounded-lg shadow-md">
+
+        <h2 class="text-3xl font-bold text-center mb-6">
+            What Our Students Say
+        </h2>
+        <div class="reviews-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <!-- Reviews will be injected here by AJAX -->
+        </div>
     </section>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        // Function to fetch reviews and display them
+        function fetchReviews() {
+            $.ajax({
+                type: "GET",
+                url: "./assets/reviews.php", // Path to the reviews.php script
+                success: function(response) {
+                    const reviews = JSON.parse(response);
+
+                    if (reviews.length === 0) {
+                        // No reviews found
+                        $(".reviews-container").html("<p>No reviews yet.</p>");
+                    } else {
+                        let reviewsHtml = "";
+                        reviews.forEach((review) => {
+                            // Build the HTML structure for each review
+                            reviewsHtml += `
+                        <div class="bg-gray-100 p-4 rounded-lg flex flex-col items-center text-center">
+                            <div class="flex flex-col items-center mb-2">
+                                <img alt="User avatar of ${review.name}" 
+                                    class="w-10 h-10 rounded-full mb-2" 
+                                    height="50" 
+                                    src="https://storage.googleapis.com/a1aa/image/mKVIY3gc40bgEtHZx8RuJ9l3Mjrw7cy0DAOcjqK81QBA1e9JA.jpg" 
+                                    width="50" />
+                                <div>
+                                    <p class="text-md font-semibold">${review.name}</p>
+                                    <p class="text-xs text-gray-500">${review.created_at}</p>
+                                </div>
+                            </div>
+                            <p>"${review.message}"</p>
+                            <div class="flex items-center mb-2">
+                                ${getStars(review.rating)}
+                            </div>
+                        </div>
+
+                        `;
+                        });
+
+                        // Insert the reviews into the page
+                        $(".reviews-container").html(reviewsHtml);
+                    }
+                },
+                error: function() {
+                    $(".reviews-container").html('<div class="bg-red-500 text-white p-3 rounded">An error occurred while fetching reviews.</div>');
+                }
+            });
+        }
+
+        // Function to render the stars based on rating
+        function getStars(rating) {
+            let starsHtml = "";
+            for (let i = 1; i <= 5; i++) {
+                if (i <= rating) {
+                    starsHtml += '<i class="fas fa-star text-yellow-500"></i>';
+                } else {
+                    starsHtml += '<i class="far fa-star text-yellow-500"></i>';
+                }
+            }
+            return starsHtml;
+        }
+
+        // Call fetchReviews when the page loads
+        $(document).ready(function() {
+            fetchReviews();
+        });
+    </script>
+
     <?php include("./assets/footer_1.php") ?>
 </body>
 

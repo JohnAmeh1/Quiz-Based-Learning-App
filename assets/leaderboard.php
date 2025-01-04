@@ -11,6 +11,7 @@ $result = $DB->read($query);
 if ($result){
     $user_data = $result[0];
 }
+$user_data = getUser();
 
 $servername = "localhost";
 $username = "root";
@@ -22,9 +23,11 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
+$user = $user_data['account_type'];
+
 
 // Get top 2 users
-$topUsersQuery = "SELECT username, score FROM users ORDER BY score DESC LIMIT 3";
+$topUsersQuery = "SELECT username, score FROM users where account_type = '$user' ORDER BY score DESC LIMIT 3";
 $topUsersResult = $conn->query($topUsersQuery);
 
 // Get current user's position (replace 1 with your user's ID)

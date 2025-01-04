@@ -29,6 +29,10 @@
                 <p>
                     Join thousands of learners and start your journey to becoming a programming expert. Our courses are designed to be engaging, interactive, and comprehensive.
                 </p>
+                <button id="toTopButton"
+                    class="fixed bottom-4 right-4 p-5 bg-blue-500 text-white rounded-sm shadow-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300 transition">
+                    ↑
+                </button>
             </div>
             <div>
                 <h3 class="text-xl font-bold mb-4">
@@ -36,23 +40,23 @@
                 </h3>
                 <ul>
                     <li class="mb-2">
-                        <a class="hover:underline" href="#">
+                        <a class="hover:underline" href="../dashboard.php">
                             Home
                         </a>
                     </li>
                     <li class="mb-2">
-                        <a class="hover:underline" href="#">
+                        <a class="hover:underline" href="../courses.php">
                             Courses
                         </a>
                     </li>
                     <li class="mb-2">
-                        <a class="hover:underline" href="#">
+                        <a class="hover:underline" href="../about.php">
                             About
                         </a>
                     </li>
                     <li class="mb-2">
-                        <a class="hover:underline" href="#">
-                            Contact
+                        <a class="hover:underline" href="../reviews_page.php">
+                            Leave a review
                         </a>
                     </li>
                 </ul>
@@ -73,8 +77,8 @@
                         </a>
                     </li>
                     <li class="mb-2">
-                        <a class="hover:underline" href="#">
-                            Support
+                        <a class="hover:underline" href="../contact.php">
+                            Contact Support
                         </a>
                     </li>
                     <li class="mb-2">
@@ -114,6 +118,28 @@
             </p>
         </div>
     </footer>
+    <script>
+        // Scroll to top function
+        const toTopButton = document.getElementById("toTopButton");
+        toTopButton.addEventListener("click", () => {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth",
+            });
+        });
+
+        // Show or hide the button based on scroll position
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 200) {
+                toTopButton.style.display = "block";
+            } else {
+                toTopButton.style.display = "none";
+            }
+        });
+
+        // Initially hide the button
+        toTopButton.style.display = "none";
+    </script>
 </body>
 
 </html>

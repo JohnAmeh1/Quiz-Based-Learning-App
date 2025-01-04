@@ -1,7 +1,7 @@
 <?php
 include("./assets/header_1.php");
 include("./assets/leaderboard.php");
-include("./Php/submit.php");
+include("./php/submit.php");
 
 $postnew = new Submit();
 $pp = $postnew->user_pp();
@@ -74,12 +74,6 @@ $user_id = $user_data['id'];
             <nav class="flex flex-col md:flex-row">
                 <a class="py-4 px-6 text-center text-gray-700 hover:bg-gray-200 hover:text-gray-900 border-b md:border-b-0 md:border-r" onclick="openModal()">
                     Edit Profile
-                </a>
-                <a class="py-4 px-6 text-center text-gray-700 hover:bg-gray-200 hover:text-gray-900 border-b md:border-b-0 md:border-r" href="#">
-                    Courses
-                </a>
-                <a class="py-4 px-6 text-center text-gray-700 hover:bg-gray-200 hover:text-gray-900 border-b md:border-b-0 md:border-r" href="#">
-                    Achievements
                 </a>
                 <a class="py-4 px-6 text-center text-gray-700 hover:bg-gray-200 hover:text-gray-900" href="#">
                     Settings
@@ -172,7 +166,7 @@ $user_id = $user_data['id'];
                 </ul>
             </div>
             <!-- Recent Activity -->
-            <div class="bg-white shadow-lg rounded-lg p-6">
+            <!-- <div class="bg-white shadow-lg rounded-lg p-6">
                 <h3 class="text-2xl font-bold text-gray-800 mb-4">
                     Recent Activity
                 </h3>
@@ -220,9 +214,9 @@ $user_id = $user_data['id'];
                         </div>
                     </li>
                 </ul>
-            </div>
+            </div> -->
             <!-- Courses -->
-            <div class="bg-white shadow-lg rounded-lg p-6">
+            <!-- <div class="bg-white shadow-lg rounded-lg p-6">
                 <h3 class="text-2xl font-bold text-gray-800 mb-4">
                     Courses
                 </h3>
@@ -243,7 +237,7 @@ $user_id = $user_data['id'];
                         Node.js and Express
                     </li>
                 </ul>
-            </div>
+            </div> -->
             <!-- Achievements -->
             <!-- <div class="bg-white shadow-lg rounded-lg p-6">
                 <h3 class="text-2xl font-bold text-gray-800 mb-4">
@@ -307,7 +301,11 @@ $user_id = $user_data['id'];
                     <?php else: ?>
                         <p>Current user not found.</p>
                     <?php endif; ?>
-
+                    <a href="./pages/leaderboard_page.php"
+                        class="inline-block px-6 py-3 mt-4 text-white bg-gradient-to-r 
+                    from-blue-500 to-indigo-600 rounded-lg shadow-md hover:from-indigo-600 
+                    hover:to-blue-500 transition-transform transform hover:scale-105 
+                    focus:outline-none focus:ring-2 focus:ring-blue-400">View All</a>
                 </ul>
             </div>
         </div>
