@@ -43,11 +43,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $user_data = getUser(); // Method to fetch user data from DB
 
             if ($user_data['account_type'] === 'mentor') {
-                header("location: ./mentor.php");
+                header("location: ./pages/mentor.php");
                 die;
             }
             if ($user_data['account_type'] === 'admin') {
-                header("location: ./admin.php");
+                header("location: ./admin/admin.php");
                 die;
             } else {
                 header("location: ./dashboard.php");

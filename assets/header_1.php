@@ -197,7 +197,7 @@ $user_id = $user_data['id'];
             setTimeout(() => {
                 preloader.style.display = 'none'; // Hide preloader
                 content.classList.remove('hidden'); // Show main content
-            }, 3000); // Adjust the duration of the preloader here
+            }, 1500); // Adjust the duration of the preloader here
         });
     </script>
 

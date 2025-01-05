@@ -184,18 +184,14 @@
                             reviewsHtml += `
                         <div class="bg-gray-100 p-4 rounded-lg flex flex-col items-center text-center">
                             <div class="flex flex-col items-center mb-2">
-                                <img alt="User avatar of ${review.name}" 
-                                    class="w-10 h-10 rounded-full mb-2" 
-                                    height="50" 
-                                    src="https://storage.googleapis.com/a1aa/image/mKVIY3gc40bgEtHZx8RuJ9l3Mjrw7cy0DAOcjqK81QBA1e9JA.jpg" 
-                                    width="50" />
+                                
                                 <div>
-                                    <p class="text-md font-semibold">${review.name}</p>
+                                    <p class="text-xl font-semibold mb-2">${review.name}</p>
                                     <p class="text-xs text-gray-500">${review.created_at}</p>
                                 </div>
                             </div>
-                            <p>"${review.message}"</p>
-                            <div class="flex items-center mb-2">
+                            <p class="font-normal text-base">"${review.message}"</p>
+                            <div class="flex items-center mt-4 mb-2 text-xl">
                                 ${getStars(review.rating)}
                             </div>
                         </div>

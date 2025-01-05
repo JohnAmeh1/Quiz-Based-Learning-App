@@ -162,7 +162,7 @@ $user_id = $user_data['id'];
             reviews.forEach((review) => {
               // Build the HTML structure for each review
               reviewsHtml += `
-              <div class="bg-gray-100 p-4 rounded-lg cursor-pointer" onclick="openModal('${review.name}', '${review.created_at}', '${review.message}', ${review.rating})">
+              <div class="bg-gray-100 p-5 rounded-lg cursor-pointer" onclick="openModal('${review.name}', '${review.created_at}', '${review.message}', ${review.rating})">
     <div class="flex flex-col items-start mb-2">
         <img 
             alt="User avatar of ${review.name}" 
@@ -172,25 +172,25 @@ $user_id = $user_data['id'];
             width="50" 
         />
         <div>
-            <p class="text-sm font-medium">${review.name}</p>
+            <p class="text-md font-medium">${review.name}</p>
             <p class="text-xs text-gray-500">${review.created_at}</p>
         </div>
     </div>
-    <p>${review.message}</p>
-    <div class="flex items-start mb-2">
+    <p class="text-base">"${review.message}"</p>
+    <div class="flex items-start mb-2text-xl">
         ${getStars(review.rating)}
     </div>
 </div>
-<div id="reviewModal" class="hidden fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center z-50">
+<div id="reviewModal" class="hidden fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex flex-col items-center text-center justify-center z-50">
     <div class="bg-white p-6 rounded-lg shadow-lg w-11/12 sm:w-2/3 lg:w-1/3">
         <div class="flex justify-between items-center mb-4">
-            <h2 id="modalName" class="text-lg font-semibold"></h2>
+            <h2 id="modalName" class="text-xl font-semibold mb-2"></h2>
             <button class="text-gray-500 hover:text-gray-800" onclick="closeModal()">×</button>
         </div>
         <p id="modalDate" class="text-xs text-gray-500 mb-2"></p>
-        <p id="modalMessage" class="text-sm mb-4"></p>
-        <div id="modalRating" class="flex mb-4"></div>
-        <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" onclick="closeModal()">Close</button>
+        <p id="modalMessage" class="text-base mb-4">""</p>
+        <div id="modalRating" class="mb-4 text-xl"></div>
+        <button class="flex bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" onclick="closeModal()">Close</button>
     </div>
 </div>
 
