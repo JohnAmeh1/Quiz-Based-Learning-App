@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 20, 2025 at 07:58 AM
+-- Generation Time: Jan 25, 2025 at 11:41 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -35,6 +35,13 @@ CREATE TABLE `contact` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `contact`
+--
+
+INSERT INTO `contact` (`id`, `username`, `email`, `message`, `created_at`) VALUES
+(1, 'john', 'johnameh@gmail.com', 'very', '2025-10-09 23:00:00');
+
 -- --------------------------------------------------------
 
 --
@@ -54,11 +61,7 @@ CREATE TABLE `courses` (
 --
 
 INSERT INTO `courses` (`id`, `name`, `description`, `image`, `created_at`) VALUES
-(8, 'html', 'htm', 'uploads/1st.jpg', '2025-01-10 16:29:44'),
-(9, 'js', 'javascript', 'uploads/achsiteplan.jpg', '2025-01-10 16:31:46'),
-(10, 'js', 'javascript', 'uploads/achsiteplan.jpg', '2025-01-10 16:32:17'),
-(11, 'css', 'cas', 'uploads/dp.jpeg', '2025-01-10 16:34:53'),
-(12, 'Ts', 'Typescript', 'uploads/peakpx.jpg', '2025-01-16 01:47:13');
+(1, 'HTML', 'HTML (HyperText Markup Language) is the standard markup language used for creating and structuring web page content.', 'uploads/peakpx.jpg', '2025-01-24 16:31:45');
 
 -- --------------------------------------------------------
 
@@ -103,19 +106,9 @@ INSERT INTO `messages` (`id`, `sender`, `recipient`, `message`, `timestamp`, `is
 (7, 'John29', 'Johnydrille', 'no need to shout', '2025-01-20 06:55:28', 0),
 (8, 'Johnydrille', 'John29', 'i wasn\'t', '2025-01-20 06:55:41', 0),
 (9, 'John29', 'Johnydrille', 'sorry', '2025-01-20 06:55:49', 0),
-(10, 'Johnydrille', 'John29', 'Thank you', '2025-01-20 06:56:02', 0);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `options`
---
-
-CREATE TABLE `options` (
-  `id` int(11) NOT NULL,
-  `question_id` int(11) NOT NULL,
-  `option_text` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+(10, 'Johnydrille', 'John29', 'Thank you', '2025-01-20 06:56:02', 0),
+(11, 'Johnydrille', 'John29', 'get', '2025-01-20 09:17:07', 0),
+(12, 'John29', 'Johnydrille', 'i get', '2025-01-20 09:18:12', 0);
 
 -- --------------------------------------------------------
 
@@ -157,15 +150,14 @@ INSERT INTO `posts` (`id`, `user_id`, `post`, `date`, `parent_id`, `comments`) V
 -- --------------------------------------------------------
 
 --
--- Table structure for table `questions`
+-- Table structure for table `quizzes`
 --
 
-CREATE TABLE `questions` (
+CREATE TABLE `quizzes` (
   `id` int(11) NOT NULL,
-  `course_id` int(11) NOT NULL,
-  `question` text NOT NULL,
-  `points` int(11) NOT NULL,
-  `correct_option` int(11) NOT NULL
+  `question` varchar(230) NOT NULL,
+  `options` varchar(255) NOT NULL,
+  `correct_option` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -183,15 +175,26 @@ CREATE TABLE `reviews` (
   `created_at` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `reviews`
+-- Table structure for table `sections`
 --
 
-INSERT INTO `reviews` (`id`, `name`, `email`, `rating`, `message`, `created_at`) VALUES
-(1, 'John29', 'johnameh2@gmail.com', 3, 'yh', '2025-01-04'),
-(2, 'John29', 'johnameh2@gmail.com', 3, 'yh', '2025-01-04'),
-(3, 'John29', 'johnameh2@gmail.com', 3, 'good', '2025-01-04'),
-(4, 'John29', 'johnameh2@gmail.com', 5, 'great', '2025-01-04');
+CREATE TABLE `sections` (
+  `id` int(11) NOT NULL,
+  `course_id` int(11) NOT NULL,
+  `section_title` varchar(255) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `sections`
+--
+
+INSERT INTO `sections` (`id`, `course_id`, `section_title`, `created_at`) VALUES
+(1, 1, 'Introduction', '2025-01-24 18:03:19'),
+(2, 1, 'yh', '2025-01-24 18:24:17');
 
 -- --------------------------------------------------------
 
@@ -207,6 +210,28 @@ CREATE TABLE `source_codes` (
   `file_path` varchar(255) DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `subtitles`
+--
+
+CREATE TABLE `subtitles` (
+  `id` int(11) NOT NULL,
+  `section_id` int(11) NOT NULL,
+  `subtitle` varchar(255) NOT NULL,
+  `content` text NOT NULL,
+  `code_snippet` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `subtitles`
+--
+
+INSERT INTO `subtitles` (`id`, `section_id`, `subtitle`, `content`, `code_snippet`) VALUES
+(1, 2, 'what is html', 'w34ety', '<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Document</title>\n</head>\n<body>\n    yes\n</body>\n</html>'),
+(2, 2, 'testing', 'q3w4', NULL);
 
 -- --------------------------------------------------------
 
@@ -230,17 +255,26 @@ CREATE TABLE `users` (
   `fb` varchar(50) NOT NULL,
   `tw` varchar(50) NOT NULL,
   `yt` varchar(50) NOT NULL,
-  `date` date DEFAULT NULL
+  `date` date DEFAULT NULL,
+  `is_active` tinyint(1) DEFAULT 0,
+  `signup_date` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `user_id`, `username`, `name`, `email`, `password`, `bio`, `image_path`, `account_type`, `score`, `level`, `completed_courses`, `fb`, `tw`, `yt`, `date`) VALUES
-(1, 'user_6760c8bb991ae', 'Johnameh29', 'John Ameh ', 'johnameh29@gmail.com', '12345678', 'learning Enthusiast', '973556760c8bb991e5.jpg', 'admin', 0, 1, '[]', '', '', '', '2025-01-04'),
-(10, 'user_67740ff1c88fd', 'Johnydrille', 'John Ameh ', 'johnameh107@gmail.com', '12345678', 'Learning Enthusiast | Comprehensive Learning Fan', '3604167740ff1c8924.jpeg', 'mentor', 0, 1, '[]', 'fb', 'tw', 'yt', '2025-01-04'),
-(14, 'user_67790f88dc895', 'John29', 'John Ameh ', 'johnameh2@gmail.com', '12345678', 'Learning Enthusiast | Comprehensive Learning Fan', '9931067790f88dc972.jpeg', 'learner', 0, 1, '[]', 'fb', 'tw', 'yt', NULL);
+INSERT INTO `users` (`id`, `user_id`, `username`, `name`, `email`, `password`, `bio`, `image_path`, `account_type`, `score`, `level`, `completed_courses`, `fb`, `tw`, `yt`, `date`, `is_active`, `signup_date`) VALUES
+(1, 'user_6760c8bb991ae', 'Johnameh29', 'John Ameh ', 'johnameh29@gmail.com', '12345678', 'learning Enthusiast', '973556760c8bb991e5.jpg', 'admin', 0, 1, '[]', '', '', '', '2025-01-04', 0, '2025-01-25 19:21:37'),
+(10, 'user_67740ff1c88fd', 'Johnydrille', 'John Ameh ', 'johnameh107@gmail.com', '12345678', 'Learning Enthusiast | Comprehensive Learning Fan', '3604167740ff1c8924.jpeg', 'mentor', 0, 1, '[]', 'fb', 'tw', 'yt', '2025-01-04', 0, '2025-01-25 19:21:37'),
+(14, 'user_67790f88dc895', 'John29', 'John Ameh ', 'johnameh2@gmail.com', '12345678', 'Learning Enthusiast | Comprehensive Learning Fan', '9931067790f88dc972.jpeg', 'learner', 0, 1, '[]', 'fb', 'tw', 'yt', NULL, 0, '2025-01-25 19:21:37'),
+(31, 'user_67740ff1c88fd', 'Johnydrille', 'John Ameh ', 'johnameh107@gmail.com', '12345678', 'Learning Enthusiast | Comprehensive Learning Fan', '3604167740ff1c8924.jpeg', 'mentor', 0, 1, '[]', 'fb', 'tw', 'yt', '2025-01-04', 0, '2025-01-25 19:21:37'),
+(32, 'user_67740ff1c88fd', 'Johnydrille', 'John Ameh ', 'johnameh107@gmail.com', '12345678', 'Learning Enthusiast | Comprehensive Learning Fan', '3604167740ff1c8924.jpeg', 'mentor', 0, 1, '[]', 'fb', 'tw', 'yt', '2025-01-04', 0, '2025-01-25 19:21:37'),
+(33, 'user_67740ff1c88fd', 'Johnydrille', 'John Ameh ', 'johnameh107@gmail.com', '12345678', 'Learning Enthusiast | Comprehensive Learning Fan', '3604167740ff1c8924.jpeg', 'mentor', 0, 1, '[]', 'fb', 'tw', 'yt', '2025-01-04', 0, '2025-01-25 19:21:37'),
+(34, 'user_67740ff1c88fd', 'Johnydrille', 'John Ameh ', 'johnameh107@gmail.com', '12345678', 'Learning Enthusiast | Comprehensive Learning Fan', '3604167740ff1c8924.jpeg', 'mentor', 0, 1, '[]', 'fb', 'tw', 'yt', '2025-01-04', 0, '2025-01-25 19:21:37'),
+(35, 'user_67740ff1c88fd', 'Johnydrille', 'John Ameh ', 'johnameh107@gmail.com', '12345678', 'Learning Enthusiast | Comprehensive Learning Fan', '3604167740ff1c8924.jpeg', 'mentor', 0, 1, '[]', 'fb', 'tw', 'yt', '2025-01-04', 0, '2025-01-25 19:21:37'),
+(36, 'user_67740ff1c88fd', 'Johnydrille', 'John Ameh ', 'johnameh107@gmail.com', '12345678', 'Learning Enthusiast | Comprehensive Learning Fan', '3604167740ff1c8924.jpeg', 'mentor', 0, 1, '[]', 'fb', 'tw', 'yt', '2025-01-04', 0, '2025-01-25 19:21:37'),
+(40, 'user_67952c51b6337', 'Johny', 'John Ameh ', 'johnameh@gmail.com', '12345678', 'Learning Enthusiast | Comprehensive Learning Fan', '2132067952c51c1f33.png', 'admin', 0, 1, '[]', 'fb', 'tw', 'yt', NULL, 0, '2024-01-25 19:24:17');
 
 -- --------------------------------------------------------
 
@@ -300,13 +334,6 @@ ALTER TABLE `messages`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `options`
---
-ALTER TABLE `options`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `question_id` (`question_id`);
-
---
 -- Indexes for table `posts`
 --
 ALTER TABLE `posts`
@@ -316,11 +343,10 @@ ALTER TABLE `posts`
   ADD KEY `comments` (`comments`);
 
 --
--- Indexes for table `questions`
+-- Indexes for table `quizzes`
 --
-ALTER TABLE `questions`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `course_id` (`course_id`);
+ALTER TABLE `quizzes`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `reviews`
@@ -329,11 +355,25 @@ ALTER TABLE `reviews`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `sections`
+--
+ALTER TABLE `sections`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `course_id` (`course_id`);
+
+--
 -- Indexes for table `source_codes`
 --
 ALTER TABLE `source_codes`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `subtitles`
+--
+ALTER TABLE `subtitles`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `section_id` (`section_id`);
 
 --
 -- Indexes for table `users`
@@ -362,13 +402,13 @@ ALTER TABLE `videos`
 -- AUTO_INCREMENT for table `contact`
 --
 ALTER TABLE `contact`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `courses`
 --
 ALTER TABLE `courses`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `jobs`
@@ -380,25 +420,25 @@ ALTER TABLE `jobs`
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT for table `options`
+-- AUTO_INCREMENT for table `quizzes`
 --
-ALTER TABLE `options`
+ALTER TABLE `quizzes`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `questions`
---
-ALTER TABLE `questions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `reviews`
 --
 ALTER TABLE `reviews`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `sections`
+--
+ALTER TABLE `sections`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `source_codes`
@@ -407,10 +447,16 @@ ALTER TABLE `source_codes`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `subtitles`
+--
+ALTER TABLE `subtitles`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `user_progress`
@@ -435,22 +481,22 @@ ALTER TABLE `jobs`
   ADD CONSTRAINT `jobs_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
--- Constraints for table `options`
+-- Constraints for table `sections`
 --
-ALTER TABLE `options`
-  ADD CONSTRAINT `options_ibfk_1` FOREIGN KEY (`question_id`) REFERENCES `questions` (`id`);
-
---
--- Constraints for table `questions`
---
-ALTER TABLE `questions`
-  ADD CONSTRAINT `questions_ibfk_1` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`);
+ALTER TABLE `sections`
+  ADD CONSTRAINT `sections_ibfk_1` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `source_codes`
 --
 ALTER TABLE `source_codes`
   ADD CONSTRAINT `source_codes_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `subtitles`
+--
+ALTER TABLE `subtitles`
+  ADD CONSTRAINT `subtitles_ibfk_1` FOREIGN KEY (`section_id`) REFERENCES `sections` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `videos`
