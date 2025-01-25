@@ -71,7 +71,7 @@
 
                     <!-- Primary Nav -->
                     <div class="hidden lg:flex items-center space-x-1">
-                        <a class="py-4 px-5 text-gray-800 hover:text-blue-600 transition-all duration-300 ease-in-out font-semibold text-lg" href="./admin.php">
+                        <a class="py-4 px-5 text-gray-800 hover:text-blue-600 transition-all duration-300 ease-in-out font-semibold text-lg" href="./home.php">
                             Home
                         </a>
 
@@ -113,7 +113,7 @@
 
         <!-- Mobile Menu -->
         <div id="mobileMenu" class="mobile-menu hidden lg:hidden bg-gray-800 text-white">
-            <a class="block py-3 px-5 text-lg hover:bg-gray-700 transition-all duration-300" href="./admin.php">
+            <a class="block py-3 px-5 text-lg hover:bg-gray-700 transition-all duration-300" href="./home.php">
                 Home
             </a>
 

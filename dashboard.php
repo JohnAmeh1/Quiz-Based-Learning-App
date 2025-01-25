@@ -186,7 +186,12 @@
                             <div class="flex flex-col items-center mb-2">
                                 
                                 <div>
-                                    <p class="text-xl font-semibold mb-2">${review.name}</p>
+                                    <div 
+            class="w-10 h-10 flex items-center justify-center rounded-full bg-blue-500 text-white font-bold ms-4 mr-3"
+            style="font-size: 1rem;"
+        >
+            ${review.name.charAt(0).toUpperCase()}
+        </div>
                                     <p class="text-xs text-gray-500">${review.created_at}</p>
                                 </div>
                             </div>

@@ -92,7 +92,7 @@ $user_id = $user_data['id'];
         <h2 class="text-3xl font-bold text-center mb-6">
           User Reviews
         </h2>
-        <div class="reviews-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div class="reviews-container overflow-y-auto h-96 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           <!-- Reviews will be injected here by AJAX -->
         </div>
       </section>
@@ -148,55 +148,48 @@ $user_id = $user_data['id'];
 
     // Function to fetch reviews and display them
     function fetchReviews() {
-      $.ajax({
-        type: "GET",
-        url: "./assets/reviews.php", // Path to the reviews.php script
-        success: function(response) {
-          const reviews = JSON.parse(response);
+  $.ajax({
+    type: "GET",
+    url: "./assets/reviews.php", // Path to the reviews.php script
+    success: function (response) {
+      const reviews = JSON.parse(response);
 
-          if (reviews.length === 0) {
-            // No reviews found
-            $(".reviews-container").html("<p>No reviews yet.</p>");
-          } else {
-            let reviewsHtml = "";
-            reviews.forEach((review) => {
-              // Build the HTML structure for each review
-              reviewsHtml += `
-              <div class="bg-gray-100 p-5 rounded-lg cursor-pointer" onclick="openModal('${review.name}', '${review.created_at}', '${review.message}', ${review.rating})">
-    <div class="flex flex-col items-start mb-2">
-        <img 
-            alt="User avatar of ${review.name}" 
-            class="w-10 h-10 rounded-full mr-3" 
-            height="50" 
-            src="https://storage.googleapis.com/a1aa/image/mKVIY3gc40bgEtHZx8RuJ9l3Mjrw7cy0DAOcjqK81QBA1e9JA.jpg" 
-            width="50" 
-        />
-        <div>
-            <p class="text-md font-medium">${review.name}</p>
-            <p class="text-xs text-gray-500">${review.created_at}</p>
-        </div>
-    </div>
-    <p class="text-base">"${review.message}"</p>
-    <div class="flex items-start mb-2text-xl">
-        ${getStars(review.rating)}
-    </div>
-</div>
-<div id="reviewModal" class="hidden fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex flex-col items-center text-center justify-center z-50">
-    <div class="bg-white p-6 rounded-lg shadow-lg w-11/12 sm:w-2/3 lg:w-1/3">
-        <div class="flex justify-between items-center mb-4">
-            <h2 id="modalName" class="text-xl font-semibold mb-2"></h2>
-            <button class="text-gray-500 hover:text-gray-800" onclick="closeModal()">×</button>
-        </div>
-        <p id="modalDate" class="text-xs text-gray-500 mb-2"></p>
-        <p id="modalMessage" class="text-base mb-4">""</p>
-        <div id="modalRating" class="mb-4 text-xl"></div>
-        <button class="flex bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" onclick="closeModal()">Close</button>
-    </div>
-</div>
+      if (reviews.length === 0) {
+        // No reviews found
+        $(".reviews-container").html("<p>No reviews yet.</p>");
+      } else {
+        let reviewsHtml = "";
 
-            `;
-            });
+        reviews.forEach((review) => {
+          // Build the HTML structure for each review
+          reviewsHtml += `
+            <div class="hidden md:block bg-gray-100 p-5 rounded-lg cursor-pointer" onclick="openModal('${review.name}', '${review.created_at}', '${review.message}', ${review.rating})">
+              <div class="flex flex-col items-start mb-2">
+                <div 
+                  class="w-10 h-10 flex items-center justify-center rounded-full bg-blue-500 text-white font-bold mr-3"
+                  style="font-size: 1rem;"
+                >
+                  ${review.name.charAt(0).toUpperCase()}
+                </div>
+                <div>
+                  <p class="text-md font-medium">${review.name}</p>
+                  <p class="text-xs text-gray-500">${review.created_at}</p>
+                </div>
+              </div>
+              <p class="text-base">"${review.message}"</p>
+              <div class="flex items-start mb-2 text-xl">
+                ${getStars(review.rating)}
+              </div>
+            </div>
 
+            <div class="block md:hidden bg-gray-200 p-7 flex justify-between items-center bg-white p-[10px] rounded-lg w-64 cursor-pointer" onclick="openModal('${review.name}', '${review.created_at}', '${review.message}', ${review.rating})">
+              <span class="text-gray-800 font-semibold">${review.name}</span>
+              <div>
+                ${getStars(review.rating)}
+              </div>
+            </div>
+          `;
+        });
             // Insert the reviews into the page
             $(".reviews-container").html(reviewsHtml);
           }

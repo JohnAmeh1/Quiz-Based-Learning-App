@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 die;
             }
             if ($user_data['account_type'] === 'admin') {
-                header("location: ./admin/admin.php");
+                header("location: ./admin/home.php");
                 die;
             } else {
                 header("location: ./dashboard.php");
