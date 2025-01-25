@@ -73,7 +73,7 @@ include("./header_2.php");
                 <p class="mb-4">
                     Test your knowledge on this topic by taking the quiz.
                 </p>
-                <a class="bg-blue-500 text-white px-4 py-2 rounded-lg" href="#">
+                <a href="./pages/quiz.php?course_id={$course['id']}" class="bg-blue-500 text-white px-4 py-2 rounded-lg" href="#">
                     Take Quiz
                 </a>
             </section>

@@ -1,14 +1,85 @@
-<?php include("./assets/header_1.php") ?>
+<?php
+include("./assets/header_1.php");
+
+$host = "localhost";
+$user = "root";
+$password = "";
+$dbname = "learning_app";
+
+$conn = new mysqli($host, $user, $password, $dbname);
+
+// $host = "localhost";
+// $user = "root";
+// $password = "";
+// $dbname = "learning_app";
+
+// $conn = new mysqli($host, $user, $password, $dbname);
+
+// if ($conn->connect_error) {
+//     die("Connection failed: " . $conn->connect_error);
+// }
+
+// if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+//     $course_name = $_POST['course_name'];
+//     $course_description = $_POST['course_description'];
+//     $course_image = "";
+
+//     if (isset($_FILES['course_image']) && $_FILES['course_image']['error'] === UPLOAD_ERR_OK) {
+//         $upload_dir = "uploads/";
+//         if (!is_dir($upload_dir)) {
+//             mkdir($upload_dir, 0777, true);
+//         }
+//         $file_name = basename($_FILES['course_image']['name']);
+//         $target_file = $upload_dir . $file_name;
+
+//         if (move_uploaded_file($_FILES['course_image']['tmp_name'], $target_file)) {
+//             $course_image = $target_file;
+//         } else {
+//             echo "Error uploading file.";
+//             exit;
+//         }
+//     }
+
+//     $stmt = $conn->prepare("INSERT INTO courses (name, description, image) VALUES (?, ?, ?)");
+//     $stmt->bind_param("sss", $course_name, $course_description, $course_image);
+
+//     if ($stmt->execute()) {
+//         echo "
+//     <div id='successAlert' class='fixed top-4 right-4 z-50 bg-green-100 border-l-4 border-green-500 text-green-700 p-4 rounded-lg shadow-lg'>
+//         <div class='flex items-center justify-between'>
+//             <span class='font-semibold'>Course added successfully</span>
+//             <button id='dismissAlert' class='ml-4 text-green-700'>
+//                 <i class='fas fa-times'></i>
+//             </button>
+//         </div>
+//     </div>";
+//     } else {
+//         echo "Error: " . $stmt->error;
+//     }
+
+//     $stmt->close();
+// }
+
+$courses = [];
+$result = $conn->query("SELECT * FROM courses ORDER BY created_at DESC");
+if ($result->num_rows > 0) {
+    $courses = $result->fetch_all(MYSQLI_ASSOC);
+}
+
+$conn->close();
+
+// Fetch Courses
+// $courses = $conn->query("SELECT * FROM courses");
+
+
+?>
 <html lang="en">
 
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>
-        Learning App Dashboard
-    </title>
-    <script src="https://cdn.tailwindcss.com">
-    </script>
+    <title>Courses Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet" />
 
@@ -26,153 +97,43 @@
 
             <!-- Main Dashboard -->
             <main class="flex-1 bg-white shadow-lg rounded-lg p-6 ml-6">
-                <h2 class="text-2xl font-bold mb-4">
-                    Course Dashboard
-                </h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <!-- Course Card -->
-                    <div class="bg-gray-100 p-4 rounded-lg shadow transition-transform transform hover:scale-105">
-                        <img alt="Thumbnail of a web development course, showing a computer screen with code" class="w-full h-40 object-cover rounded mb-4" height="200" src="https://storage.googleapis.com/a1aa/image/OozDBMYeBv3VQCcCZUKmYM3SPny2YwQ5TGZfZ2AVzqxk1I7TA.jpg" width="300" />
-                        <h3 class="text-xl font-bold mb-2">
-                            Web Development
-                        </h3>
-                        <p class="text-gray-700 mb-4">
-                            Learn the basics of HTML, CSS, and JavaScript to build your own websites.
-                        </p>
-                        <button class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 focus:ring">
-                            Start Course
-                        </button>
+                <h2 class="text-2xl font-bold mb-4">Course Dashboard</h2>
+
+                <?php if (isset($course)): ?>
+                    <h1><?= htmlspecialchars($course['name']) ?></h1>
+                    <p><?= htmlspecialchars($course['description']) ?></p>
+                    <?php while ($content = $contents->fetch_assoc()): ?>
+                        <h2><?= htmlspecialchars($content['title']) ?></h2>
+                        <p><?= nl2br(htmlspecialchars($content['content'])) ?></p>
+                    <?php endwhile; ?>
+                    <a href="student.php">Back to Courses</a>
+                <?php else: ?>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <?php // while ($course = $courses->fetch_assoc()): 
+                        foreach ($courses as $course):
+                        ?>
+                            <div class="bg-gray-100 p-4 rounded-lg shadow">
+                                <?php
+                                // Handle image path or fallback to placeholder
+                                $imagePath = !empty($course['image']) ? './admin/' . $course['image'] : 'https://placehold.co/300x200';
+                                ?>
+                                <img alt="Course Thumbnail"
+                                    class="w-full h-40 object-cover rounded mb-4"
+                                    src="<?= htmlspecialchars($imagePath) ?>" />
+                                <h3 class="text-xl font-bold mb-2"><?= htmlspecialchars($course['name']) ?></h3>
+                                <p class="text-gray-700 mb-4"><?= htmlspecialchars($course['description']) ?></p>
+                                <a href="./details/view_courses.php?course_id=<?= $course['id'] ?>"
+                                    class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 focus:ring">
+                                    Start Course
+                                </a>
+                            </div>
+                        <?php //endwhile; 
+                        endforeach; ?>
                     </div>
-                    <!-- Course Card -->
-                    <div class="bg-gray-100 p-4 rounded-lg shadow transition-transform transform hover:scale-105">
-                        <img alt="Thumbnail of a data science course, showing a graph and data points" class="w-full h-40 object-cover rounded mb-4" height="200" src="https://storage.googleapis.com/a1aa/image/TD77mkfKkn0ncCAjjjN21rAuMDCDUmjO8UjjdgTE6aLxak9JA.jpg" width="300" />
-                        <h3 class="text-xl font-bold mb-2">
-                            Data Science
-                        </h3>
-                        <p class="text-gray-700 mb-4">
-                            Dive into data analysis, visualization, and machine learning with Python.
-                        </p>
-                        <button class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 focus:ring">
-                            Start Course
-                        </button>
-                    </div>
-                    <!-- Course Card -->
-                    <div class="bg-gray-100 p-4 rounded-lg shadow transition-transform transform hover:scale-105">
-                        <img alt="Thumbnail of a machine learning course, showing a neural network diagram" class="w-full h-40 object-cover rounded mb-4" height="200" src="https://storage.googleapis.com/a1aa/image/f8w1hTQXwTVyQyiVanoSxvkEFlvzun4ca68Uug6l88eg1I7TA.jpg" width="300" />
-                        <h3 class="text-xl font-bold mb-2">
-                            Machine Learning
-                        </h3>
-                        <p class="text-gray-700 mb-4">
-                            Understand the fundamentals of machine learning and build your own models.
-                        </p>
-                        <button class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 focus:ring">
-                            Start Course
-                        </button>
-                    </div>
-                    <!-- Course Card -->
-                    <div class="bg-gray-100 p-4 rounded-lg shadow transition-transform transform hover:scale-105">
-                        <img alt="Thumbnail of a mobile development course, showing a smartphone with app icons" class="w-full h-40 object-cover rounded mb-4" height="200" src="https://storage.googleapis.com/a1aa/image/BUzArCyvLYYqClw4r97hHFAYBv3ZaNWmEwIm0QkFmNFXNyeJA.jpg" width="300" />
-                        <h3 class="text-xl font-bold mb-2">
-                            Mobile Development
-                        </h3>
-                        <p class="text-gray-700 mb-4">
-                            Create mobile applications for Android and iOS using modern frameworks.
-                        </p>
-                        <button class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 focus:ring">
-                            Start Course
-                        </button>
-                    </div>
-                    <!-- Course Card -->
-                    <div class="bg-gray-100 p-4 rounded-lg shadow transition-transform transform hover:scale-105">
-                        <img alt="Thumbnail of a game development course, showing a game controller and a game scene" class="w-full h-40 object-cover rounded mb-4" height="200" src="https://storage.googleapis.com/a1aa/image/JZ8tAI1ozGZfWqMTfEufwxlPWhpCQuLVZROpjDib6dIKrR2nA.jpg" width="300" />
-                        <h3 class="text-xl font-bold mb-2">
-                            Game Development
-                        </h3>
-                        <p class="text-gray-700 mb-4">
-                            Learn to design and develop your own video games using Unity and Unreal Engine.
-                        </p>
-                        <button class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 focus:ring">
-                            Start Course
-                        </button>
-                    </div>
-                    <!-- Course Card -->
-                    <div class="bg-gray-100 p-4 rounded-lg shadow transition-transform transform hover:scale-105">
-                        <img alt="Thumbnail of a cyber security course, showing a lock and a shield" class="w-full h-40 object-cover rounded mb-4" height="200" src="https://storage.googleapis.com/a1aa/image/VNvYg8IJObKdMZBUrx5tPKaTwiOgTtZsW0d5fBEKbL5vak9JA.jpg" width="300" />
-                        <h3 class="text-xl font-bold mb-2">
-                            Cyber Security
-                        </h3>
-                        <p class="text-gray-700 mb-4">
-                            Protect systems and networks from cyber threats and attacks.
-                        </p>
-                        <button class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 focus:ring">
-                            Start Course
-                        </button>
-                    </div>
-                    <!-- Course Card -->
-                    <div class="bg-gray-100 p-4 rounded-lg shadow transition-transform transform hover:scale-105">
-                        <img alt="Thumbnail of a cloud computing course, showing a cloud icon and server racks" class="w-full h-40 object-cover rounded mb-4" height="200" src="https://storage.googleapis.com/a1aa/image/JsfMnBfIryt0UEmopyu1NyccXk6mSDkIUOHY1z6wSfpDrR2nA.jpg" width="300" />
-                        <h3 class="text-xl font-bold mb-2">
-                            Cloud Computing
-                        </h3>
-                        <p class="text-gray-700 mb-4">
-                            Explore cloud services and architecture with AWS, Azure, and Google Cloud.
-                        </p>
-                        <button class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 focus:ring">
-                            Start Course
-                        </button>
-                    </div>
-                    <!-- Course Card -->
-                    <div class="bg-gray-100 p-4 rounded-lg shadow transition-transform transform hover:scale-105">
-                        <img alt="Thumbnail of a DevOps course, showing a DevOps lifecycle diagram" class="w-full h-40 object-cover rounded mb-4" height="200" src="https://storage.googleapis.com/a1aa/image/4QIDaZWXqextdiyQKGkPVUaCCHKaDpsPfUGPbDSNMYFj1I7TA.jpg" width="300" />
-                        <h3 class="text-xl font-bold mb-2">
-                            DevOps
-                        </h3>
-                        <p class="text-gray-700 mb-4">
-                            Implement continuous integration and delivery pipelines with DevOps tools.
-                        </p>
-                        <button class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 focus:ring">
-                            Start Course
-                        </button>
-                    </div>
-                    <!-- Course Card -->
-                    <div class="bg-gray-100 p-4 rounded-lg shadow transition-transform transform hover:scale-105">
-                        <img alt="Thumbnail of an AI &amp; Robotics course, showing a robot and AI brain" class="w-full h-40 object-cover rounded mb-4" height="200" src="https://storage.googleapis.com/a1aa/image/A24F6vVVcW5KLpF8E4dBrDShXaPLQ66ebtABmTLKxr2tak9JA.jpg" width="300" />
-                        <h3 class="text-xl font-bold mb-2">
-                            AI &amp; Robotics
-                        </h3>
-                        <p class="text-gray-700 mb-4">
-                            Build intelligent systems and robots using AI and machine learning.
-                        </p>
-                        <button class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 focus:ring">
-                            Start Course
-                        </button>
-                    </div>
-                    <!-- Course Card -->
-                    <div class="bg-gray-100 p-4 rounded-lg shadow transition-transform transform hover:scale-105">
-                        <img alt="Thumbnail of a blockchain course, showing a blockchain network diagram" class="w-full h-40 object-cover rounded mb-4" height="200" src="https://storage.googleapis.com/a1aa/image/sWPdvXpuV95jF14P2l8gXLtSkZZfZjhWLKharuo9vfqd1I7TA.jpg" width="300" />
-                        <h3 class="text-xl font-bold mb-2">
-                            Blockchain
-                        </h3>
-                        <p class="text-gray-700 mb-4">
-                            Understand blockchain technology and develop decentralized applications.
-                        </p>
-                        <button class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 focus:ring">
-                            Start Course
-                        </button>
-                    </div>
-                </div>
+                <?php endif; ?>
             </main>
         </div>
     </div>
-    <!-- <script>
-        const btn = document.querySelector("button.mobile-menu-button");
-        const menu = document.querySelector(".mobile-menu");
-
-        btn.addEventListener("click", () => {
-            menu.classList.toggle("hidden");
-        });
-    </script> -->
-    <?php include("./assets/footer_1.php") ?>
 </body>
 
 </html>
