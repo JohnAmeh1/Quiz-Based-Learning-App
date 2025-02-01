@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $sql = "INSERT INTO source_codes (title, description, price, file_path, user_id) VALUES ('$title', '$description', '$price', '$target_file', '$user_id')";
         if ($conn->query($sql) === TRUE) {
             echo "Source code uploaded successfully!";
-            header("Location: display_source_code.php");
+            header("Location: ./display_source_codes.php");
         } else {
             echo "Error: " . $conn->error;
         }
