@@ -3,7 +3,6 @@ include("./php/all_files.php");
 include("./assets/user_auth.php");
 
 if($_SESSION['auth']){
-
 }else{
     header("location: ./index.php");
     die;

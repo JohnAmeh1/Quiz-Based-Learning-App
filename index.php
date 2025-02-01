@@ -56,14 +56,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 }
-$user_data = getUser();
+// $user_data = getUser();
 
-if($user_data['badge'] == 'verified'){
+// if($user_data['badge'] == 'verified'){
 
-}else{
-  header("location: payment_mentor.php");
-  die;
-}
+// }else{
+//   header("location: payment_mentor.php");
+//   die;
+// }
 ?>
 
 

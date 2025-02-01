@@ -1,14 +1,12 @@
 <?php
-
+ob_start();
 include("./assets/header_pages.php");
 
 $user_data = getUser();
 
-if($user_data['badge'] == 'verified'){
-
-}else{
-  header("location: payment_mentor.php");
-  die;
+if ($user_data['badge'] !== 'verified') {
+  header("location: ./payment_mentor.php");
+  exit;
 }
 
 ?>
@@ -127,6 +125,7 @@ if($user_data['badge'] == 'verified'){
     setInterval(fetchMessages, 2000);
     fetchUsers();
   </script>
+
 </body>
 
 </html>
