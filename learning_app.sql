@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 25, 2025 at 11:41 PM
+-- Generation Time: Feb 01, 2025 at 03:41 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -118,7 +118,7 @@ INSERT INTO `messages` (`id`, `sender`, `recipient`, `message`, `timestamp`, `is
 
 CREATE TABLE `posts` (
   `id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL DEFAULT 0,
+  `user_id` varchar(500) NOT NULL,
   `post` text NOT NULL,
   `date` datetime NOT NULL,
   `parent_id` int(11) NOT NULL DEFAULT 0,
@@ -130,22 +130,8 @@ CREATE TABLE `posts` (
 --
 
 INSERT INTO `posts` (`id`, `user_id`, `post`, `date`, `parent_id`, `comments`) VALUES
-(1, 1, 'This is my first post', '2023-02-06 16:30:16', 0, 0),
-(2, 1, 'this is my second post', '2023-02-06 16:49:15', 0, 0),
-(3, 1, 'this is my third post', '2023-02-06 16:50:19', 0, 0),
-(4, 1, 'this is my fourth post', '2023-02-06 17:07:56', 0, 1),
-(5, 1, 'post number 5', '2023-02-06 17:17:48', 0, 0),
-(6, 4, 'a post by mary and some other guy', '2023-02-10 16:31:06', 0, 0),
-(10, 4, 'a comment by mary', '2023-02-10 20:59:06', 0, 0),
-(11, 4, 'another post by mary', '2023-02-10 20:59:51', 0, 5),
-(13, 4, 'a real comment by mary', '2023-02-10 21:11:26', 11, 0),
-(14, 4, 'a second comment by mary', '2023-02-10 21:11:48', 11, 0),
-(15, 4, 'a third comment', '2023-02-10 21:13:08', 11, 0),
-(16, 4, 'a comment on eathornes post', '2023-02-10 21:14:25', 4, 0),
-(17, 1, 'a comment by eathorne', '2023-02-10 21:18:13', 11, 0),
-(18, 5, 'Hi, this is my first post as john doe', '2023-02-10 23:20:02', 0, 1),
-(19, 5, 'a comment by john does on his own post', '2023-02-10 23:20:17', 18, 0),
-(20, 5, 'hey there guys', '2023-02-10 23:20:30', 11, 0);
+(5, 'user_67790f88dc895', 'n', '2025-01-28 02:00:10', 0, 1),
+(13, 'user_67790f88dc895', 'yh', '2025-01-28 17:09:07', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -249,6 +235,7 @@ CREATE TABLE `users` (
   `bio` varchar(255) NOT NULL,
   `image_path` varchar(255) NOT NULL,
   `account_type` varchar(30) NOT NULL,
+  `badge` varchar(255) NOT NULL,
   `score` int(11) DEFAULT 0,
   `level` int(11) DEFAULT 1,
   `completed_courses` text DEFAULT '[]',
@@ -264,17 +251,8 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `user_id`, `username`, `name`, `email`, `password`, `bio`, `image_path`, `account_type`, `score`, `level`, `completed_courses`, `fb`, `tw`, `yt`, `date`, `is_active`, `signup_date`) VALUES
-(1, 'user_6760c8bb991ae', 'Johnameh29', 'John Ameh ', 'johnameh29@gmail.com', '12345678', 'learning Enthusiast', '973556760c8bb991e5.jpg', 'admin', 0, 1, '[]', '', '', '', '2025-01-04', 0, '2025-01-25 19:21:37'),
-(10, 'user_67740ff1c88fd', 'Johnydrille', 'John Ameh ', 'johnameh107@gmail.com', '12345678', 'Learning Enthusiast | Comprehensive Learning Fan', '3604167740ff1c8924.jpeg', 'mentor', 0, 1, '[]', 'fb', 'tw', 'yt', '2025-01-04', 0, '2025-01-25 19:21:37'),
-(14, 'user_67790f88dc895', 'John29', 'John Ameh ', 'johnameh2@gmail.com', '12345678', 'Learning Enthusiast | Comprehensive Learning Fan', '9931067790f88dc972.jpeg', 'learner', 0, 1, '[]', 'fb', 'tw', 'yt', NULL, 0, '2025-01-25 19:21:37'),
-(31, 'user_67740ff1c88fd', 'Johnydrille', 'John Ameh ', 'johnameh107@gmail.com', '12345678', 'Learning Enthusiast | Comprehensive Learning Fan', '3604167740ff1c8924.jpeg', 'mentor', 0, 1, '[]', 'fb', 'tw', 'yt', '2025-01-04', 0, '2025-01-25 19:21:37'),
-(32, 'user_67740ff1c88fd', 'Johnydrille', 'John Ameh ', 'johnameh107@gmail.com', '12345678', 'Learning Enthusiast | Comprehensive Learning Fan', '3604167740ff1c8924.jpeg', 'mentor', 0, 1, '[]', 'fb', 'tw', 'yt', '2025-01-04', 0, '2025-01-25 19:21:37'),
-(33, 'user_67740ff1c88fd', 'Johnydrille', 'John Ameh ', 'johnameh107@gmail.com', '12345678', 'Learning Enthusiast | Comprehensive Learning Fan', '3604167740ff1c8924.jpeg', 'mentor', 0, 1, '[]', 'fb', 'tw', 'yt', '2025-01-04', 0, '2025-01-25 19:21:37'),
-(34, 'user_67740ff1c88fd', 'Johnydrille', 'John Ameh ', 'johnameh107@gmail.com', '12345678', 'Learning Enthusiast | Comprehensive Learning Fan', '3604167740ff1c8924.jpeg', 'mentor', 0, 1, '[]', 'fb', 'tw', 'yt', '2025-01-04', 0, '2025-01-25 19:21:37'),
-(35, 'user_67740ff1c88fd', 'Johnydrille', 'John Ameh ', 'johnameh107@gmail.com', '12345678', 'Learning Enthusiast | Comprehensive Learning Fan', '3604167740ff1c8924.jpeg', 'mentor', 0, 1, '[]', 'fb', 'tw', 'yt', '2025-01-04', 0, '2025-01-25 19:21:37'),
-(36, 'user_67740ff1c88fd', 'Johnydrille', 'John Ameh ', 'johnameh107@gmail.com', '12345678', 'Learning Enthusiast | Comprehensive Learning Fan', '3604167740ff1c8924.jpeg', 'mentor', 0, 1, '[]', 'fb', 'tw', 'yt', '2025-01-04', 0, '2025-01-25 19:21:37'),
-(40, 'user_67952c51b6337', 'Johny', 'John Ameh ', 'johnameh@gmail.com', '12345678', 'Learning Enthusiast | Comprehensive Learning Fan', '2132067952c51c1f33.png', 'admin', 0, 1, '[]', 'fb', 'tw', 'yt', NULL, 0, '2024-01-25 19:24:17');
+INSERT INTO `users` (`id`, `user_id`, `username`, `name`, `email`, `password`, `bio`, `image_path`, `account_type`, `badge`, `score`, `level`, `completed_courses`, `fb`, `tw`, `yt`, `date`, `is_active`, `signup_date`) VALUES
+(1, 'user_679d855c44b32', 'Johnameh29', 'John Ameh ', 'johnameh29@gmail.com', '12345678', 'Learning Enthusiast | Comprehensive Learning Fan', '38904679d855c44b5a.jpeg', 'mentor', 'normal', 0, 1, '[]', 'fb', 'tw', 'yt', NULL, 0, '2025-02-01 03:22:20');
 
 -- --------------------------------------------------------
 
@@ -423,6 +401,12 @@ ALTER TABLE `messages`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
+-- AUTO_INCREMENT for table `posts`
+--
+ALTER TABLE `posts`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
 -- AUTO_INCREMENT for table `quizzes`
 --
 ALTER TABLE `quizzes`
@@ -456,7 +440,7 @@ ALTER TABLE `subtitles`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `user_progress`
