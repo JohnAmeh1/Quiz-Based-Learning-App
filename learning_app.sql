@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 01, 2025 at 03:41 PM
+-- Generation Time: Feb 11, 2025 at 02:34 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -97,18 +97,11 @@ CREATE TABLE `messages` (
 --
 
 INSERT INTO `messages` (`id`, `sender`, `recipient`, `message`, `timestamp`, `is_read`) VALUES
-(1, 'Johnydrille', 'John29', 'hi', '2025-01-20 06:40:35', 0),
-(2, 'Johnydrille', 'Johnydrille', 'yh', '2025-01-20 06:46:28', 0),
-(3, 'Johnydrille', 'Johnydrille', 'yh', '2025-01-20 06:53:31', 0),
-(4, 'Johnydrille', 'Johnydrille', 'send', '2025-01-20 06:53:55', 0),
-(5, 'John29', 'Johnydrille', 'what', '2025-01-20 06:55:05', 0),
-(6, 'Johnydrille', 'John29', 'yh my bad', '2025-01-20 06:55:16', 0),
-(7, 'John29', 'Johnydrille', 'no need to shout', '2025-01-20 06:55:28', 0),
-(8, 'Johnydrille', 'John29', 'i wasn\'t', '2025-01-20 06:55:41', 0),
-(9, 'John29', 'Johnydrille', 'sorry', '2025-01-20 06:55:49', 0),
-(10, 'Johnydrille', 'John29', 'Thank you', '2025-01-20 06:56:02', 0),
-(11, 'Johnydrille', 'John29', 'get', '2025-01-20 09:17:07', 0),
-(12, 'John29', 'Johnydrille', 'i get', '2025-01-20 09:18:12', 0);
+(1, 'Johnameh', 'Johnameh29', 'hi', '2025-02-01 21:33:41', 0),
+(2, 'Johnameh', 'Johnameh29', 'yh', '2025-02-01 22:14:30', 0),
+(3, 'Johnameh29', 'Johnameh', 'hi', '2025-02-01 22:20:15', 0),
+(4, 'Johnameh', 'Johnameh29', 'yh', '2025-02-05 02:37:53', 0),
+(5, 'Johnameh29', 'Johnameh', 'what', '2025-02-05 02:38:09', 0);
 
 -- --------------------------------------------------------
 
@@ -124,14 +117,6 @@ CREATE TABLE `posts` (
   `parent_id` int(11) NOT NULL DEFAULT 0,
   `comments` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `posts`
---
-
-INSERT INTO `posts` (`id`, `user_id`, `post`, `date`, `parent_id`, `comments`) VALUES
-(5, 'user_67790f88dc895', 'n', '2025-01-28 02:00:10', 0, 1),
-(13, 'user_67790f88dc895', 'yh', '2025-01-28 17:09:07', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -190,12 +175,20 @@ INSERT INTO `sections` (`id`, `course_id`, `section_title`, `created_at`) VALUES
 
 CREATE TABLE `source_codes` (
   `id` int(11) NOT NULL,
-  `title` varchar(255) DEFAULT NULL,
-  `description` text DEFAULT NULL,
-  `price` decimal(10,2) DEFAULT NULL,
-  `file_path` varchar(255) DEFAULT NULL,
-  `user_id` int(11) DEFAULT NULL
+  `title` varchar(255) NOT NULL,
+  `description` text NOT NULL,
+  `price` decimal(10,0) NOT NULL,
+  `file_path` varchar(255) NOT NULL,
+  `user_id` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `source_codes`
+--
+
+INSERT INTO `source_codes` (`id`, `title`, `description`, `price`, `file_path`, `user_id`) VALUES
+(1, 'wjbj', 'jqle', 2345, 'uploads/codesconfig.inc.php', 'user_679e443c50d54'),
+(2, 'nmrvmer', ' rhk3w', 2345, 'uploads/codesfail.alert.inc.php', 'user_679e443c50d54');
 
 -- --------------------------------------------------------
 
@@ -252,7 +245,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `user_id`, `username`, `name`, `email`, `password`, `bio`, `image_path`, `account_type`, `badge`, `score`, `level`, `completed_courses`, `fb`, `tw`, `yt`, `date`, `is_active`, `signup_date`) VALUES
-(1, 'user_679d855c44b32', 'Johnameh29', 'John Ameh ', 'johnameh29@gmail.com', '12345678', 'Learning Enthusiast | Comprehensive Learning Fan', '38904679d855c44b5a.jpeg', 'mentor', 'normal', 0, 1, '[]', 'fb', 'tw', 'yt', NULL, 0, '2025-02-01 03:22:20');
+(3, 'user_679e43416ecef', 'Johnameh29', 'John Ameh ', 'johnameh29@gmail.com', '12345678', 'Learning Enthusiast | Comprehensive Learning Fan', '74975679e43416ed18.jpeg', 'mentor', 'verified', 0, 1, '[]', 'fb', 'tw', 'yt', NULL, 0, '2025-02-01 16:52:33'),
+(4, 'user_679e443c50d54', 'Johnameh', 'John Ameh ', 'johnameh107@gmail.com', '12345678', 'Learning Enthusiast | Comprehensive Learning Fan', '53395679e443c50d81.jpeg', 'learner', 'verified', 0, 1, '[]', 'fb', 'tw', 'yt', NULL, 0, '2025-02-01 16:56:44');
 
 -- --------------------------------------------------------
 
@@ -343,8 +337,7 @@ ALTER TABLE `sections`
 -- Indexes for table `source_codes`
 --
 ALTER TABLE `source_codes`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `user_id` (`user_id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `subtitles`
@@ -398,13 +391,13 @@ ALTER TABLE `jobs`
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `quizzes`
@@ -440,7 +433,7 @@ ALTER TABLE `subtitles`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `user_progress`
@@ -469,12 +462,6 @@ ALTER TABLE `jobs`
 --
 ALTER TABLE `sections`
   ADD CONSTRAINT `sections_ibfk_1` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`) ON DELETE CASCADE;
-
---
--- Constraints for table `source_codes`
---
-ALTER TABLE `source_codes`
-  ADD CONSTRAINT `source_codes_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `subtitles`

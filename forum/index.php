@@ -1,166 +1,188 @@
 <?php
-
 require('config.inc.php');
 require('functions.php');
 
 $page = $_GET['page'] ?? 1;
 $page = (int)$page;
 
-if ($page < 1)
-	$page = 1;
-
+if ($page < 1) {
+    $page = 1;
+}
 ?>
 
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>EduQuest - Community Forum</title>
-	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap-icons.css">
-	<link rel="stylesheet" type="text/css" href="assets/css/styles.css">
-	<script src="https://cdn.tailwindcss.com"></script>
-	<link
-		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-		rel="stylesheet" />
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-	<link
-		href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap"
-		rel="stylesheet" />
-	<link rel="icon" href="./img/brain.jpg">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="EduQuest Community Forum - Share and learn together">
+    <title>EduQuest - Community Forum</title>
+    
+    <!-- Fonts and Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="./img/brain.jpg">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                        },
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-out',
+                        'pulse-slow': 'pulse 3s infinite',
+                    },
+                },
+            },
+        }
+    </script>
+    
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .post-card {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        
+        .post-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+        
+        .hide {
+            display: none;
+        }
+    </style>
 </head>
 
-<body class="overflow-y-hidden ">
-
-	<style>
-		@keyframes appear {
-			0% {
-				opacity: 0;
-			}
-
-			100% {
-				opacity: 1;
-			}
-		}
-
-		.hide {
-			display: none;
-		}
-
-		@keyframes grow-shrink {
-
-			0%,
-			100% {
-				transform: scale(1);
-				/* Normal size */
-			}
-
-			50% {
-				transform: scale(1.2);
-				/* Grow */
-			}
-		}
-
-		.animate-grow-shrink {
-			animation: grow-shrink 1.5s infinite ease-in-out;
-		}
-	</style>
-	<section class="bg-gray-100 font-roboto flex-col ">
-
-		<?php include('header.inc.php') ?>
-		<div class="flex h-screen p-4 flex-1 flex flex-col md:flex-row">
-			<!-- Main Content -->
-			<div class="flex-1 flex flex-col p-4 mb-5 ">
-				<?php include('success.alert.inc.php') ?>
-				<?php include('fail.alert.inc.php') ?>
-
-				<h1 class="text-xl font-bold mb-2">Posts</h1>
-				<section class="js-posts rounded shadow mb-4 w-full p-1 overflow-y-auto">
-					<div style="padding:10px;text-align:center;">Loading posts....</div>
-				</section>
-
-				<div class="flex justify-between items-center bg-gray-200 p-4">
-					<button onclick="mypost.prev_page()" class="cursor-pointer px-4 py-2 text-white bg-gradient-to-r 
-                    from-blue-500 to-indigo-600 rounded-lg shadow-md hover:from-indigo-600 
-                    hover:to-blue-500 
-                    focus:outline-none focus:ring-2 focus:ring-blue-400">
-						Prev page
-					</button>
-					<div class="js-page-number">Page 1</div>
-					<button onclick="mypost.next_page()" class="cursor-pointer px-4 py-2 text-white bg-gradient-to-r 
-                    from-blue-500 to-indigo-600 rounded-lg shadow-md hover:from-indigo-600 
-                    hover:to-blue-500 
-                    focus:outline-none focus:ring-2 focus:ring-blue-400">
-						Next page
-					</button>
-				</div>
-			</div>
-
-			<!-- Right Bar -->
-			<?php if (logged_in()): ?> 
-				<form onsubmit="mypost.submit(event)" method="post" class=" w-full md:w-1/3 p-4 bg-gray-200 overflow-y-auto order-first md:order-none">
-					<div class="bg-white p-4 rounded shadow">
-						<textarea placeholder="What's on your mind?" name="post" class="js-post-input w-full p-2 border rounded mb-2" rows="4"></textarea>
-						<button class=" px-4 py-2 rounded w-full inline-block text-white bg-gradient-to-r 
-                    from-blue-500 to-indigo-600 rounded-lg shadow-md hover:from-indigo-600 
-                    hover:to-blue-500 
-                    focus:outline-none focus:ring-2 focus:ring-blue-400"><i class="fa-solid fa-paper-plane"></i></button>
-					</div>
-				</form>
-			<?php else: ?>
-				<div class="w-1/3 p-4 bg-gray-200 text-center">
-					<i class="bi bi-info-circle-fill"></i>
-					<div onclick="login.show()" style="cursor:pointer;">
-						You're not logged in <br>Click here to login and post
-					</div>
-				</div>
-			<?php endif; ?>
-		</div>
-
-		<br><br>
-		<?php include('signup.inc.php') ?>
-		<?php include('login.inc.php') ?>
-		<?php include('post.edit.inc.php') ?>
-	</section>
-
-	<!--post card template-->
-	<div class="js-post-card hide bg-white p-2 rounded shadow mb-2">
-		<a href="#" class="js-profile-link flex justify-between mb-2">
-			<img src="assets/images/user.jpg" class="js-image class_47">
-			<h2 class="js-username text-gray-500 text-sm">
-				Jane Name
-			</h2>
-		</a>
-		<div class="">
-
-			<div class="js-post ">
-				is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets c
-			</div>
-			<div class="flex justify-between items-center">
-				<h4 class="js-date text-gray-500 " style="font-size: 10px;">
-					3rd Jan 23 14:35 pm
-				</h4>
-				<div class="flex items-center">
-					<i class="cursor-pointer fa-solid fa-comment text-blue-500 text-md mr-1"></i>
-					<!-- <i class="bi bi-chat-left-dots text-gray-500 text-md mr-2"></i> -->
-					<div class="js-comment-link cursor-pointer text-blue-500 text-md">
-						Comments
-					</div>
-				</div>
-
-			</div>
-
-		</div>
-	</div>
-
-
+<body class="bg-gray-100 font-sans">
+    <?php include('header.inc.php') ?>
+    
+    <main class="container mx-auto px-4 py-8 min-h-screen">
+        <div class="flex flex-col lg:flex-row gap-8">
+            <!-- Main Content -->
+            <div class="flex-1">
+                <?php include('success.alert.inc.php') ?>
+                <?php include('fail.alert.inc.php') ?>
+                
+                <div class="flex justify-between items-center mb-6">
+                    <h1 class="text-2xl font-bold text-gray-900">Community Posts</h1>
+                    <?php if (logged_in()): ?>
+                        <button onclick="document.querySelector('.js-post-input').focus()" 
+                                class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-primary-600 rounded-lg hover:bg-primary-700 focus:ring-4 focus:ring-primary-100">
+                            <i class="fas fa-pen-to-square mr-2"></i>
+                            New Post
+                        </button>
+                    <?php endif; ?>
+                </div>
+                
+                <section class="js-posts space-y-4 mb-6 w-full p-1 overflow-y-auto">
+                    <div class="text-center py-8 animate-pulse">
+                        <div class="inline-block rounded-full bg-primary-100 p-4">
+                            <i class="fas fa-spinner fa-spin text-primary-600 text-xl"></i>
+                        </div>
+                        <p class="mt-4 text-gray-600">Loading posts...</p>
+                    </div>
+                </section>
+                
+                <!-- Pagination -->
+                <div class="flex justify-between items-center bg-white p-4 rounded-lg shadow-sm">
+                    <button onclick="mypost.prev_page()" 
+                            class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 focus:ring-4 focus:ring-primary-100">
+                        <i class="fas fa-chevron-left mr-2"></i>
+                        Previous
+                    </button>
+                    <span class="js-page-number text-sm font-medium text-gray-700">Page 1</span>
+                    <button onclick="mypost.next_page()" 
+                            class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 focus:ring-4 focus:ring-primary-100">
+                        Next
+                        <i class="fas fa-chevron-right ml-2"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Sidebar -->
+            <div class="lg:w-1/3">
+                <?php if (logged_in()): ?>
+                    <form onsubmit="mypost.submit(event)" method="post" class="bg-white p-6 rounded-lg shadow-sm">
+                        <h2 class="text-lg font-semibold text-gray-900 mb-4">Create a Post</h2>
+                        <textarea 
+                            placeholder="Share your thoughts with the community..." 
+                            name="post" 
+                            class="js-post-input w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500" 
+                            rows="4"
+                        ></textarea>
+                        <button class="mt-4 w-full inline-flex justify-center items-center px-4 py-2 text-sm font-medium text-white bg-primary-600 rounded-lg hover:bg-primary-700 focus:ring-4 focus:ring-primary-100">
+                            <i class="fas fa-paper-plane mr-2"></i>
+                            Post
+                        </button>
+                    </form>
+                <?php else: ?>
+                    <div class="bg-white p-6 rounded-lg shadow-sm text-center">
+                        <i class="fas fa-lock text-4xl text-gray-400 mb-4"></i>
+                        <h2 class="text-lg font-semibold text-gray-900 mb-2">Join the Discussion</h2>
+                        <p class="text-gray-600 mb-4">Sign in to share your thoughts and engage with the community</p>
+                        <button onclick="login.show()" 
+                                class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-primary-600 rounded-lg hover:bg-primary-700 focus:ring-4 focus:ring-primary-100">
+                            <i class="fas fa-sign-in-alt mr-2"></i>
+                            Sign In
+                        </button>
+                    </div>
+                <?php endif; ?>
+            </div>
+        </div>
+    </main>
+    
+    <?php include('signup.inc.php') ?>
+    <?php include('login.inc.php') ?>
+    <?php include('post.edit.inc.php') ?>
+    
+    <!-- Post Card Template -->
+    <div class="js-post-card hide">
+        <div class="post-card bg-white p-6 rounded-lg shadow-sm animate-fade-in">
+            <div class="flex items-center justify-between mb-4">
+                <a href="#" class="js-profile-link flex items-center space-x-3">
+                    <img src="assets/images/user.jpg" class="js-image w-10 h-10 rounded-full">
+                    <span class="js-username text-sm font-medium text-gray-900"></span>
+                </a>
+                <span class="js-date text-sm text-gray-500"></span>
+            </div>
+            
+            <p class="js-post text-gray-700 mb-4"></p>
+            
+            <div class="flex items-center justify-end">
+                <div class="js-comment-link inline-flex items-center text-sm text-primary-600 hover:text-primary-700 cursor-pointer">
+                    <i class="fas fa-comment mr-2"></i>
+                    Comments
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        var page_number = <?= $page ?>;
+        var home_page = true;
+    </script>
+    <script src="./assets/js/mypost.js?v3"></script>
 </body>
-
-<script>
-	var page_number = <?= $page ?>;
-	var home_page = true;
-</script>
-<script src="./assets/js/mypost.js?v3"></script>
-
 </html>

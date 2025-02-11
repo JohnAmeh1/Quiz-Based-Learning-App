@@ -23,26 +23,18 @@ if (isset($_GET['course_id'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         pre {
-            background-color:rgb(236, 235, 235);;
-            /* background-color: #f5f5f5; */
-            /* Light gray background */
+            background-color: rgb(248, 250, 252);
             border-radius: 8px;
-            /* Rounded corners */
             padding: 5px;
-            /* Padding inside the block */
             overflow-x: auto;
-            /* Horizontal scroll for long code */
+            border: 1px solid rgb(226, 232, 240);
         }
 
         code {
-            /* font-family: 'Courier New', Courier, monospace; */
-            /* Monospace font for code */
             font-size: 12px;
-            
-            /* Slightly smaller font size */
         }
     </style>
-    <title><?= $course['name'] ?> - Course Content</title>
+    <title><?= $course['name'] ?> - Tutorial</title>
     <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
@@ -63,7 +55,7 @@ if (isset($_GET['course_id'])) {
             // Automatically activate the first tab
             const firstTab = tabs[0];
             if (firstTab) {
-                firstTab.classList.add('bg-blue-300');
+                firstTab.classList.add('bg-indigo-100');
                 const firstContent = document.querySelector(`#${firstTab.dataset.tab}`);
                 if (firstContent) {
                     firstContent.classList.remove('hidden');
@@ -76,88 +68,93 @@ if (isset($_GET['course_id'])) {
                     tabContents.forEach(content => content.classList.add('hidden'));
 
                     // Remove active state from all tabs
-                    tabs.forEach(t => t.classList.remove('bg-gray-300'));
+                    tabs.forEach(t => t.classList.remove('bg-indigo-100'));
 
                     // Show the clicked tab's content
                     document.querySelector(`#${tab.dataset.tab}`).classList.remove('hidden');
 
                     // Set the active state on the clicked tab
-                    tab.classList.add('bg-gray-300');
+                    tab.classList.add('bg-indigo-100');
                 });
             });
         });
     </script>
 </head>
 
-<body class="font-sans bg-gray-100">
+<body class="font-sans bg-white">
     <div class="flex h-screen">
-        <!-- Sidebar Toggle Button for Small Screens -->
-
+        <!-- Overlay for mobile sidebar -->
+        <div id="sidebar-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden md:hidden"></div>
 
         <!-- Sidebar -->
-        <aside class="w-1/4 bg-stone-300 p-5 overflow-y-auto hidden md:block">
-            <h2 class="text-xl font-bold sm:text-normal mb-5"><?= $course['name'] ?> Content</h2>
-            <ul>
-                <?php while ($section = $sections_query->fetch_assoc()): ?>
-                    <li class="mb-1">
-                        <button data-tab="section-<?= $section['id'] ?>" class="focus:outline-none focus:ring-2 focus:ring-gray-500 block w-full text-left px-3 py-2 text-gray-900 hover:bg-gray-300 rounded">
-                            <?= $section['section_title'] ?>
-                        </button>
-                    </li>
-                <?php endwhile; ?>
-            </ul>
+        <aside id="sidebar" class="fixed md:relative w-64 md:w-1/4 bg-slate-100 h-screen overflow-y-auto -left-64 md:left-0 transition-all duration-300 ease-in-out z-50 md:block border-r border-slate-200">
+            <div class="p-5 relative">
+                <!-- Close button for mobile -->
+                <button id="sidebar-close" class="absolute top-4 right-4 text-slate-600 hover:text-slate-800 md:hidden">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+
+                <h2 class="text-xl font-bold sm:text-normal mb-5 text-slate-800"><?= $course['name'] ?> Tutorial</h2>
+                <ul>
+                    <?php while ($section = $sections_query->fetch_assoc()): ?>
+                        <li class="mb-1">
+                            <button data-tab="section-<?= $section['id'] ?>"
+                                class="focus:outline-none focus:ring-2 focus:ring-indigo-500 block w-full text-left px-3 py-2 text-slate-700 hover:bg-indigo-50 rounded transition duration-150">
+                                <?= $section['section_title'] ?>
+                            </button>
+                        </li>
+                    <?php endwhile; ?>
+                </ul>
+            </div>
         </aside>
 
         <!-- Main Content -->
-        <main class="flex-1 p-8 overflow-y-auto bg-gray-200">
-            <!-- Toggle Button -->
-            <button id="sidebar-toggle"
-                class="p-4 bg-gray-800 text-white fixed top-4 left-4 z-50 md:hidden rounded-full shadow-lg hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500">
-                <i class="fas fa-bars text-white text-lg"></i>
-            </button>
-
-            <?php
-            // Reset the pointer to fetch sections again
-            $sections_query->data_seek(0);
-            while ($section = $sections_query->fetch_assoc()):
-                // Fetch subtitles and content for each section
-                $subtitles_query = $conn->query("SELECT * FROM subtitles WHERE section_id = {$section['id']} ORDER BY id ASC");
-            ?>
-                <section id="section-<?= $section['id'] ?>" data-content class="hidden">
-                    <h2 class="text-2xl font-semibold mb-4 text-gray-800"><?= $section['section_title'] ?></h2>
-
-                    <?php while ($subtitle = $subtitles_query->fetch_assoc()): ?>
-                        <article class="mb-8">
-                            <h3 class="text-xl font-medium text-gray-700 mb-2"><?= $subtitle['subtitle'] ?></h3>
-                            <p class="text-gray-600 leading-relaxed"><?= nl2br($subtitle['content']) ?></p>
-                            <pre class="bg-stone-100"><code class=""><?= nl2br(htmlspecialchars($subtitle['code_snippet'])) ?></code></pre>
-                        </article>
-                    <?php endwhile; ?>
-                </section>
-            <?php endwhile; ?>
-            <div class="flex justify-between items-center bg-gray-200 p-4">
-                <button
-                    id="prevTab"
-                    class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none">
-                    Prev
+        <main class="flex-1 flex flex-col bg-white min-h-screen">
+            <!-- Content Area with Proper Scrolling -->
+            <div class="flex-1 overflow-y-auto">
+                <!-- Toggle Button -->
+                <button id="sidebar-toggle"
+                    class="p-4 bg-indigo-600 text-white fixed top-4 left-4 z-50 md:hidden rounded-full shadow-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-150">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
                 </button>
-                <button
-                    id="nextTab"
-                    class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none">
+
+                <?php
+                $sections_query->data_seek(0);
+                while ($section = $sections_query->fetch_assoc()):
+                    $subtitles_query = $conn->query("SELECT * FROM subtitles WHERE section_id = {$section['id']} ORDER BY id ASC");
+                ?>
+                    <section id="section-<?= $section['id'] ?>" data-content class="hidden p-8">
+                        <h2 class="text-2xl font-semibold mb-4 text-slate-800"><?= $section['section_title'] ?></h2>
+
+                        <?php while ($subtitle = $subtitles_query->fetch_assoc()): ?>
+                            <article class="mb-8 bg-white rounded-lg shadow-sm p-6">
+                                <h3 class="text-xl font-medium text-slate-700 mb-2"><?= $subtitle['subtitle'] ?></h3>
+                                <p class="text-slate-600 leading-relaxed mb-4"><?= nl2br($subtitle['content']) ?></p>
+                                <pre class="bg-slate-50"><code class="text-slate-800">Code Example: <br><br><?= nl2br(htmlspecialchars($subtitle['code_snippet'])) ?></code></pre>
+                            </article>
+                        <?php endwhile; ?>
+                    </section>
+                <?php endwhile; ?>
+            </div>
+
+            <div class="flex justify-between items-center p-4 bg-slate-50 border-t border-slate-200">
+                <button id="prevTab"
+                    class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-150">
+                    Previous
+                </button>
+                <button id="nextTab"
+                    class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-150">
                     Next
                 </button>
             </div>
         </main>
-
     </div>
 
     <script>
-        // Automatically display the first tab content on page load
-        const firstTab = document.querySelector('[data-tab]');
-        if (firstTab) {
-            firstTab.click();
-        }
-
         document.addEventListener('DOMContentLoaded', () => {
             const tabs = document.querySelectorAll('[data-tab]');
             const tabContents = document.querySelectorAll('[data-content]');
@@ -171,11 +168,28 @@ if (isset($_GET['course_id'])) {
                 tabContents.forEach(content => content.classList.add('hidden'));
 
                 // Remove active state from all tabs
-                tabs.forEach(tab => tab.classList.remove('bg-gray-300'));
+                tabs.forEach(tab => tab.classList.remove('bg-indigo-100'));
 
                 // Show the current tab content
                 tabContents[currentTabIndex].classList.remove('hidden');
-                tabs[currentTabIndex].classList.add('bg-gray-300');
+                tabs[currentTabIndex].classList.add('bg-indigo-100');
+
+                // Update button states
+                prevButton.disabled = currentTabIndex === 0;
+                nextButton.disabled = currentTabIndex === tabs.length - 1;
+
+                // Visual feedback for disabled state
+                if (prevButton.disabled) {
+                    prevButton.classList.add('opacity-50', 'cursor-not-allowed');
+                } else {
+                    prevButton.classList.remove('opacity-50', 'cursor-not-allowed');
+                }
+
+                if (nextButton.disabled) {
+                    nextButton.classList.add('opacity-50', 'cursor-not-allowed');
+                } else {
+                    nextButton.classList.remove('opacity-50', 'cursor-not-allowed');
+                }
             };
 
             // Initialize the first tab
@@ -198,12 +212,59 @@ if (isset($_GET['course_id'])) {
                 }
             });
 
-            // Also make sure clicking tabs updates the currentTabIndex
+            // Tab click handlers
             tabs.forEach((tab, index) => {
                 tab.addEventListener('click', () => {
                     currentTabIndex = index;
                     updateTabs();
                 });
+            });
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+            const sidebar = document.querySelector('#sidebar');
+            const sidebarToggle = document.querySelector('#sidebar-toggle');
+            const sidebarClose = document.querySelector('#sidebar-close');
+            const overlay = document.querySelector('#sidebar-overlay');
+
+            function openSidebar() {
+                sidebar.classList.remove('-left-64');
+                sidebar.classList.add('left-0');
+                overlay.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeSidebar() {
+                sidebar.classList.remove('left-0');
+                sidebar.classList.add('-left-64');
+                overlay.classList.add('hidden');
+                document.body.style.overflow = '';
+            }
+
+            sidebarToggle.addEventListener('click', openSidebar);
+            sidebarClose.addEventListener('click', closeSidebar);
+            overlay.addEventListener('click', closeSidebar);
+
+            // Close sidebar when clicking a tab on mobile
+            const tabButtons = document.querySelectorAll('[data-tab]');
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    if (window.innerWidth < 768) { // md breakpoint
+                        closeSidebar();
+                    }
+                });
+            });
+
+            // Handle resize events
+            window.addEventListener('resize', () => {
+                if (window.innerWidth >= 768) {
+                    sidebar.classList.remove('-left-64');
+                    sidebar.classList.remove('left-0');
+                    overlay.classList.add('hidden');
+                    document.body.style.overflow = '';
+                } else {
+                    sidebar.classList.remove('left-0');
+                    sidebar.classList.add('-left-64');
+                }
             });
         });
     </script>
