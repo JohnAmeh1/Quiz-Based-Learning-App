@@ -1,0 +1,102 @@
+[
+  {
+      "question": "What does PHP stand for?",
+      "options": ["Personal Home Page", "PHP: Hypertext Preprocessor", "Private Hosting Protocol", "Programming HTML Pages"],
+      "correct": "PHP: Hypertext Preprocessor"
+  },
+  {
+      "question": "Which function is used to print text in PHP?",
+      "options": ["echo", "print", "printf", "All of the above"],
+      "correct": "All of the above"
+  },
+  {
+      "question": "How do you declare a variable in PHP?",
+      "options": ["$variable_name", "var variable_name", "variable_name = value", "declare variable_name"],
+      "correct": "$variable_name"
+  },
+  {
+      "question": "Which of the following is NOT a valid PHP data type?",
+      "options": ["Boolean", "Integer", "String", "Character"],
+      "correct": "Character"
+  },
+  {
+      "question": "Which PHP superglobal is used to collect form data?",
+      "options": ["$_POST", "$_SESSION", "$_COOKIE", "$_GET"],
+      "correct": "$_POST"
+  },
+  {
+      "question": "What will count([1, 2, 3, 4]) return?",
+      "options": ["3", "4", "5", "Error"],
+      "correct": "4"
+  },
+  {
+      "question": "Which function is used to check if a variable is set?",
+      "options": ["isset()", "empty()", "is_null()", "defined()"],
+      "correct": "isset()"
+  },
+  {
+      "question": "What is the correct way to open a file in PHP?",
+      "options": ["fopen('file.txt', 'r');", "open('file.txt');", "file_open('file.txt', 'r');", "open_file('file.txt');"],
+      "correct": "fopen('file.txt', 'r');"
+  },
+  {
+      "question": "Which function is used to include a file and continue execution even if the file is missing?",
+      "options": ["include", "require", "require_once", "include_once"],
+      "correct": "include"
+  },
+  {
+      "question": "Which function is used to end a session in PHP?",
+      "options": ["session_end()", "session_destroy()", "session_stop()", "session_close()"],
+      "correct": "session_destroy()"
+  },
+  {
+      "question": "Which keyword is used to define a class in PHP?",
+      "options": ["class", "function", "object", "define"],
+      "correct": "class"
+  },
+  {
+      "question": "How do you create a new object in PHP?",
+      "options": ["$obj = new ClassName();", "$obj = ClassName();", "ClassName $obj = new();", "$obj = class(ClassName);"],
+      "correct": "$obj = new ClassName();"
+  },
+  {
+      "question": "Which PHP function is used to sanitize user input?",
+      "options": ["filter_input()", "sanitize_input()", "escape_string()", "html_escape()"],
+      "correct": "filter_input()"
+  },
+  {
+      "question": "Which function is used to hash passwords securely in PHP?",
+      "options": ["md5()", "sha1()", "password_hash()", "crypt()"],
+      "correct": "password_hash()"
+  },
+  {
+      "question": "Which SQL command is used to retrieve data?",
+      "options": ["SELECT", "UPDATE", "DELETE", "INSERT"],
+      "correct": "SELECT"
+  },
+  {
+      "question": "Which function is used to connect to a MySQL database in PHP?",
+      "options": ["mysqli_connect()", "mysql_connect()", "pdo_connect()", "connect()"],
+      "correct": "mysqli_connect()"
+  },
+  {
+      "question": "Which PHP function is used to redirect a user to another page?",
+      "options": ["redirect()", "header()", "goto()", "forward()"],
+      "correct": "header()"
+  },
+  {
+      "question": "How do you prevent SQL injection in PHP?",
+      "options": ["Using prepared statements", "Escaping user input with addslashes()", "Disabling user input", "Allowing only admin users"],
+      "correct": "Using prepared statements"
+  },
+  {
+      "question": "What does isset($var) return if $var is null?",
+      "options": ["true", "false", "null", "1"],
+      "correct": "false"
+  },
+  {
+      "question": "Which function is used to destroy a cookie in PHP?",
+      "options": ["delete_cookie()", "unset_cookie()", "setcookie('name', '', time() - 3600)", "remove_cookie()"],
+      "correct": "setcookie('name', '', time() - 3600)"
+  }
+]
