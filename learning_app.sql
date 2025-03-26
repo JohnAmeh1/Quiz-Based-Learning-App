@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 26, 2025 at 02:30 PM
+-- Generation Time: Mar 26, 2025 at 02:36 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -107,16 +107,6 @@ CREATE TABLE `courses` (
   `is_premium` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `courses`
---
-
-INSERT INTO `courses` (`id`, `name`, `description`, `image`, `created_at`, `is_premium`) VALUES
-(1, 'HTML', 'HTML (HyperText Markup Language) is the standard markup language for creating web pages. Learn how to structure content on the web.', 'uploads/logo-2582748_640.webp', '2025-03-12 00:16:54', 0),
-(2, 'CSS', 'CSS (Cascading Style Sheets) is used to style and layout web pages. Learn how to make your web pages visually appealing.', 'uploads/919826.png', '2025-03-12 00:25:45', 0),
-(8, 'Java', 'Java is a popular programming language. Java is used to develop mobile apps, web apps, desktop apps, games and much more.', 'uploads/what-is-java-image.png', '2025-03-25 13:02:13', 0),
-(9, 'python', 'python ', 'uploads/download.jpeg', '2025-03-25 16:41:40', 0);
-
 -- --------------------------------------------------------
 
 --
@@ -198,32 +188,6 @@ CREATE TABLE `quizzes` (
   `correct_option` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `quizzes`
---
-
-INSERT INTO `quizzes` (`id`, `course_id`, `question`, `options`, `correct_option`) VALUES
-(1, '2', 'What does PHP stand for?', '[\"Personal Home Page\",\"PHP: Hypertext Preprocessor\",\"Private Hosting Protocol\",\"Programming HTML Pages\"]', 'PHP: Hypertext Preprocessor'),
-(2, '2', 'Which function is used to print text in PHP?', '[\"echo\",\"print\",\"printf\",\"All of the above\"]', 'All of the above'),
-(3, '2', 'How do you declare a variable in PHP?', '[\"$variable_name\",\"var variable_name\",\"variable_name = value\",\"declare variable_name\"]', '$variable_name'),
-(4, '2', 'Which of the following is NOT a valid PHP data type?', '[\"Boolean\",\"Integer\",\"String\",\"Character\"]', 'Character'),
-(5, '2', 'Which PHP superglobal is used to collect form data?', '[\"$_POST\",\"$_SESSION\",\"$_COOKIE\",\"$_GET\"]', '$_POST'),
-(6, '2', 'What will count([1, 2, 3, 4]) return?', '[\"3\",\"4\",\"5\",\"Error\"]', '4'),
-(7, '2', 'Which function is used to check if a variable is set?', '[\"isset()\",\"empty()\",\"is_null()\",\"defined()\"]', 'isset()'),
-(8, '2', 'What is the correct way to open a file in PHP?', '[\"fopen(\'file.txt\', \'r\');\",\"open(\'file.txt\');\",\"file_open(\'file.txt\', \'r\');\",\"open_file(\'file.txt\');\"]', 'fopen(\'file.txt\', \'r\');'),
-(9, '2', 'Which function is used to include a file and continue execution even if the file is missing?', '[\"include\",\"require\",\"require_once\",\"include_once\"]', 'include'),
-(10, '2', 'Which function is used to end a session in PHP?', '[\"session_end()\",\"session_destroy()\",\"session_stop()\",\"session_close()\"]', 'session_destroy()'),
-(11, '2', 'Which keyword is used to define a class in PHP?', '[\"class\",\"function\",\"object\",\"define\"]', 'class'),
-(12, '2', 'How do you create a new object in PHP?', '[\"$obj = new ClassName();\",\"$obj = ClassName();\",\"ClassName $obj = new();\",\"$obj = class(ClassName);\"]', '$obj = new ClassName();'),
-(13, '2', 'Which PHP function is used to sanitize user input?', '[\"filter_input()\",\"sanitize_input()\",\"escape_string()\",\"html_escape()\"]', 'filter_input()'),
-(14, '2', 'Which function is used to hash passwords securely in PHP?', '[\"md5()\",\"sha1()\",\"password_hash()\",\"crypt()\"]', 'password_hash()'),
-(15, '2', 'Which SQL command is used to retrieve data?', '[\"SELECT\",\"UPDATE\",\"DELETE\",\"INSERT\"]', 'SELECT'),
-(16, '2', 'Which function is used to connect to a MySQL database in PHP?', '[\"mysqli_connect()\",\"mysql_connect()\",\"pdo_connect()\",\"connect()\"]', 'mysqli_connect()'),
-(17, '2', 'Which PHP function is used to redirect a user to another page?', '[\"redirect()\",\"header()\",\"goto()\",\"forward()\"]', 'header()'),
-(18, '2', 'How do you prevent SQL injection in PHP?', '[\"Using prepared statements\",\"Escaping user input with addslashes()\",\"Disabling user input\",\"Allowing only admin users\"]', 'Using prepared statements'),
-(19, '2', 'What does isset($var) return if $var is null?', '[\"true\",\"false\",\"null\",\"1\"]', 'false'),
-(20, '2', 'What does isset($var) return if $var is null?', '[\"true\",\"false\",\"null\",\"1\"]', 'false');
-
 -- --------------------------------------------------------
 
 --
@@ -276,18 +240,6 @@ CREATE TABLE `sections` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `sections`
---
-
-INSERT INTO `sections` (`id`, `course_id`, `section_title`, `created_at`) VALUES
-(1, 1, 'Introduction to HTML', '2025-03-12 00:17:58'),
-(2, 1, 'HTML Basics', '2025-03-12 00:18:15'),
-(3, 2, 'Introduction to CSS', '2025-03-12 00:26:32'),
-(4, 2, 'CSS Box Model', '2025-03-12 00:26:45'),
-(7, 8, 'Java Quickstart', '2025-03-25 13:04:07'),
-(8, 9, 'Introduction', '2025-03-25 16:42:29');
-
 -- --------------------------------------------------------
 
 --
@@ -324,26 +276,6 @@ CREATE TABLE `subtitles` (
   `content` text NOT NULL,
   `code_snippet` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `subtitles`
---
-
-INSERT INTO `subtitles` (`id`, `section_id`, `subtitle`, `content`, `code_snippet`) VALUES
-(1, 1, 'What is HTML?', 'HTML stands for HyperText Markup Language. It is the standard markup language for creating web pages.', '<!DOCTYPE html>\n<html>\n<head>\n    <title>Page Title</title>\n</head>\n<body>\n    <h1>My First Heading</h1>\n    <p>My first paragraph.</p>\n</body>\n</html>'),
-(2, 1, 'HTML Elements', 'HTML elements are the building blocks of HTML pages. They are represented by tags.', '<!DOCTYPE html>\n<html>\n<head>\n    <title>Page Title</title>\n</head>\n<body>\n<p>This is a paragraph.</p>\n<a href=\"https://www.example.com\">This is a link</a>\n</body>\n</html>'),
-(3, 1, 'HTML Attributes', 'Attributes provide additional information about HTML elements.', '<!DOCTYPE html>\n<html>\n<head>\n    <title>Page Title</title>\n</head>\n<body>\n<img src=\"image.jpg\" alt=\"Description of image\">\n</body>\n</html>'),
-(4, 2, 'Headings', 'HTML headings are defined with the <h1> to <h6> tags.', '<!DOCTYPE html>\n<html>\n<head>\n    <title>Page Title</title>\n</head>\n<body>\n<h1>Heading 1</h1>\n<h2>Heading 2</h2>\n</body>\n</html>'),
-(5, 2, 'Paragraphs', 'Paragraphs are defined with the <p> tag.', '<!DOCTYPE html>\n<html>\n<head>\n    <title>Page Title</title>\n</head>\n<body>\n<p>This is a paragraph.</p>\n</body>\n</html>'),
-(6, 2, 'Links', 'Links are defined with the <a> tag.', '<!DOCTYPE html>\n<html>\n<head>\n    <title>Page Title</title>\n</head>\n<body>\n<a href=\"https://www.example.com\">Visit Example</a>\n</body>\n</html>'),
-(7, 3, 'What is CSS?', 'CSS stands for Cascading Style Sheets. It is used to style HTML elements.', '<!DOCTYPE html>\n<html>\n<head>\n    <title>Page Title</title>\n<style>\n.body-class {\n    background-color: lightblue;\n}\n</style>\n</head>\n<body class=\"body-class\">\n</body>\n</html>'),
-(8, 3, 'CSS Syntax', 'CSS rules consist of a selector and a declaration block.', '<!DOCTYPE html>\n<html>\n<head>\n    <title>Page Title</title>\n<style>\np {\n    color: red;\n    font-size: 16px;\n}\n</style>\n</head>\n<body>\n<p>hello</p>\n</body>\n</html>'),
-(9, 3, 'CSS Selectors', 'Selectors are used to target HTML elements for styling.', '<!DOCTYPE html>\n<html>\n<head>\n    <title>Page Title</title>\n<style>\n.class {\n    color: blue;\n}\n#id {\n    color: green;\n}\n</style>\n</head>\n<body>\n<span class=\"class\">hello world!!</span>\n<span id=\"id\"> hello world!!</span>\n</body>\n</html>'),
-(10, 4, 'Margin and Padding', 'Margin is the space outside the element, while padding is the space inside the element.', '<!DOCTYPE html>\n<html>\n<head>\n    <title>Page Title</title>\n<style>\n.div-class {\n    margin: 10px;\n    padding: 20px;\n}\n</style>\n</head>\n<body>\n<div class=\"div-class\">\n<p>margin</p>\n</div>\n</body>\n</html>\n'),
-(11, 4, 'Border', 'Borders can be styled using CSS.', '<!DOCTYPE html>\n<html>\n<head>\n    <title>Page Title</title>\n<style>\n.div-class-2 {\n    border: 2px solid black;\n}\n</style>\n</head>\n<body>\n<div class=\"div-class-2\">\n<p>Borders</p>\n</body>\n</html>'),
-(12, 4, 'Box Sizing', 'The box-sizing property controls how the total width and height of an element is calculated.', '<!DOCTYPE html>\n<html>\n<head>\n    <title>Page Title</title>\n<style>\n.div-class-3 {\n    box-sizing: border-box;\n}\n</style>\n</head>\n<body>\n<div class=\"div-class-3\">\n<span> Border-box</span>\n</div>\n</body>\n</html>'),
-(13, 7, 'Java Quickstart', 'In Java, every application begins with a class name, and that class must match the filename.\r\n\r\nLet\'s create our first Java file, called Main.java, which can be done in any text editor (like Notepad).\r\n\r\nThe file should contain a \"Hello World\" message, which is written with the following code:', 'class Main {\n  public static void main(String[] args) {\n    System.out.println(\"Hello World\");\n  }\n}'),
-(14, 8, 'what is python', 'python', 'print(\'Hello, World!\')\r\n# Fibonacci sequence\r\ndef fib(n):\r\n    if n <= 1:\r\n        return n\r\n    return fib(n-1) + fib(n-2)\r\nprint(fib(10))');
 
 -- --------------------------------------------------------
 
@@ -593,7 +525,7 @@ ALTER TABLE `posts`
 -- AUTO_INCREMENT for table `quizzes`
 --
 ALTER TABLE `quizzes`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `quiz_payments`
@@ -623,7 +555,7 @@ ALTER TABLE `source_codes`
 -- AUTO_INCREMENT for table `subtitles`
 --
 ALTER TABLE `subtitles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `users`
