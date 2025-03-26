@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 18, 2025 at 01:32 PM
+-- Generation Time: Mar 26, 2025 at 02:30 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -113,7 +113,9 @@ CREATE TABLE `courses` (
 
 INSERT INTO `courses` (`id`, `name`, `description`, `image`, `created_at`, `is_premium`) VALUES
 (1, 'HTML', 'HTML (HyperText Markup Language) is the standard markup language for creating web pages. Learn how to structure content on the web.', 'uploads/logo-2582748_640.webp', '2025-03-12 00:16:54', 0),
-(2, 'CSS', 'CSS (Cascading Style Sheets) is used to style and layout web pages. Learn how to make your web pages visually appealing.', 'uploads/919826.png', '2025-03-12 00:25:45', 0);
+(2, 'CSS', 'CSS (Cascading Style Sheets) is used to style and layout web pages. Learn how to make your web pages visually appealing.', 'uploads/919826.png', '2025-03-12 00:25:45', 0),
+(8, 'Java', 'Java is a popular programming language. Java is used to develop mobile apps, web apps, desktop apps, games and much more.', 'uploads/what-is-java-image.png', '2025-03-25 13:02:13', 0),
+(9, 'python', 'python ', 'uploads/download.jpeg', '2025-03-25 16:41:40', 0);
 
 -- --------------------------------------------------------
 
@@ -225,6 +227,22 @@ INSERT INTO `quizzes` (`id`, `course_id`, `question`, `options`, `correct_option
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `quiz_payments`
+--
+
+CREATE TABLE `quiz_payments` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `course_id` int(11) NOT NULL,
+  `payment_reference` varchar(255) NOT NULL,
+  `amount` decimal(10,2) NOT NULL,
+  `payment_status` enum('pending','completed','failed') DEFAULT 'pending',
+  `payment_date` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `reviews`
 --
 
@@ -266,7 +284,9 @@ INSERT INTO `sections` (`id`, `course_id`, `section_title`, `created_at`) VALUES
 (1, 1, 'Introduction to HTML', '2025-03-12 00:17:58'),
 (2, 1, 'HTML Basics', '2025-03-12 00:18:15'),
 (3, 2, 'Introduction to CSS', '2025-03-12 00:26:32'),
-(4, 2, 'CSS Box Model', '2025-03-12 00:26:45');
+(4, 2, 'CSS Box Model', '2025-03-12 00:26:45'),
+(7, 8, 'Java Quickstart', '2025-03-25 13:04:07'),
+(8, 9, 'Introduction', '2025-03-25 16:42:29');
 
 -- --------------------------------------------------------
 
@@ -321,7 +341,9 @@ INSERT INTO `subtitles` (`id`, `section_id`, `subtitle`, `content`, `code_snippe
 (9, 3, 'CSS Selectors', 'Selectors are used to target HTML elements for styling.', '<!DOCTYPE html>\n<html>\n<head>\n    <title>Page Title</title>\n<style>\n.class {\n    color: blue;\n}\n#id {\n    color: green;\n}\n</style>\n</head>\n<body>\n<span class=\"class\">hello world!!</span>\n<span id=\"id\"> hello world!!</span>\n</body>\n</html>'),
 (10, 4, 'Margin and Padding', 'Margin is the space outside the element, while padding is the space inside the element.', '<!DOCTYPE html>\n<html>\n<head>\n    <title>Page Title</title>\n<style>\n.div-class {\n    margin: 10px;\n    padding: 20px;\n}\n</style>\n</head>\n<body>\n<div class=\"div-class\">\n<p>margin</p>\n</div>\n</body>\n</html>\n'),
 (11, 4, 'Border', 'Borders can be styled using CSS.', '<!DOCTYPE html>\n<html>\n<head>\n    <title>Page Title</title>\n<style>\n.div-class-2 {\n    border: 2px solid black;\n}\n</style>\n</head>\n<body>\n<div class=\"div-class-2\">\n<p>Borders</p>\n</body>\n</html>'),
-(12, 4, 'Box Sizing', 'The box-sizing property controls how the total width and height of an element is calculated.', '<!DOCTYPE html>\n<html>\n<head>\n    <title>Page Title</title>\n<style>\n.div-class-3 {\n    box-sizing: border-box;\n}\n</style>\n</head>\n<body>\n<div class=\"div-class-3\">\n<span> Border-box</span>\n</div>\n</body>\n</html>');
+(12, 4, 'Box Sizing', 'The box-sizing property controls how the total width and height of an element is calculated.', '<!DOCTYPE html>\n<html>\n<head>\n    <title>Page Title</title>\n<style>\n.div-class-3 {\n    box-sizing: border-box;\n}\n</style>\n</head>\n<body>\n<div class=\"div-class-3\">\n<span> Border-box</span>\n</div>\n</body>\n</html>'),
+(13, 7, 'Java Quickstart', 'In Java, every application begins with a class name, and that class must match the filename.\r\n\r\nLet\'s create our first Java file, called Main.java, which can be done in any text editor (like Notepad).\r\n\r\nThe file should contain a \"Hello World\" message, which is written with the following code:', 'class Main {\n  public static void main(String[] args) {\n    System.out.println(\"Hello World\");\n  }\n}'),
+(14, 8, 'what is python', 'python', 'print(\'Hello, World!\')\r\n# Fibonacci sequence\r\ndef fib(n):\r\n    if n <= 1:\r\n        return n\r\n    return fib(n-1) + fib(n-2)\r\nprint(fib(10))');
 
 -- --------------------------------------------------------
 
@@ -375,13 +397,6 @@ CREATE TABLE `user_completed_courses` (
   `name` varchar(255) NOT NULL,
   `completed_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `user_completed_courses`
---
-
-INSERT INTO `user_completed_courses` (`id`, `user_id`, `course_id`, `name`, `completed_at`) VALUES
-(1, 20, 2, 'CSS', '2025-03-18 01:12:18');
 
 -- --------------------------------------------------------
 
@@ -468,6 +483,14 @@ ALTER TABLE `quizzes`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `quiz_payments`
+--
+ALTER TABLE `quiz_payments`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `course_id` (`course_id`);
+
+--
 -- Indexes for table `reviews`
 --
 ALTER TABLE `reviews`
@@ -546,7 +569,7 @@ ALTER TABLE `contact`
 -- AUTO_INCREMENT for table `courses`
 --
 ALTER TABLE `courses`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `jobs`
@@ -573,6 +596,12 @@ ALTER TABLE `quizzes`
   MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
+-- AUTO_INCREMENT for table `quiz_payments`
+--
+ALTER TABLE `quiz_payments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `reviews`
 --
 ALTER TABLE `reviews`
@@ -582,7 +611,7 @@ ALTER TABLE `reviews`
 -- AUTO_INCREMENT for table `sections`
 --
 ALTER TABLE `sections`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `source_codes`
@@ -594,7 +623,7 @@ ALTER TABLE `source_codes`
 -- AUTO_INCREMENT for table `subtitles`
 --
 ALTER TABLE `subtitles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -606,7 +635,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `user_completed_courses`
 --
 ALTER TABLE `user_completed_courses`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `user_progress`
@@ -629,6 +658,13 @@ ALTER TABLE `videos`
 --
 ALTER TABLE `jobs`
   ADD CONSTRAINT `jobs_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `quiz_payments`
+--
+ALTER TABLE `quiz_payments`
+  ADD CONSTRAINT `quiz_payments_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `quiz_payments_ibfk_2` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`);
 
 --
 -- Constraints for table `sections`

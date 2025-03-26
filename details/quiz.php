@@ -1,4 +1,8 @@
 <?php
+
+include("./php/all_files.php");
+include("./assets/user_auth.php");
+
 $conn = new mysqli("localhost", "root", "", "learning_app");
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
@@ -17,6 +21,24 @@ if (!$course) {
 
 $result = $conn->query("SELECT * FROM quizzes WHERE course_id = $course_id");
 $quizzes = $result->fetch_all(MYSQLI_ASSOC);
+
+
+$user_data = getUser();
+$user_id = $user_data['id'];
+
+// Check if user has paid for this quiz
+$payment_check = $conn->prepare("SELECT * FROM quiz_payments WHERE user_id = ? AND course_id = ? AND payment_status = 'completed'");
+$payment_check->bind_param("ii", $user_id, $course_id);
+$payment_check->execute();
+$result = $payment_check->get_result();
+
+if ($result->num_rows === 0 && $user_data['badge'] !== 'verified') {
+    // User hasn't paid and isn't verified, redirect to payment page
+    header("location: ./quiz_payment.php?course_id=$course_id");
+    die;
+}
+
+
 
 
 ?>
@@ -175,18 +197,42 @@ $quizzes = $result->fetch_all(MYSQLI_ASSOC);
 </head>
 
 <body class="bg-gray-100">
+    <div id="preloader" class="fixed inset-0 flex flex-col items-center justify-center bg-gray-100 z-50">
+        <!-- Icon or Logo -->
+        <img src="../img/brain.jpg"
+            alt="Quiz Icon"
+            class="w-16 h-16 animate-grow-shrink mb-4 rounded-full shadow-lg border-2 border-blue-400 p-1">
+        <!-- Loading Text -->
+        <p class="text-gray-700 text-lg font-medium animate-pulse">
+            Loading...
+        </p>
+    </div>
     <div class="min-h-screen flex items-center justify-center p-4">
         <div class="quiz-container w-full max-w-6xl">
-            <div class="p-4 lg:p-6 flex flex-col lg:flex-row justify-between items-center">
+            <!-- <div class="p-4 lg:p-6 flex flex-col lg:flex-row justify-between items-center">
                 <div class="text-center lg:text-left mb-4 lg:mb-0">
                     <h1 class="text-2xl lg:text-3xl font-bold text-gray-800"><?php echo htmlspecialchars($course['name']); ?> Quiz</h1>
                 </div>
                 <div class="text-xl font-bold text-gray-800">
                     Time Remaining: <span id="timer">05:00</span>
                 </div>
-                <!-- <div class="difficulty-badge">
-                    <?php echo htmlspecialchars($course['difficulty']); ?> Level
-                </div> -->
+
+                <?php echo htmlspecialchars($course['difficulty']); ?> Level
+
+            </div> -->
+
+            <div class="p-4 lg:p-6 flex flex-col lg:flex-row justify-between items-center">
+                <div class="text-center lg:text-left mb-4 lg:mb-0 flex items-center">
+                    <h1 class="text-2xl lg:text-3xl font-bold text-gray-800 mr-4"><?php echo htmlspecialchars($course['name']); ?> Quiz</h1>
+                    <a href="../courses.php" onclick="deleteQuizPayment()" class="text-gray-600 hover:text-blue-600 transition-colors duration-200">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                        </svg>
+                    </a>
+                </div>
+                <div class="text-xl font-bold text-gray-800">
+                    Time Remaining: <span id="timer">05:00</span>
+                </div>
             </div>
             <div class="quiz-progress" id="progressBar"></div>
 
@@ -264,125 +310,70 @@ $quizzes = $result->fetch_all(MYSQLI_ASSOC);
         // Start the timer
         const timerInterval = setInterval(updateTimer, 1000);
 
-        // Function to submit the quiz and redirect
-        // function submitQuizAndRedirect() {
-        //     const form = document.getElementById("quizForm");
-        //     let formData = new FormData(form);
-
-        //     // Show a message before submitting
-        //     const messageElement = document.createElement("p");
-        //     messageElement.id = "timeoutMessage";
-        //     messageElement.className = "text-red-600 font-bold mt-4";
-        //     messageElement.textContent = "Time's up! Submitting quiz...";
-        //     document.getElementById("quizInfo").appendChild(messageElement);
-
-        //     // Submit the quiz
-        //     fetch("process_quiz.php", {
-        //             method: "POST",
-        //             body: formData
-        //         })
-        //         .then(response => response.json())
-        //         .then(data => {
-        //             if (data.error) {
-        //                 alert("Error: " + data.error);
-        //             } else {
-        //                 // Display the quiz results
-        //                 document.getElementById("scoreResult").classList.remove("hidden");
-        //                 document.getElementById("scoreValue").textContent = data.score;
-        //                 document.getElementById("totalValue").textContent = data.total;
-        //                 document.getElementById("pointsValue").textContent = data.game_points;
-
-        //                 // Show a countdown message for redirection
-        //                 let countdown = 2;
-        //                 const countdownElement = document.createElement("p");
-        //                 countdownElement.id = "countdown";
-        //                 countdownElement.className = "text-gray-600 mt-4";
-        //                 countdownElement.textContent = `Redirecting to courses page in ${countdown} seconds...`;
-        //                 document.getElementById("quizInfo").appendChild(countdownElement);
-
-        //                 // Start the countdown
-        //                 const countdownInterval = setInterval(() => {
-        //                     countdown--;
-        //                     countdownElement.textContent = `Redirecting to courses page in ${countdown} seconds...`;
-
-        //                     // Redirect after 2 seconds
-        //                     if (countdown <= 0) {
-        //                         clearInterval(countdownInterval);
-        //                         window.location.href = "../courses.php"; // Redirect to the courses page
-        //                     }
-        //                 }, 1000);
-        //             }
-        //         })
-        //         .catch(error => {
-        //             console.error("Fetch error:", error);
-        //             alert("An unexpected error occurred while processing your quiz.");
-        //         });
-        // }
-
         function submitQuizAndRedirect() {
-    const form = document.getElementById("quizForm");
-    let formData = new FormData(form);
+            const form = document.getElementById("quizForm");
+            let formData = new FormData(form);
 
-    // Show a message before submitting
-    const messageElement = document.createElement("p");
-    messageElement.id = "timeoutMessage";
-    messageElement.className = "text-red-600 font-bold mt-4";
-    messageElement.textContent = "Time's up! Submitting quiz...";
-    document.getElementById("quizInfo").appendChild(messageElement);
+            // Show a message before submitting
+            const messageElement = document.createElement("p");
+            messageElement.id = "timeoutMessage";
+            messageElement.className = "text-red-600 font-bold mt-4";
+            messageElement.textContent = "Time's up! Submitting quiz...";
+            document.getElementById("quizInfo").appendChild(messageElement);
 
-    // Submit the quiz
-    fetch("process_quiz.php", {
-        method: "POST",
-        body: formData
-    })
-    .then(response => {
-        // Check if the response is JSON
-        const contentType = response.headers.get("content-type");
-        if (contentType && contentType.includes("application/json")) {
-            return response.json();
-        } else {
-            // If the response is not JSON, throw an error
-            return response.text().then(text => {
-                throw new Error(`Expected JSON, got: ${text}`);
-            });
+            // Submit the quiz
+            fetch("process_quiz.php", {
+                    method: "POST",
+                    body: formData
+                })
+                .then(response => {
+                    // Check if the response is JSON
+                    const contentType = response.headers.get("content-type");
+                    if (contentType && contentType.includes("application/json")) {
+                        return response.json();
+                    } else {
+                        // If the response is not JSON, throw an error
+                        return response.text().then(text => {
+                            throw new Error(`Expected JSON, got: ${text}`);
+                        });
+                    }
+                })
+                .then(data => {
+                    if (data.error) {
+                        alert("Error: " + data.error);
+                    } else {
+                        // Display the quiz results
+                        document.getElementById("scoreResult").classList.remove("hidden");
+                        document.getElementById("scoreValue").textContent = data.score;
+                        document.getElementById("totalValue").textContent = data.total;
+                        document.getElementById("pointsValue").textContent = data.game_points;
+
+                        // Show a countdown message for redirection
+                        let countdown = 2;
+                        const countdownElement = document.createElement("p");
+                        countdownElement.id = "countdown";
+                        countdownElement.className = "text-gray-600 mt-4";
+                        countdownElement.textContent = `Redirecting to courses page in ${countdown} seconds...`;
+                        document.getElementById("quizInfo").appendChild(countdownElement);
+
+                        // Start the countdown
+                        const countdownInterval = setInterval(() => {
+                            countdown--;
+                            countdownElement.textContent = `Redirecting to courses page in ${countdown} seconds...`;
+
+                            // Redirect after 2 seconds
+                            if (countdown <= 0) {
+                                clearInterval(countdownInterval);
+                                window.location.href = "../courses.php"; // Redirect to the courses page
+                            }
+                        }, 1000);
+                    }
+                })
+                .catch(error => {
+                    console.error("Fetch error:", error);
+                    alert("An unexpected error occurred while processing your quiz. Please check the console for details.");
+                });
         }
-    })
-    .then(data => {
-        if (data.error) {
-            alert("Error: " + data.error);
-        } else {
-            // Display the quiz results
-            document.getElementById("scoreResult").classList.remove("hidden");
-            document.getElementById("scoreValue").textContent = data.score;
-            document.getElementById("totalValue").textContent = data.total;
-            document.getElementById("pointsValue").textContent = data.game_points;
-
-            // Show a countdown message for redirection
-            let countdown = 2;
-            const countdownElement = document.createElement("p");
-            countdownElement.id = "countdown";
-            countdownElement.className = "text-gray-600 mt-4";
-            countdownElement.textContent = `Redirecting to courses page in ${countdown} seconds...`;
-            document.getElementById("quizInfo").appendChild(countdownElement);
-
-            // Start the countdown
-            const countdownInterval = setInterval(() => {
-                countdown--;
-                countdownElement.textContent = `Redirecting to courses page in ${countdown} seconds...`;
-
-                // Redirect after 2 seconds
-                if (countdown <= 0) {
-                    clearInterval(countdownInterval);
-                    window.location.href = "../courses.php"; // Redirect to the courses page
-                }
-            }, 1000);
-        }
-    })
-    .catch(error => {
-        console.error("Fetch error:", error);
-        alert("An unexpected error occurred while processing your quiz. Please check the console for details.");
-    });
-}
 
         // Function to handle manual submission
         function submitQuiz() {
@@ -442,6 +433,48 @@ $quizzes = $result->fetch_all(MYSQLI_ASSOC);
             event.preventDefault();
             clearInterval(timerInterval); // Stop the timer
             submitQuiz(); // Submit the quiz
+        });
+
+        // Function to delete quiz payment when home button is clicked
+        function deleteQuizPayment() {
+            // Prevent the default link behavior
+            event.preventDefault();
+
+            // Confirm with the user
+            if (confirm("Are you sure you want to exit this quiz? Your payment will be forfeited.")) {
+                // Send AJAX request to delete payment
+                fetch('delete_quiz_payment.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: `course_id=<?php echo $course_id; ?>`
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            // Redirect to courses page after successful deletion
+                            window.location.href = '../courses.php';
+                        } else {
+                            alert('Error: ' + (data.message || 'Failed to delete payment'));
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('An error occurred while processing your request');
+                    });
+            }
+        }
+
+        // JavaScript to hide preloader after the page loads
+        window.addEventListener('load', () => {
+            const preloader = document.getElementById('preloader');
+            const content = document.getElementById('content');
+
+            setTimeout(() => {
+                preloader.style.display = 'none'; // Hide preloader
+                content.classList.remove('hidden'); // Show main content
+            }, 1500); // Adjust the duration of the preloader here
         });
     </script>
 </body>

@@ -59,6 +59,9 @@ if ($_SESSION['auth']) {
                                 <a href="../videos/index.php" class="block px-4 py-2 text-gray-800 hover:bg-blue-50 hover:text-blue-600 transition-all duration-300 ease-in-out">
                                     Tutorial Videos
                                 </a>
+                                <a href="../code_playground/playground.php" class="block px-4 py-2 text-gray-800 hover:bg-blue-50 hover:text-blue-600 transition-all duration-300 ease-in-out">
+                                    Code Playground
+                                </a>
                             </div>
                         </div>
                         <!-- About Dropdown -->
@@ -128,6 +131,9 @@ if ($_SESSION['auth']) {
                     </a>
                     <a href="../videos/index.php" class="block px-4 py-2 text-gray-800 hover:bg-blue-50 hover:text-blue-600 transition-all duration-300 ease-in-out">
                         Tutorial Videos
+                    </a>
+                    <a href="../code_playground/playground.php" class="block px-4 py-2 text-gray-800 hover:bg-blue-50 hover:text-blue-600 transition-all duration-300 ease-in-out">
+                        Code Playground
                     </a>
                 </div>
             </div>

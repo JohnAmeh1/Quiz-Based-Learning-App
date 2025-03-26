@@ -4,13 +4,14 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Content-Type');
 
-// Configuration settings
+// Security and configuration settings
 $config = [
     'timeout' => 5, // Execution timeout in seconds
     'memory_limit' => '128M', // Memory limit
     'max_filesize' => 100000, // Max code size (bytes)
     'allowed_languages' => ['python', 'javascript', 'php', 'html', 'java', 'c', 'cpp'],
-    'sandbox_path' => 'C:/xampp/tmp/sandbox/', // Change to '/tmp/sandbox/' for Linux
+    'sandbox_path' => 'C:/xampp/tmp/sandbox/',
+    // 'sandbox_path' => '/tmp/sandbox/', // Directory for sandboxed execution
 ];
 
 // Create sandbox directory if it doesn't exist
@@ -40,13 +41,11 @@ if (!in_array($language, $config['allowed_languages'])) {
     exit;
 }
 
-// Sanitize PHP code (basic protection)
-if ($language === 'php') {
-    $code = preg_replace('/<\?php/i', '<?php', $code); // Normalize PHP tags
-    $code = str_replace('<?=', '<?php echo ', $code); // Replace short echo tags
-}
+// Sanitize code (basic protection)
+$code = preg_replace('/<\?php/i', '<?php', $code); // Prevent case variations
+$code = str_replace('<?=', '<?php echo ', $code); // Convert short echo tags
 
-// Execute code
+// Execute based on language
 try {
     $result = execute_code($code, $language, $config);
     echo json_encode($result);
@@ -56,7 +55,7 @@ try {
 }
 
 /**
- * Execute code in a language-specific sandbox
+ * Execute code in language-specific sandbox
  */
 function execute_code($code, $language, $config)
 {
@@ -74,30 +73,26 @@ function execute_code($code, $language, $config)
             case 'python':
                 $filename = $sandboxFile . '.py';
                 file_put_contents($filename, $code);
-                $command = "python " . escapeshellarg($filename) . " 2>&1";
+                $command = "python " . escapeshellarg($filename) . " 2>&1"; // Use 'python' instead of 'python3'
                 break;
 
             case 'javascript':
                 $filename = $sandboxFile . '.js';
                 file_put_contents($filename, $code);
-                $command = "node " . escapeshellarg($filename) . " 2>&1";
+                $command = "node " . escapeshellarg($filename) . " 2>&1"; // Ensure 'node' is in PATH
                 break;
-
             case 'php':
                 $filename = $sandboxFile . '.php';
                 file_put_contents($filename, $code);
                 $command = "php " . escapeshellarg($filename) . " 2>&1";
                 break;
-
             case 'html':
-                // Directly return the HTML content for client-side rendering
+                // For HTML we return the code as output (client-side rendering)
                 return ['output' => $code, 'html' => true];
-
             case 'java':
                 $filename = $sandboxFile . '.java';
-                $classname = 'Main';
+                $classname = 'Main'; // Default class name
                 file_put_contents($filename, $code);
-                // Compile Java code
                 $compileCmd = "javac " . escapeshellarg($filename) . " 2>&1";
                 $compileOutput = shell_exec($compileCmd);
                 if ($compileOutput) {
@@ -108,7 +103,7 @@ function execute_code($code, $language, $config)
 
             case 'c':
                 $filename = $sandboxFile . '.c';
-                $outputFile = $sandboxFile . '_out.exe';
+                $outputFile = $sandboxFile . '_out.exe'; // Add .exe extension for Windows
                 file_put_contents($filename, $code);
                 $compileCmd = "gcc " . escapeshellarg($filename) . " -o " . escapeshellarg($outputFile) . " 2>&1";
                 $compileOutput = shell_exec($compileCmd);
@@ -120,7 +115,7 @@ function execute_code($code, $language, $config)
 
             case 'cpp':
                 $filename = $sandboxFile . '.cpp';
-                $outputFile = $sandboxFile . '_out.exe';
+                $outputFile = $sandboxFile . '_out.exe'; // Add .exe extension for Windows
                 file_put_contents($filename, $code);
                 $compileCmd = "g++ " . escapeshellarg($filename) . " -o " . escapeshellarg($outputFile) . " 2>&1";
                 $compileOutput = shell_exec($compileCmd);
@@ -129,30 +124,26 @@ function execute_code($code, $language, $config)
                 }
                 $command = escapeshellarg($outputFile) . " 2>&1";
                 break;
-
             default:
                 throw new Exception("Unsupported language");
         }
 
         if (!empty($command)) {
-            // Set execution time limit and memory limit
+            // Set execution time limit
             ini_set('max_execution_time', $config['timeout']);
-            ini_set('memory_limit', $config['memory_limit']);
 
-            // Execute command with timeout handling
+            // Execute command with timeout
             $descriptors = [
                 0 => ['pipe', 'r'], // stdin
                 1 => ['pipe', 'w'], // stdout
-                2 => ['pipe', 'w'], // stderr
+                2 => ['pipe', 'w']  // stderr
             ];
-
             $process = proc_open($command, $descriptors, $pipes);
-
             if (!is_resource($process)) {
                 throw new Exception("Failed to execute code");
             }
 
-            // Handle timeout
+            // Set timeout
             $startTime = time();
             $timeout = false;
             while (true) {
@@ -178,7 +169,6 @@ function execute_code($code, $language, $config)
             if ($timeout) {
                 throw new Exception("Execution timed out after {$config['timeout']} seconds");
             }
-
             if ($errorOutput) {
                 $error .= $errorOutput;
             }
@@ -193,8 +183,8 @@ function execute_code($code, $language, $config)
         if ($language === 'java' && file_exists($sandboxFile . '.class')) {
             unlink($sandboxFile . '.class');
         }
-        if (($language === 'c' || $language === 'cpp') && file_exists($sandboxFile . '_out.exe')) {
-            unlink($sandboxFile . '_out.exe');
+        if (($language === 'c' || $language === 'cpp') && file_exists($sandboxFile . '_out')) {
+            unlink($sandboxFile . '_out');
         }
     }
 

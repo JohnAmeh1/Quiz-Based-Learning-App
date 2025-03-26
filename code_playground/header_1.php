@@ -1,16 +1,16 @@
 <?php
 include("./php/all_files.php");
-include("./assets/user_auth.php");
+include("./user_auth.php");
+
+// if ($_SESSION['auth']) {
+// } else {
+//     header("location: ../index.php");
+//     die;
+// }
 
 $user_data = getUser();
 
 $user_id = $user_data['id'];
-
-if ($_SESSION['auth']) {
-} else {
-    header("location: ../index.php");
-    die;
-}
 ?>
 
 <!DOCTYPE html>
@@ -22,6 +22,8 @@ if ($_SESSION['auth']) {
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link rel="icon" href="../img/brain.jpg">
     <style>
         @keyframes grow-shrink {
@@ -29,7 +31,7 @@ if ($_SESSION['auth']) {
             0%,
             100% {
                 transform: scale(1);
-                /* Normal size */
+                /* semibold size */
             }
 
             50% {
@@ -66,7 +68,7 @@ if ($_SESSION['auth']) {
                             <img
                                 alt="EduQuest Logo"
                                 class="w-14 h-14 rounded-full border-2 border-white shadow-sm"
-                                src="./img/brain.jpg" />
+                                src="../img/brain.jpg" />
                             <!-- Brand Name -->
                             <span class="ml-4 text-2xl font-bold text-white">
                                 EduQuest
@@ -83,7 +85,7 @@ if ($_SESSION['auth']) {
                         <!-- Courses Link -->
                         <div class="relative" id="dropdown">
                             <!-- Dropdown Trigger -->
-                            <button onclick="toggleDropdown()" class="py-4 px-5 text-gray-800 hover:text-blue-600 transition-all duration-300 ease-in-out font-semibold text-lg focus:outline-none">
+                            <button onclick="toggleDropdown(event)" class="py-4 px-5 text-gray-800 hover:text-blue-600 transition-all duration-300 ease-in-out font-semibold text-lg focus:outline-none">
                                 Tutorials
                                 <i class="fas fa-chevron-down ml-2 text-sm"></i>
                             </button>
@@ -96,7 +98,7 @@ if ($_SESSION['auth']) {
                                 <a href="../videos/index.php" class="block px-4 py-2 text-gray-800 hover:bg-blue-50 hover:text-blue-600 transition-all duration-300 ease-in-out">
                                     Tutorial Videos
                                 </a>
-                                <a href="../code_playground/playground.php" class="block px-4 py-2 text-gray-800 hover:bg-blue-50 hover:text-blue-600 transition-all duration-300 ease-in-out">
+                                <a href="./playground.php" class="block px-4 py-2 text-gray-800 hover:bg-blue-50 hover:text-blue-600 transition-all duration-300 ease-in-out">
                                     Code Playground
                                 </a>
                             </div>
@@ -158,10 +160,13 @@ if ($_SESSION['auth']) {
 
             <!-- Tutorials Dropdown -->
             <div class="relative">
-                <button onclick="toggleMobileDropdown('tutorialsDropdown')" class="w-full text-left px-4 py-2 text-gray-800 hover:bg-blue-50 hover:text-blue-600 transition-all duration-300 ease-in-out focus:outline-none">
+                <!-- Dropdown Trigger -->
+                <button onclick="toggleMobileDropdown('tutorialsDropdown')" class="w-full text-left px-4 py-2 text-gray-800 hover:bg-blue-50 hover:text-blue-600 transition-all duration-300 ease-in-out focus:outline-none flex justify-between items-center">
                     Tutorials
-                    <i class="fas fa-chevron-down float-right mt-1 text-sm"></i>
+                    <i id="tutorialsDropdownIcon" class="fas fa-chevron-down text-sm transition-transform duration-300"></i>
                 </button>
+
+                <!-- Dropdown Menu -->
                 <div id="tutorialsDropdown" class="hidden pl-4">
                     <a href="../courses.php" class="block px-4 py-2 text-gray-800 hover:bg-blue-50 hover:text-blue-600 transition-all duration-300 ease-in-out">
                         Courses
@@ -169,7 +174,7 @@ if ($_SESSION['auth']) {
                     <a href="../videos/index.php" class="block px-4 py-2 text-gray-800 hover:bg-blue-50 hover:text-blue-600 transition-all duration-300 ease-in-out">
                         Tutorial Videos
                     </a>
-                    <a href="../code_playground/playground.php" class="block px-4 py-2 text-gray-800 hover:bg-blue-50 hover:text-blue-600 transition-all duration-300 ease-in-out">
+                    <a href="./playground.php" class="block px-4 py-2 text-gray-800 hover:bg-blue-50 hover:text-blue-600 transition-all duration-300 ease-in-out">
                         Code Playground
                     </a>
                 </div>
@@ -226,8 +231,15 @@ if ($_SESSION['auth']) {
             }
         });
 
+        // function toggleDropdown() {
+        //     const dropdownMenu = document.getElementById('dropdownMenu');
+        //     dropdownMenu.classList.toggle('hidden');
+        // }
+
         function toggleDropdown() {
+            console.log('Dropdown Toggled'); // Debugging log
             const dropdownMenu = document.getElementById('dropdownMenu');
+            console.log('Dropdown Menu:', dropdownMenu); // Debugging log
             dropdownMenu.classList.toggle('hidden');
         }
 
@@ -249,18 +261,35 @@ if ($_SESSION['auth']) {
             mobileMenu.classList.toggle('hidden');
         });
 
-        // Toggle Mobile Dropdowns
+        // // Toggle Mobile Dropdowns
+        // function toggleMobileDropdown(dropdownId) {
+        //     const dropdown = document.getElementById(dropdownId);
+        //     dropdown.classList.toggle('hidden');
+        // }
+
+        // // Close Mobile Menu When Clicking Outside
+        // document.addEventListener('click', (event) => {
+        //     if (!mobileMenu.contains(event.target) && !mobileMenuButton.contains(event.target)) {
+        //         mobileMenu.classList.add('hidden');
+        //     }
+        // });
+
+
+        // Toggle Mobile Dropdown
         function toggleMobileDropdown(dropdownId) {
             const dropdown = document.getElementById(dropdownId);
+            const dropdownIcon = document.getElementById(`${dropdownId}Icon`);
+
+            // Toggle dropdown visibility
             dropdown.classList.toggle('hidden');
+
+            // Rotate chevron icon
+            if (dropdownIcon) {
+                dropdownIcon.classList.toggle('rotate-180');
+            }
         }
 
-        // Close Mobile Menu When Clicking Outside
-        document.addEventListener('click', (event) => {
-            if (!mobileMenu.contains(event.target) && !mobileMenuButton.contains(event.target)) {
-                mobileMenu.classList.add('hidden');
-            }
-        });
+
         // JavaScript to hide preloader after the page loads
         window.addEventListener('load', () => {
             const preloader = document.getElementById('preloader');

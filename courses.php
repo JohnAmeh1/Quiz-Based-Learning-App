@@ -100,7 +100,7 @@ $conn->close();
             hover:to-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-400">
                                                 Start Course
                                             </a> -->
-                                            <a href="./view_courses.php?course_id=<?= $course['id'] ?>"
+                                            <a href="./details/view_courses.php?course_id=<?= $course['id'] ?>"
                                                 class="w-full inline-block text-center px-6 py-3 mt-1 text-white bg-gradient-to-r 
     from-blue-500 to-indigo-600 rounded-lg shadow-md hover:from-indigo-600 
     hover:to-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-400">
