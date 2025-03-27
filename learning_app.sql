@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 26, 2025 at 02:36 PM
+-- Generation Time: Mar 28, 2025 at 12:26 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -106,6 +106,13 @@ CREATE TABLE `courses` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `is_premium` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `courses`
+--
+
+INSERT INTO `courses` (`id`, `name`, `description`, `image`, `created_at`, `is_premium`) VALUES
+(10, 'Java', 'Java is a high-level, general-purpose, memory-safe, object-oriented programming language. It is intended to let programmers write once, run anywhere', 'uploads/what-is-java-image.png', '2025-03-27 22:45:11', 0);
 
 -- --------------------------------------------------------
 
@@ -240,6 +247,14 @@ CREATE TABLE `sections` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `sections`
+--
+
+INSERT INTO `sections` (`id`, `course_id`, `section_title`, `created_at`) VALUES
+(9, 10, 'Java Intro', '2025-03-27 22:50:50'),
+(10, 10, 'Java Syntax', '2025-03-27 22:50:50');
+
 -- --------------------------------------------------------
 
 --
@@ -276,6 +291,14 @@ CREATE TABLE `subtitles` (
   `content` text NOT NULL,
   `code_snippet` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `subtitles`
+--
+
+INSERT INTO `subtitles` (`id`, `section_id`, `subtitle`, `content`, `code_snippet`) VALUES
+(1, 9, 'What is Java?', 'Java is a popular programming language, created in 1995.\r\n\r\nIt is owned by Oracle, and more than 3 billion devices run Java.\r\n\r\nIt is used for:\r\n\r\n1. Mobile applications (specially Android apps)\r\n2. Desktop applications\r\n3. Web applications\r\n4. Web servers and application servers\r\n5 .Games\r\n6. Database connection\r\nAnd much, much more!', ''),
+(2, 10, 'Java Syntax', 'We use the following code to print \"Hello World\" to the screen:', 'class Main {\r\n  public static void main(String[] args) {\r\n    System.out.println(\"Hello World\");\r\n  }\r\n}');
 
 -- --------------------------------------------------------
 
@@ -501,7 +524,7 @@ ALTER TABLE `contact`
 -- AUTO_INCREMENT for table `courses`
 --
 ALTER TABLE `courses`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `jobs`
@@ -531,7 +554,7 @@ ALTER TABLE `quizzes`
 -- AUTO_INCREMENT for table `quiz_payments`
 --
 ALTER TABLE `quiz_payments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `reviews`
@@ -543,7 +566,7 @@ ALTER TABLE `reviews`
 -- AUTO_INCREMENT for table `sections`
 --
 ALTER TABLE `sections`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `source_codes`
@@ -555,7 +578,7 @@ ALTER TABLE `source_codes`
 -- AUTO_INCREMENT for table `subtitles`
 --
 ALTER TABLE `subtitles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`

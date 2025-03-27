@@ -221,7 +221,7 @@ console.log("Hello, World!");</textarea>
                         </div>
                     </div>
                     <!-- Java Example -->
-                    <div class="example-card" data-lang="java" data-code="// Hello World in Java\n public class Main {\n    public static void main(String[] args) {\n        System.out.println(&quot;Hello, World!&quot;);\n        // Simple loop\n        for (int i = 1; i <= 5; i++) {\n            System.out.println(i);\n        }\n    }\n}">
+                    <div class="example-card" data-lang="java" data-code="// Hello World in Java\n class Main {\n    public static void main(String[] args) {\n        System.out.println(&quot;Hello, World!&quot;);\n        // Simple loop\n        for (int i = 1; i <= 5; i++) {\n            System.out.println(i);\n        }\n    }\n}">
                         <div class="bg-orange-100 p-3 rounded-lg cursor-pointer hover:bg-orange-200">
                             <h3 class="font-medium">Java Basics</h3>
                             <p class="text-sm text-gray-600">Hello World and a simple loop</p>

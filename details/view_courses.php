@@ -82,11 +82,22 @@ $has_paid_for_quiz = $quiz_payment_result->num_rows > 0;
             line-height: 1.5;
             color: #000;
         }
+
+        /* Mobile sidebar toggle button */
+        #sidebar-toggle {
+            display: none;
+        }
+
+        @media (max-width: 767px) {
+            #sidebar-toggle {
+                display: block;
+            }
+        }
     </style>
 </head>
 
 <body class="font-sans bg-white">
-    <div class="flex h-screen">
+    <div class="flex h-screen overflow-hidden">
         <!-- Overlay for mobile sidebar -->
         <div id="sidebar-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden md:hidden"></div>
         <!-- Sidebar -->
@@ -113,52 +124,6 @@ $has_paid_for_quiz = $quiz_payment_result->num_rows > 0;
         </aside>
         <!-- Main Content -->
         <main class="flex-1 flex flex-col bg-white min-h-screen overflow-hidden mt-5">
-            <div class="flex justify-end p-4">
-
-                <?php if ($has_paid_for_quiz): ?>
-                    <a href="quiz.php?course_id=<?= isset($course['id']) ? htmlspecialchars($course['id']) : '' ?>"
-                        target = "_blank" class="inline-block px-6 py-3 mt-4 text-white bg-gradient-to-r from-blue-500 to-indigo-600 rounded-lg shadow-md hover:from-indigo-600 hover:to-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-400">
-                        Take Quiz
-                    </a>
-                <?php else: ?>
-                    <a href="./quiz_payment.php?course_id=<?= isset($course['id']) ? htmlspecialchars($course['id']) : '' ?>"
-                        class="bg-orange-600 text-white px-4 py-2 rounded hover:bg-orange-700 cursor-pointer">
-                        Pay for Quiz
-                    </a>
-                <?php endif; ?>
-
-            </div>
-            <div class="flex-1 overflow-y-auto p-4">
-                <button id="sidebar-toggle"
-                    class="p-2 fixed top-18 left-3 z-50 text-gray-900 bg-white border-2 border-gray-900 rounded-full shadow-lg hover:bg-blue-700 hover:text-white hover:border-white transition duration-150">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                    </svg>
-                </button>
-                <?php
-                $sections_query->data_seek(0);
-                while ($section = $sections_query->fetch_assoc()):
-                    $subtitles_query = $conn->query("SELECT * FROM subtitles WHERE section_id = {$section['id']} ORDER BY id ASC");
-                ?>
-                    <section id="section-<?= $section['id'] ?>" data-content class="hidden p-8">
-                        <h2 class="text-2xl font-semibold mb-4 text-slate-800"><?= $section['section_title'] ?></h2>
-                        <?php while ($subtitle = $subtitles_query->fetch_assoc()): ?>
-                            <article class="mb-8 bg-white rounded-lg shadow-sm p-6">
-                                <h3 class="text-xl font-medium text-slate-700 mb-2"><?= $subtitle['subtitle'] ?></h3>
-                                <p class="text-slate-600 leading-relaxed mb-4"><?= nl2br($subtitle['content']) ?></p>
-                                <div class="w3-code">
-                                    <pre><code class="language-php overflow-x-auto overflow-y-auto"><?= htmlspecialchars($subtitle['code_snippet']) ?></code></pre>
-                                    <!-- <a href="view_code.php?section_id=<?= $subtitle['id'] ?>" class="w3-viewbutton">View</a> -->
-                                    <a href="view_code.php?course_id=<?= htmlspecialchars($course['id']) ?>&section_id=<?= htmlspecialchars($subtitle['id']) ?>" target="_blank" class="w3-viewbutton">View</a>
-
-                                    <!-- <a href="view_code.php?course_id=<?= $course['id'] ?>&section_id=<?= $subtitle['id'] ?>" target="_blank"  class="w3-viewbutton">View</a> -->
-
-                                </div>
-                            </article>
-                        <?php endwhile; ?>
-                    </section>
-                <?php endwhile; ?>
-            </div>
             <div class="flex justify-between items-center p-4 bg-slate-50 border-t border-slate-200">
                 <button id="prevTab"
                     class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-150 disabled:opacity-50 disabled:cursor-not-allowed"
@@ -172,10 +137,100 @@ $has_paid_for_quiz = $quiz_payment_result->num_rows > 0;
                     Next
                 </button>
             </div>
+            <div class="flex justify-between items-center p-4">
+                <?php if ($has_paid_for_quiz): ?>
+                    <a href="quiz.php?course_id=<?= isset($course['id']) ? htmlspecialchars($course['id']) : '' ?>"
+                        target="_blank" class="inline-block px-6 py-3 text-white bg-gradient-to-r from-blue-500 to-indigo-600 rounded-lg shadow-md hover:from-indigo-600 hover:to-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                        Take Quiz
+                    </a>
+                <?php else: ?>
+                    <a href="./quiz_payment.php?course_id=<?= isset($course['id']) ? htmlspecialchars($course['id']) : '' ?>"
+                        class="bg-orange-600 text-white px-4 py-2 rounded hover:bg-orange-700 cursor-pointer">
+                        Pay for Quiz
+                    </a>
+                <?php endif; ?>
+
+                <!-- Sidebar toggle button - now only visible on mobile -->
+                <button id="sidebar-toggle"
+                    class="p-2 text-gray-900 bg-white border-2 border-gray-900 rounded-full shadow-lg hover:bg-blue-700 hover:text-white hover:border-white transition duration-150 md:hidden">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
+            <div class="flex-1 overflow-y-auto p-4">
+                <!-- Sidebar toggle button - now only visible on mobile -->
+                <!-- <button id="sidebar-toggle"
+                    class="p-2 fixed top-17 right-3 z-50 text-gray-900 bg-white border-2 border-gray-900 rounded-full shadow-lg hover:bg-blue-700 hover:text-white hover:border-white transition duration-150 md:hidden">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button> -->
+                <?php
+                $sections_query->data_seek(0);
+                while ($section = $sections_query->fetch_assoc()):
+                    $subtitles_query = $conn->query("SELECT * FROM subtitles WHERE section_id = {$section['id']} ORDER BY id ASC");
+                ?>
+                    <section id="section-<?= $section['id'] ?>" data-content class="hidden p-8">
+                        <h2 class="text-2xl font-semibold mb-4 text-slate-800"><?= $section['section_title'] ?></h2>
+                        <?php while ($subtitle = $subtitles_query->fetch_assoc()): ?>
+                            <article class="mb-8 bg-white rounded-lg shadow-sm p-6">
+                                <h3 class="text-xl font-medium text-slate-700 mb-2"><?= $subtitle['subtitle'] ?></h3>
+                                <p class="text-slate-600 leading-relaxed mb-4"><?= nl2br($subtitle['content']) ?></p>
+                                <div class="w3-code">
+                                    <pre><code class="language-php overflow-x-auto overflow-y-auto"><?= htmlspecialchars($subtitle['code_snippet']) ?></code></pre>
+                                    <a href="view_code.php?course_id=<?= htmlspecialchars($course['id']) ?>&section_id=<?= htmlspecialchars($subtitle['id']) ?>" target="_blank" class="w3-viewbutton">View</a>
+                                </div>
+                            </article>
+                        <?php endwhile; ?>
+                    </section>
+                <?php endwhile; ?>
+            </div>
         </main>
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // Sidebar toggle functionality
+            const sidebar = document.getElementById('sidebar');
+            const sidebarToggle = document.getElementById('sidebar-toggle');
+            const sidebarClose = document.getElementById('sidebar-close');
+            const sidebarOverlay = document.getElementById('sidebar-overlay');
+
+            sidebarToggle.addEventListener('click', () => {
+                sidebar.classList.toggle('-translate-x-full');
+                sidebarOverlay.classList.toggle('hidden');
+            });
+
+            sidebarClose.addEventListener('click', () => {
+                sidebar.classList.add('-translate-x-full');
+                sidebarOverlay.classList.add('hidden');
+            });
+
+            sidebarOverlay.addEventListener('click', () => {
+                sidebar.classList.add('-translate-x-full');
+                sidebarOverlay.classList.add('hidden');
+            });
+
+            // Function to update user score
+            const updateScore = async (points) => {
+                try {
+                    const response = await fetch('update_score.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: `points=${points}`
+                    });
+
+                    if (!response.ok) {
+                        console.error('Failed to update score');
+                    }
+                } catch (error) {
+                    console.error('Error updating score:', error);
+                }
+            };
+
+            // Tab functionality
             const tabs = document.querySelectorAll('[data-tab]');
             const tabContents = document.querySelectorAll('[data-content]');
             const prevButton = document.getElementById('prevTab');
@@ -200,6 +255,8 @@ $has_paid_for_quiz = $quiz_payment_result->num_rows > 0;
                 if (currentTabIndex > 0) {
                     currentTabIndex--;
                     showTab(currentTabIndex);
+                    // Subtract 10 points when going back
+                    updateScore(-10);
                 }
             });
 
@@ -207,6 +264,8 @@ $has_paid_for_quiz = $quiz_payment_result->num_rows > 0;
                 if (currentTabIndex < tabs.length - 1) {
                     currentTabIndex++;
                     showTab(currentTabIndex);
+                    // Add 10 points when going forward
+                    updateScore(10);
                 }
             });
 
@@ -214,6 +273,11 @@ $has_paid_for_quiz = $quiz_payment_result->num_rows > 0;
                 tab.addEventListener('click', () => {
                     currentTabIndex = index;
                     showTab(currentTabIndex);
+                    // Close sidebar on mobile when a tab is selected
+                    if (window.innerWidth < 768) {
+                        sidebar.classList.add('-translate-x-full');
+                        sidebarOverlay.classList.add('hidden');
+                    }
                 });
             });
         });

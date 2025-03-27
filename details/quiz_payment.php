@@ -19,11 +19,15 @@ if (!$_SESSION['auth']) {
 
 // Check if course_id is provided
 if (!isset($_GET['course_id'])) {
-    header("location: courses.php");
+    header("location: ../courses.php");
     die;
 }
 
 $course_id = intval($_GET['course_id']);
+
+$course_query = $conn->query("SELECT * FROM courses WHERE id = $course_id");
+$course = $course_query->fetch_assoc();
+$course_name = $course['name'];
 
 // Fetch user data
 $user_data = getUser();
@@ -51,10 +55,10 @@ if ($result->num_rows > 0) {
 <html lang="en">
 
 <head>
-<script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" href="./img/brain.jpg">
-    <title>Pay for Quiz</title>
+    <title><?php echo $course_name; ?>- Quiz Payment</title>
     <style>
         #submit-button {
             background: linear-gradient(to right, rgb(38, 73, 226), rgb(35, 65, 154));
@@ -114,7 +118,7 @@ if ($result->num_rows > 0) {
 
             <!-- Payment Button -->
             <div class="text-center">
-                <button id ="submit-button" onclick="payWithPaystack()">
+                <button id="submit-button" onclick="payWithPaystack()">
                     Pay Now
                 </button>
                 <p class="mt-4 text-sm text-gray-600">Secure payment powered by Paystack</p>
@@ -134,6 +138,7 @@ if ($result->num_rows > 0) {
 
         function payWithPaystack() {
             const handler = PaystackPop.setup({
+                // key: 'pk_test_fdeb97ce15dc119e28cc589fcb24fac669b14f81',
                 key: 'pk_live_4f399bf20785fe69402e909561b671795972e56c',
                 email: email,
                 amount: amount,

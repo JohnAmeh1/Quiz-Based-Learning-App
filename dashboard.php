@@ -26,6 +26,8 @@ $user_id = $user_data['id'];
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7169117931522379"
+        crossorigin="anonymous"></script>
     <link rel="icon" href="./img/brain.jpg">
     <style>
         body {
@@ -196,8 +198,7 @@ $user_id = $user_data['id'];
         </div>
 
     </nav>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7169117931522379"
-        crossorigin="anonymous"></script>
+
 
     <section class="relative bg-blue-600 text-white">
         <img
