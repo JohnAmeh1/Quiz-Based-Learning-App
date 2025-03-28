@@ -91,7 +91,7 @@
                 <div class="lg:flex items-center space-x-1 hidden">
                     <a href="../profile_page.php" class="flex items-center gap-4 py-3 px-4 rounded-lg shadow-md border border-blue-500 bg-blue-50 hover:bg-blue-100 hover:shadow-lg transition-all duration-300 ease-in-out space-x-3">
                         <span class="text-lg font-semibold text-blue-600 hover:text-blue-800">
-                            <i class="fas fa-user-circle text-gray pe-2"></i><?= $_SESSION['USER'] ?>
+                            <i class="fas fa-user-circle text-gray pe-2"></i><?= $_SESSION['USER']['username']  ?>
                         </span>
                     </a>
                     <a class="py-3 px-4 bg-red-600 text-white rounded hover:bg-red-500" href="../logout.php">
