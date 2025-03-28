@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 28, 2025 at 05:02 AM
+-- Generation Time: Mar 28, 2025 at 05:28 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -134,7 +134,9 @@ INSERT INTO `messages` (`id`, `sender`, `recipient`, `message`, `timestamp`, `is
 (6, 'awe', 'Johnee', 'hi', '2025-03-05 00:17:37', 0),
 (7, 'Johnee', 'awe', 'yh', '2025-03-05 00:41:46', 0),
 (8, 'Adole', 'awe', 'hi', '2025-03-15 23:35:44', 0),
-(9, 'awe', 'Johnee', 'Yh', '2025-03-28 03:48:42', 0);
+(9, 'awe', 'Johnee', 'Yh', '2025-03-28 03:48:42', 0),
+(10, 'Johnee', 'awe', 'yh', '2025-03-28 04:02:52', 0),
+(11, 'awe', 'dan', 'Yes', '2025-03-28 04:19:04', 0);
 
 -- --------------------------------------------------------
 
@@ -376,6 +378,20 @@ CREATE TABLE `webrtc_signaling` (
   `timestamp` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `webrtc_signaling`
+--
+
+INSERT INTO `webrtc_signaling` (`id`, `sender`, `recipient`, `type`, `sdp`, `candidate`, `call_type`, `timestamp`) VALUES
+(279, 'awe', 'dan', 'hangup', NULL, NULL, NULL, '2025-03-28 05:12:01'),
+(280, 'awe', 'dan', 'hangup', NULL, NULL, NULL, '2025-03-28 05:12:24'),
+(281, 'awe', 'dan', 'hangup', NULL, NULL, NULL, '2025-03-28 05:12:47'),
+(282, 'awe', 'dan', 'hangup', NULL, NULL, NULL, '2025-03-28 05:13:51'),
+(283, 'awe', 'dan', 'hangup', NULL, NULL, NULL, '2025-03-28 05:14:16'),
+(284, 'awe', 'dan', 'hangup', NULL, NULL, NULL, '2025-03-28 05:18:24'),
+(285, 'awe', 'dan', 'hangup', NULL, NULL, NULL, '2025-03-28 05:20:23'),
+(286, 'awe', 'dan', 'hangup', NULL, NULL, NULL, '2025-03-28 05:22:16');
+
 -- --------------------------------------------------------
 
 --
@@ -559,7 +575,7 @@ ALTER TABLE `jobs`
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `posts`
@@ -631,7 +647,7 @@ ALTER TABLE `videos`
 -- AUTO_INCREMENT for table `webrtc_signaling`
 --
 ALTER TABLE `webrtc_signaling`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=259;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=287;
 
 --
 -- AUTO_INCREMENT for table `webrtc_signaling_1`
