@@ -12,47 +12,6 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-//     $course_name = $_POST['course_name'];
-//     $course_description = $_POST['course_description'];
-//     $course_image = "";
-
-//     if (isset($_FILES['course_image']) && $_FILES['course_image']['error'] === UPLOAD_ERR_OK) {
-//         $upload_dir = "uploads/";
-//         if (!is_dir($upload_dir)) {
-//             mkdir($upload_dir, 0777, true);
-//         }
-//         $file_name = basename($_FILES['course_image']['name']);
-//         $target_file = $upload_dir . $file_name;
-
-//         if (move_uploaded_file($_FILES['course_image']['tmp_name'], $target_file)) {
-//             $course_image = $target_file;
-//         } else {
-//             echo "Error uploading file.";
-//             exit;
-//         }
-//     }
-
-//     $stmt = $conn->prepare("INSERT INTO courses (name, description, image) VALUES (?, ?, ?)");
-//     $stmt->bind_param("sss", $course_name, $course_description, $course_image);
-
-//     if ($stmt->execute()) {
-//         echo "
-//     <div id='successAlert' class='fixed top-4 right-4 z-50 bg-green-100 border-l-4 border-green-500 text-green-700 p-4 rounded-lg shadow-lg'>
-//         <div class='flex items-center justify-between'>
-//             <span class='font-semibold'>Course added successfully</span>
-//             <button id='dismissAlert' class='ml-4 text-green-700'>
-//                 <i class='fas fa-times'></i>
-//             </button>
-//         </div>
-//     </div>";
-//     } else {
-//         echo "Error: " . $stmt->error;
-//     }
-
-//     $stmt->close();
-// }
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $course_name = $_POST['course_name'];
     $course_description = $_POST['course_description'];

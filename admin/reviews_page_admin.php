@@ -3,8 +3,9 @@ include("./php/all_files.php");
 include("./assets/header_admin.php");
 include("./assets/user_auth.php");
 
+// $user_id = $user_data['id'];
+
 $user_data = getUser();
-$user_id = $user_data['id'];
 ?>
 
 
@@ -34,7 +35,7 @@ $user_id = $user_data['id'];
         <h2 class="text-3xl font-bold text-center mb-6">
           User Reviews
         </h2>
-        <div class="reviews-container overflow-y-auto h-96 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div class="reviews-container overflow-y-auto h-48 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           <!-- Reviews will be injected here by AJAX -->
         </div>
       <!-- </section>  -->

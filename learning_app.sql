@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 28, 2025 at 12:26 AM
+-- Generation Time: Mar 28, 2025 at 01:52 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -90,7 +90,7 @@ CREATE TABLE `contact` (
 --
 
 INSERT INTO `contact` (`id`, `username`, `email`, `message`, `created_at`) VALUES
-(1, 'john', 'johnameh@gmail.com', 'very', '2025-10-09 23:00:00');
+(2, 'john', 'johnameh@gmail.com', 'very well', '2025-10-09 23:00:00');
 
 -- --------------------------------------------------------
 
@@ -177,7 +177,6 @@ CREATE TABLE `posts` (
 --
 
 INSERT INTO `posts` (`id`, `user_id`, `post`, `date`, `parent_id`, `comments`) VALUES
-(3, 'user_67c62fdc6f212', 'hi', '2025-03-08 02:14:41', 2, 0),
 (4, 'user_67c62fdc6f212', 'Good morning', '2025-03-08 02:33:33', 0, 1),
 (6, 'user_67c62fdc6f212', 'Good day', '2025-03-18 02:02:33', 0, 0);
 
@@ -333,7 +332,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `user_id`, `username`, `name`, `email`, `password`, `bio`, `image_path`, `account_type`, `badge`, `score`, `level`, `completed_courses`, `fb`, `tw`, `yt`, `date`, `is_active`, `signup_date`) VALUES
-(20, 'user_67c62fdc6f212', 'awe', 'John Ameh', 'johnameh107@gmail.com', '12345678', 'Learning Enthusiast | Comprehensive Learning Fan', '5465067c62fdc6f23e.jpeg', 'learner', 'verified', 3700, 1, '[]', 'fb', 'tw', 'yt', NULL, 0, '2025-03-03 23:40:28'),
+(20, 'user_67c62fdc6f212', 'awe', 'John Ameh', 'johnameh107@gmail.com', '12345678', 'Learning Enthusiast | Comprehensive Learning Fan', '5465067c62fdc6f23e.jpeg', 'learner', 'Normal', 3700, 1, '[]', 'fb', 'tw', 'yt', NULL, 0, '2025-03-03 23:40:28'),
 (21, 'user_45iuriu576ooaiw', 'Johnee', 'John Ameh', 'johnameh107@gmail.com', '12345678', 'Learning Enthusiast | Comprehensive Learning Fan', '5465067c62fdc6f23e.jpeg', 'mentor', 'verified', 0, 1, '[]', 'fb', 'tw', 'yt', NULL, 0, '2025-03-03 23:40:28'),
 (23, 'user_45jrf455mnv89', 'Johnameh', 'John Ameh', 'johnameh107@gmail.com', '12345678', 'Learning Enthusiast | Comprehensive Learning Fan', '5465067c62fdc6f23e.jpeg', 'admin', 'verified', 0, 1, '[]', 'fb', 'tw', 'yt', NULL, 0, '2025-03-03 23:40:28'),
 (24, 'user_67c8fa7f94c54', 'test', 'John Ameh', 'johnamehyh@gmail.com', '12345678', 'Learning Enthusiast | Comprehensive Learning Fan', '7951167c8fa7f94dac.jpeg', 'learner', 'Normal', 0, 1, '[]', 'fb', 'tw', 'yt', NULL, 0, '2025-03-06 02:29:35'),
@@ -518,13 +517,13 @@ ALTER TABLE `code_templates`
 -- AUTO_INCREMENT for table `contact`
 --
 ALTER TABLE `contact`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `courses`
 --
 ALTER TABLE `courses`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `jobs`
@@ -542,7 +541,7 @@ ALTER TABLE `messages`
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `quizzes`
@@ -566,7 +565,7 @@ ALTER TABLE `reviews`
 -- AUTO_INCREMENT for table `sections`
 --
 ALTER TABLE `sections`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `source_codes`
@@ -578,7 +577,7 @@ ALTER TABLE `source_codes`
 -- AUTO_INCREMENT for table `subtitles`
 --
 ALTER TABLE `subtitles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `users`

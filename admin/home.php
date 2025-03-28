@@ -68,7 +68,6 @@
                 <p class="text-purple-600" id="newSignups">0</p>
             </div>
 
-
             <!-- Weekly Sign ups -->
             <div class="stat-card">
                 <h2 class="font-bold"><i class="fa-regular fa-bookmark me-2 text-xl text-yellow-500"></i>Weekly Sign Ups</h2>
@@ -89,17 +88,33 @@
                     </a>
                 </div>
             </div>
-
-            <!-- Contacts-->
-            <div class="stat-card">
-                <h2 class="font-bold"><i class="fa-regular fa-clipboard me-2 text-xl text-green-500"></i>Contacts</h2>
-
+            <!-- Contacts -->
+            <div class="stat-card bg-white shadow-lg rounded-lg p-5">
+                <h2 class="font-bold text-lg flex items-center">
+                    <i class="fa-regular fa-clipboard me-2 text-xl text-green-500"></i>
+                    Contacts
+                </h2>
                 <div class="flex justify-between items-bottom mt-4">
                     <p class="text-2xl font-semibold text-green-500 mr-20" id="contacts">0</p>
-                    <!-- <a href="./contacts_admin_page.php"
+                    <a href="./contacts_admin.php"
                         class="text-gray-500 hover:text-green-500 transition-all duration-200 ml-20">
                         <i class="fa-solid fa-arrow-right text-xl"></i>
-                    </a> -->
+                    </a>
+                </div>
+            </div>
+
+            <!-- Course Management -->
+            <div class="stat-card bg-white shadow-lg rounded-lg p-5">
+                <h2 class="font-bold text-lg flex items-center">
+                    <i class="fa-solid fa-book me-2 text-xl text-indigo-500"></i>
+                    Course Management
+                </h2>
+                <div class="flex justify-between items-bottom mt-4">
+                    <p class="text-2xl font-semibold text-indigo-500 mr-20" id="totalCourses">0</p>
+                    <a href="./courses_admin.php"
+                        class="text-gray-500 hover:text-indigo-500 transition-all duration-200 ml-20">
+                        <i class="fa-solid fa-arrow-right text-xl"></i>
+                    </a>
                 </div>
             </div>
         </section>
@@ -108,7 +123,7 @@
     <script>
         async function fetchData() {
             try {
-                const response = await fetch('./assets/get_dashboard_stats.php'); // Fetch data from PHP backend
+                const response = await fetch('./assets/get_dashboard_stats.php');
                 const data = await response.json();
 
                 document.getElementById('totalUsers').textContent = data.totalUsers || 0;
@@ -116,12 +131,12 @@
                 document.getElementById('feedbackReceived').textContent = data.feedbackReceived || 0;
                 document.getElementById('weeklySignups').textContent = data.weeklySignups || 0;
                 document.getElementById('contacts').textContent = data.contacts || 0;
+                document.getElementById('totalCourses').textContent = data.totalCourses || 0;
             } catch (error) {
                 console.error('Error fetching dashboard stats:', error);
             }
         }
 
-        // Fetch data on page load
         fetchData();
     </script>
 </body>
