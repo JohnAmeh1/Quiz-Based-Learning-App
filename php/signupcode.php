@@ -63,6 +63,8 @@ class Signup
 
     private function create_user($data)
     {
+    // Hash password
+    // $hashed_password = password_hash($password, PASSWORD_DEFAULT);
         $userId = 'user_' . uniqid();
         $username = htmlspecialchars($data["username"]);
         $name = htmlspecialchars($data["name"]);
