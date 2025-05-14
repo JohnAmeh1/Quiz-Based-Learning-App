@@ -32,7 +32,6 @@
 
 // $conn->close();
 
-
 include("./php/all_files.php");
 include("./assets/user_auth.php");
 

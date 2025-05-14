@@ -208,7 +208,7 @@ $user_id = $user_data['id'];
             src="https://storage.googleapis.com/a1aa/image/No3oX7jKvuLnIV1FCeUVehk76jVj2MJcf09uYTPY2KbwrM3nA.jpg"
             width="1920" />
         <div class="absolute inset-0 flex flex-col justify-center items-center text-center p-5">
-            <lottie-player src="./lottie/cap.json" background="transparent" speed="0.5" loop autoplay style="width: 150px; height: 150px;"></lottie-player>
+            <!-- <lottie-player src="./lottie/cap.json" background="transparent" speed="0.5" loop autoplay style="width: 150px; height: 150px;"></lottie-player> -->
             <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
                 Master Programming with Our Expert-Led Courses
             </h1>

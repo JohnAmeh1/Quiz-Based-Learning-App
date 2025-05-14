@@ -10,7 +10,8 @@ $config = [
     'memory_limit' => '128M', // Memory limit
     'max_filesize' => 100000, // Max code size (bytes)
     'allowed_languages' => ['python', 'javascript', 'php', 'html', 'java', 'c', 'cpp'],
-    'sandbox_path' => 'C:/xampp/tmp/sandbox/', // Change to '/tmp/sandbox/' for Linux
+    'sandbox_path' => '/tmp/', // Change to '/tmp/sandbox/' for Linux
+    // 'sandbox_path' => 'C:/xampp/tmp/sandbox/', // Change to '/tmp/sandbox/' for Linux
 ];
 
 // Create sandbox directory if it doesn't exist

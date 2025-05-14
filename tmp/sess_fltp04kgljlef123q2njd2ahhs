@@ -1,0 +1,307 @@
+ PMA_token |s:32:"5d6367452834683c7850312c2b425353"; HMAC_secret |s:16:"8i>CJtNRD`N|c),z";browser_access_time|a:1:{s:7:"default";i:1745111887;}relation|a:1:{i:1;a:41:{s:7:"version";s:5:"5.2.1";s:4:"user";s:4:"root";s:2:"db";s:10:"phpmyadmin";s:8:"bookmark";s:13:"pma__bookmark";s:15:"central_columns";s:20:"pma__central_columns";s:11:"column_info";s:16:"pma__column_info";s:17:"designer_settings";s:22:"pma__designer_settings";s:16:"export_templates";s:21:"pma__export_templates";s:8:"favorite";s:13:"pma__favorite";s:7:"history";s:12:"pma__history";s:16:"navigationhiding";s:21:"pma__navigationhiding";s:9:"pdf_pages";s:14:"pma__pdf_pages";s:6:"recent";s:11:"pma__recent";s:8:"relation";s:13:"pma__relation";s:13:"savedsearches";s:18:"pma__savedsearches";s:12:"table_coords";s:17:"pma__table_coords";s:10:"table_info";s:15:"pma__table_info";s:13:"table_uiprefs";s:18:"pma__table_uiprefs";s:8:"tracking";s:13:"pma__tracking";s:10:"userconfig";s:15:"pma__userconfig";s:10:"usergroups";s:15:"pma__usergroups";s:5:"users";s:10:"pma__users";s:12:"bookmarkwork";b:1;s:8:"mimework";b:1;s:18:"centralcolumnswork";b:1;s:8:"commwork";b:1;s:9:"menuswork";b:1;s:20:"designersettingswork";b:1;s:11:"displaywork";b:1;s:19:"exporttemplateswork";b:1;s:12:"favoritework";b:1;s:7:"navwork";b:1;s:7:"pdfwork";b:1;s:10:"recentwork";b:1;s:7:"relwork";b:1;s:17:"savedsearcheswork";b:1;s:11:"historywork";b:1;s:12:"trackingwork";b:1;s:11:"uiprefswork";b:1;s:14:"userconfigwork";b:1;s:8:"allworks";b:1;}}tmpval|a:16:{s:14:"favoriteTables";a:1:{i:1;a:0:{}}s:12:"recentTables";a:1:{i:1;a:3:{i:0;a:2:{s:2:"db";s:12:"learning_app";s:5:"table";s:9:"subtitles";}i:1;a:2:{s:2:"db";s:12:"learning_app";s:5:"table";s:8:"sections";}i:2;a:2:{s:2:"db";s:12:"learning_app";s:5:"table";s:7:"courses";}}}s:13:"table_uiprefs";a:1:{i:1;a:1:{s:12:"learning_app";a:3:{s:9:"subtitles";a:0:{}s:7:"courses";a:0:{}s:8:"sections";a:0:{}}}}s:5:"query";a:10:{s:32:"55e149c58a4f52b75c375b29aa2e4761";a:8:{s:3:"sql";s:1553:"INSERT INTO subtitles (id, section_id, subtitle, content, code_snippet) VALUES (35, 21, 'Code Documentation', 'Good documentation explains the "why" behind code, not just the "what". Javadoc comments describe classes, methods, and fields for API consumers. Use `@param`, `@return`, and `@throws` tags consistently. Package-level documentation explains overall architecture. Keep comments up-to-date with code changes. README files explain project setup and usage. Change logs track modifications. Documentation should be concise, accurate, and targeted to its audience (developers, users, or maintainers). Tools like Maven site plugin generate HTML documentation from Javadoc. Well-documented code is easier to understand, use, and maintain.', 'class DocumentationDemo {
+  /**
+   * Calculates the factorial of a non-negative integer.
+   * 
+   * @param n the number to calculate factorial for (must be >= 0)
+   * @return the factorial of n
+   * @throws IllegalArgumentException if n is negative
+   */
+  static long factorial(int n) {
+    if (n < 0) {
+      throw new IllegalArgumentException("n must be non-negative");
+    }
+    long result = 1;
+    for (int i = 2; i <= n; i++) {
+      result *= i;
+    }
+    return result;
+  }
+
+  static void demonstrateDocumentation() {
+    System.out.println("Factorial of 5: " + factorial(5));
+    try {
+      System.out.println("Factorial of -1: " + factorial(-1));
+    } catch (IllegalArgumentException e) {
+      System.out.println("Correctly caught: " + e.getMessage());
+    }
+  }
+}');";s:12:"repeat_cells";i:100;s:8:"max_rows";i:25;s:3:"pos";i:0;s:6:"pftext";s:1:"P";s:18:"relational_display";s:1:"K";s:9:"geoOption";s:4:"GEOM";s:14:"display_binary";b:1;}s:32:"96a88acb0994f989fc171abc2c20998c";a:8:{s:3:"sql";s:1769:"-- Section 22: Understanding Java Deeply
+INSERT INTO subtitles (id, section_id, subtitle, content, code_snippet) VALUES (36, 22, 'JVM Architecture', 'The Java Virtual Machine (JVM) is the runtime engine that executes Java bytecode. Key components include: ClassLoader (loads classes), Runtime Data Areas (method area, heap, stacks, PC registers, native method stacks), Execution Engine (interpreter, JIT compiler), and Native Method Interface. The JVM is stack-based and uses garbage collection for memory management. Different JVM implementations (HotSpot, OpenJ9) optimize for various use cases. Understanding JVM architecture helps with performance tuning, debugging, and writing efficient code. The JVM specification ensures compatibility across implementations while allowing optimization flexibility.', 'class JvmArchitectureDemo {
+  static void demonstrateJvmFeatures() {
+    // Display JVM information
+    System.out.println("JVM Name: " + System.getProperty("java.vm.name"));
+    System.out.println("JVM Version: " + System.getProperty("java.vm.version"));
+    System.out.println("JVM Vendor: " + System.getProperty("java.vm.vendor"));
+    
+    // Memory segments
+    System.out.println("\nMemory Areas:");
+    Runtime runtime = Runtime.getRuntime();
+    System.out.printf("Total Memory: %d MB%n", runtime.totalMemory() / (1024 * 1024));
+    System.out.printf("Max Memory: %d MB%n", runtime.maxMemory() / (1024 * 1024));
+    
+    // Garbage collector
+    System.out.println("\nGarbage Collector:");
+    for (java.lang.management.GarbageCollectorMXBean gc : 
+         java.lang.management.ManagementFactory.getGarbageCollectorMXBeans()) {
+      System.out.println(gc.getName() + " - Collections: " + gc.getCollectionCount());
+    }
+  }
+}');";s:12:"repeat_cells";i:100;s:8:"max_rows";i:25;s:3:"pos";i:0;s:6:"pftext";s:1:"P";s:18:"relational_display";s:1:"K";s:9:"geoOption";s:4:"GEOM";s:14:"display_binary";b:1;}s:32:"d02a74b5ae68386da6dca08ddd288f3b";a:8:{s:3:"sql";s:1499:"INSERT INTO subtitles (id, section_id, subtitle, content, code_snippet) VALUES (37, 22, 'Bytecode Analysis', 'Java bytecode is the instruction set of the JVM, stored in .class files. The javap tool disassembles bytecode. Bytecode consists of opcodes (operations) and operands (data). Common instructions include load/store, arithmetic, object creation, method invocation, and control flow. Understanding bytecode helps with performance optimization, debugging, and understanding language features. Tools like ASM allow bytecode manipulation for frameworks and libraries. Java 11+ introduced nest-based access control in bytecode to better support private inner class access. Bytecode remains compatible across JVM implementations.', 'class BytecodeDemo {
+  static int add(int a, int b) {
+    return a + b;
+  }
+
+  static void demonstrateBytecode() {
+    // This would normally be done with javap from command line
+    System.out.println("To view bytecode, run:");
+    System.out.println("  javap -c BytecodeDemo.class");
+    
+    // Show what the bytecode does conceptually
+    System.out.println("\nThe add method bytecode would:");
+    System.out.println("1. Load first parameter (a) onto stack");
+    System.out.println("2. Load second parameter (b) onto stack");
+    System.out.println("3. Add the two values");
+    System.out.println("4. Return the result");
+    
+    // Demonstrate the operation
+    System.out.println("\nActual result of add(5, 7): " + add(5, 7));
+  }
+}');";s:12:"repeat_cells";i:100;s:8:"max_rows";i:25;s:3:"pos";i:0;s:6:"pftext";s:1:"P";s:18:"relational_display";s:1:"K";s:9:"geoOption";s:4:"GEOM";s:14:"display_binary";b:1;}s:32:"2f9594bfa883760e91bedf04602d2c46";a:8:{s:3:"sql";s:1809:"INSERT INTO subtitles (id, section_id, subtitle, content, code_snippet) VALUES (38, 22, 'Class Loading Mechanism', 'Java class loading is the process of loading bytecode into memory and linking/initializing classes. The ClassLoader hierarchy includes bootstrap (core Java classes), platform (JDK classes), and application (user classes) loaders. Loading involves finding binary representation. Linking includes verification, preparation, and resolution. Initialization runs static initializers. Custom ClassLoaders can modify loading behavior for features like hot deployment. Understanding class loading helps with debugging NoClassDefFoundError, managing dependencies, and implementing plugins. Java 9+ modules added layer-based loading and stronger encapsulation.', 'class ClassLoadingDemo {
+  static void demonstrateLoading() {
+    // Display class loader hierarchy
+    ClassLoader loader = ClassLoadingDemo.class.getClassLoader();
+    System.out.println("Current class loader: " + loader);
+    
+    System.out.println("\nClass loader hierarchy:");
+    while (loader != null) {
+      System.out.println("- " + loader);
+      loader = loader.getParent();
+    }
+    System.out.println("- Bootstrap (null)");
+    
+    // Loading a class dynamically
+    try {
+      System.out.println("\nLoading String class:");
+      Class<?> stringClass = Class.forName("java.lang.String");
+      System.out.println("String class loader: " + stringClass.getClassLoader());
+      
+      System.out.println("\nLoading this class by name:");
+      Class<?> thisClass = Class.forName("ClassLoadingDemo");
+      System.out.println("Our class loader: " + thisClass.getClassLoader());
+    } catch (ClassNotFoundException e) {
+      System.err.println("Class not found: " + e.getMessage());
+    }
+  }
+}');";s:12:"repeat_cells";i:100;s:8:"max_rows";i:25;s:3:"pos";i:0;s:6:"pftext";s:1:"P";s:18:"relational_display";s:1:"K";s:9:"geoOption";s:4:"GEOM";s:14:"display_binary";b:1;}s:32:"0d7b4d8fd9e8cc859bba45e6159d00f8";a:8:{s:3:"sql";s:1720:"-- Section 23: Java Challenges and Solutions
+INSERT INTO subtitles (id, section_id, subtitle, content, code_snippet) VALUES (39, 23, 'Common Java Pitfalls', 'Java has several common pitfalls that can trap developers: using == instead of equals() for objects, mutable static fields causing thread-safety issues, memory leaks from unclosed resources or static collections, improper exception handling swallowing errors, floating-point precision issues, and integer overflow. Other traps include forgetting to override hashCode() when overriding equals(), using StringBuffer unnecessarily (instead of StringBuilder), and misunderstanding string immutability. Awareness of these pitfalls helps write more robust code. Static analysis tools can detect many of these issues automatically.', 'class CommonPitfalls {
+  static void demonstratePitfalls() {
+    // Pitfall 1: String comparison with ==
+    String s1 = "hello";
+    String s2 = new String("hello");
+    System.out.println("String equality with ==: " + (s1 == s2)); // false
+    System.out.println("String equality with equals(): " + s1.equals(s2)); // true
+    
+    // Pitfall 2: Mutable static field
+    class Counter {
+      static int count = 0;
+      void increment() { count++; }
+    }
+    
+    Counter c1 = new Counter();
+    Counter c2 = new Counter();
+    c1.increment();
+    System.out.println("Unexpected shared count: " + c2.count); // 1
+    
+    // Pitfall 3: Integer overflow
+    int max = Integer.MAX_VALUE;
+    System.out.println("Integer overflow: " + (max + 1)); // Wraps to negative
+    
+    // Pitfall 4: Floating point precision
+    System.out.println("Floating point math: " + (0.1 + 0.2)); // Not exactly 0.3
+  }
+}');";s:12:"repeat_cells";i:100;s:8:"max_rows";i:25;s:3:"pos";i:0;s:6:"pftext";s:1:"P";s:18:"relational_display";s:1:"K";s:9:"geoOption";s:4:"GEOM";s:14:"display_binary";b:1;}s:32:"2458de36b41ced3581a4e0db4b8689ef";a:8:{s:3:"sql";s:1451:"INSERT INTO subtitles (id, section_id, subtitle, content, code_snippet) VALUES (40, 23, 'Debugging Techniques', 'Effective Java debugging involves multiple techniques: using IDE debuggers (breakpoints, stepping, watches), logging (SLF4J, java.util.logging), stack trace analysis, conditional execution, and assertions. Remote debugging connects to running applications. Memory analyzers (Eclipse MAT) diagnose leaks. Thread dumps identify concurrency issues. JVM tools (jstack, jmap, jstat) provide runtime insights. Unit tests can isolate bugs. Binary search helps locate code changes that introduced bugs. A systematic approach (reproduce, isolate, fix, verify) is more effective than random changes. Understanding the problem is key before attempting solutions.', 'class DebuggingTechniques {
+  static void demonstrateDebugging() {
+    // Example buggy code
+    int[] numbers = {1, 2, 3, 4, 5};
+    int sum = 0;
+    
+    System.out.println("Starting debugging session...");
+    
+    // Using print statements (simple debugging)
+    System.out.println("Array length: " + numbers.length);
+    for (int i = 0; i <= numbers.length; i++) { // Bug: should be < not <=
+      System.out.println("Processing index " + i);
+      sum += numbers[i]; // Will throw ArrayIndexOutOfBoundsException
+    }
+    
+    // Better: use assertions
+    assert sum == 15 : "Incorrect sum calculation";
+    
+    System.out.println("Sum: " + sum);
+  }
+}');";s:12:"repeat_cells";i:100;s:8:"max_rows";i:25;s:3:"pos";i:0;s:6:"pftext";s:1:"P";s:18:"relational_display";s:1:"K";s:9:"geoOption";s:4:"GEOM";s:14:"display_binary";b:1;}s:32:"406edb53b088ecc9712668c458e654e6";a:8:{s:3:"sql";s:1840:"INSERT INTO subtitles (id, section_id, subtitle, content, code_snippet) VALUES (41, 23, 'Problem Solving Patterns', 'Common problem-solving patterns in Java include: divide and conquer (merge sort), sliding window (maximum subarray), two pointers (pair sum), fast/slow pointers (cycle detection), merge intervals (scheduling), cyclic sort (missing number), and topological sort (dependency resolution). Recognizing these patterns helps solve algorithmic challenges efficiently. Java collections provide implementations for many patterns (queues for BFS, stacks for DFS). Practice platforms (LeetCode, HackerRank) help develop pattern recognition. Understanding time/space complexity guides optimal pattern selection for given constraints.', 'class ProblemSolvingPatterns {
+  static void demonstratePatterns() {
+    // Two pointers example: finding pair sum
+    int[] numbers = {1, 2, 3, 4, 5, 6};
+    int target = 7;
+    System.out.println("Pairs summing to " + target + ":");
+    
+    int left = 0;
+    int right = numbers.length - 1;
+    while (left < right) {
+      int sum = numbers[left] + numbers[right];
+      if (sum == target) {
+        System.out.println(numbers[left] + " + " + numbers[right]);
+        left++;
+        right--;
+      } else if (sum < target) {
+        left++;
+      } else {
+        right--;
+      }
+    }
+    
+    // Sliding window example: maximum subarray
+    int[] nums = {2, 1, 5, 1, 3, 2};
+    int k = 3;
+    System.out.println("\nMaximum subarray of size " + k + ":");
+    
+    int windowSum = 0;
+    int maxSum = 0;
+    for (int i = 0; i < nums.length; i++) {
+      windowSum += nums[i];
+      if (i >= k - 1) {
+        maxSum = Math.max(maxSum, windowSum);
+        windowSum -= nums[i - (k - 1)];
+      }
+    }
+    System.out.println("Max sum: " + maxSum);
+  }
+}');";s:12:"repeat_cells";i:100;s:8:"max_rows";i:25;s:3:"pos";i:0;s:6:"pftext";s:1:"P";s:18:"relational_display";s:1:"K";s:9:"geoOption";s:4:"GEOM";s:14:"display_binary";b:1;}s:32:"71fb97f46f421ac9849e2d66f68d77bf";a:8:{s:3:"sql";s:1720:"-- Section 24: Debugging Java Programs
+INSERT INTO subtitles (id, section_id, subtitle, content, code_snippet) VALUES (42, 24, 'Using Debugger Tools', 'Modern IDEs like IntelliJ IDEA and Eclipse provide powerful debuggers with features like: breakpoints (line, conditional, exception), stepping (into, over, out), variable inspection, expression evaluation, and multi-thread debugging. The debugger connects to the JVM through JPDA (Java Platform Debugger Architecture). Hot code replacement allows modifying code during debugging. Remote debugging connects to applications running elsewhere. Memory analyzers examine heap dumps. Profilers identify performance bottlenecks. Mastering debugger tools significantly reduces troubleshooting time and provides insights into program behavior.', 'class DebuggerToolsDemo {
+  static void demonstrateDebugging() {
+    System.out.println("Starting debugger demonstration...");
+    
+    // Set breakpoint on the next line in your IDE
+    int result = calculateFactorial(5);
+    System.out.println("Factorial of 5: " + result);
+    
+    // Complex object for inspection
+    class Person {
+      String name;
+      int age;
+      
+      Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+      }
+    }
+    
+    Person alice = new Person("Alice", 30);
+    Person bob = new Person("Bob", 25);
+    
+    // Conditional breakpoint can be set here (e.g., when age > 28)
+    System.out.println("Person 1: " + alice.name);
+    System.out.println("Person 2: " + bob.name);
+
+  }
+  
+  static int calculateFactorial(int n) {
+    if (n <= 1) return 1;
+    return n * calculateFactorial(n - 1); // Step into this recursive call
+  }
+}');";s:12:"repeat_cells";i:100;s:8:"max_rows";i:25;s:3:"pos";i:0;s:6:"pftext";s:1:"P";s:18:"relational_display";s:1:"K";s:9:"geoOption";s:4:"GEOM";s:14:"display_binary";b:1;}s:32:"5be49bbdb960d237a84ac7dd4bee83f1";a:8:{s:3:"sql";s:2206:"INSERT INTO subtitles (id, section_id, subtitle, content, code_snippet) VALUES (43, 24, 'Logging Best Practices', 'Effective logging balances completeness with readability. Use SLF4J with Logback or Log4j 2 for modern logging. Log levels: ERROR (serious failures), WARN (potential problems), INFO (important runtime events), DEBUG (detailed debug), TRACE (very detailed). Include context in messages (thread, class, method). Use parameterized messages (`log.debug("User {} logged in", user)`). Avoid string concatenation in log calls. Configure appropriate appenders (console, file, syslog). Use Mapped Diagnostic Context (MDC) for request tracing. Rotate log files to prevent disk filling. Structured logging (JSON) helps with analysis. Logs should be actionable - include enough information to diagnose issues.', 'class LoggingBestPractices {
+  // Using SLF4J API (implementation could be Logback/Log4j2)
+  static final org.slf4j.Logger logger = 
+    org.slf4j.LoggerFactory.getLogger(LoggingBestPractices.class);
+
+  static void demonstrateLogging() {
+    // Set up MDC (Mapped Diagnostic Context) for request tracking
+    org.slf4j.MDC.put("requestId", java.util.UUID.randomUUID().toString());
+    
+    logger.info("Application started");
+    
+    try {
+      processOrder(12345, "Alice");
+    } catch (Exception e) {
+      logger.error("Failed to process order", e);
+    }
+    
+    // Parameterized logging (avoids string concatenation when not needed)
+    logger.debug("Processing item {} of {}", 5, 10);
+    
+    // Conditional logging
+    if (logger.isTraceEnabled()) {
+      logger.trace("Very detailed debug information: {}", getDetailedState());
+    }
+    
+    org.slf4j.MDC.clear();
+    logger.info("Application shutdown");
+  }
+  
+  static void processOrder(int orderId, String customer) {
+    logger.info("Processing order {} for customer {}", orderId, customer);
+    // Simulate work
+    try {
+      Thread.sleep(100);
+    } catch (InterruptedException e) {
+      Thread.currentThread().interrupt();
+    }
+    throw new RuntimeException("Simulated error");
+  }
+  
+  static String getDetailedState() {
+    return "Detailed state information";
+  }
+}');";s:12:"repeat_cells";i:100;s:8:"max_rows";i:25;s:3:"pos";i:0;s:6:"pftext";s:1:"P";s:18:"relational_display";s:1:"K";s:9:"geoOption";s:4:"GEOM";s:14:"display_binary";b:1;}s:32:"926527e20f2274a2f5eaa8463c7d22e4";a:8:{s:3:"sql";s:2099:"INSERT INTO subtitles (id, section_id, subtitle, content, code_snippet) VALUES (44, 24, 'Handling Stack Traces', 'Stack traces provide crucial debugging information by showing the call sequence when an exception occurs. The printStackTrace() method outputs to stderr. For logging, use logger.error("Message", exception). To analyze: start from the top (exception type and message), then follow the "Caused by" chain, and examine the stack frames (most recent call last). Filter out framework/internal calls to focus on application code. Tools like Sentry aggregate stack traces across instances. Custom exceptions should preserve the original cause. In production, consider sanitizing stack traces to avoid exposing sensitive information.', 'class StackTraceHandling {
+  static void demonstrateStackTraces() {
+    try {
+      method1();
+    } catch (Exception e) {
+      System.out.println("Basic stack trace:");
+      e.printStackTrace(System.out);
+      
+      System.out.println("\nAnalyzed stack trace:");
+      analyzeStackTrace(e);
+    }
+  }
+  
+  static void method1() {
+    method2();
+  }
+  
+  static void method2() {
+    try {
+      method3();
+    } catch (IOException e) {
+      throw new RuntimeException("Wrapper exception", e);
+    }
+  }
+  
+  static void method3() throws IOException {
+    throw new IOException("Simulated I/O error");
+  }
+  
+  static void analyzeStackTrace(Exception e) {
+    System.out.println("Root cause: " + getRootCause(e).getMessage());
+    
+    System.out.println("\nRelevant application frames:");
+    for (StackTraceElement element : e.getStackTrace()) {
+      // Filter to our application classes
+      if (element.getClassName().startsWith("StackTraceHandling")) {
+        System.out.printf("  at %s.%s(%s:%d)%n",
+          element.getClassName(),
+          element.getMethodName(),
+          element.getFileName(),
+          element.getLineNumber());
+      }
+    }
+  }
+  
+  static Throwable getRootCause(Throwable t) {
+    while (t.getCause() != null) {
+      t = t.getCause();
+    }
+    return t;
+  }
+}');";s:12:"repeat_cells";i:100;s:8:"max_rows";i:25;s:3:"pos";i:0;s:6:"pftext";s:1:"P";s:18:"relational_display";s:1:"K";s:9:"geoOption";s:4:"GEOM";s:14:"display_binary";b:1;}}s:6:"pftext";s:1:"P";s:18:"relational_display";s:1:"K";s:9:"geoOption";s:4:"GEOM";s:14:"display_binary";b:1;s:12:"display_blob";b:0;s:19:"hide_transformation";b:0;s:3:"pos";i:0;s:8:"max_rows";i:25;s:12:"repeat_cells";i:100;s:18:"table_limit_offset";i:0;s:21:"table_limit_offset_db";s:12:"learning_app";s:20:"possible_as_geometry";b:1;}two_factor_check|b:1;cache|a:2:{s:8:"server_1";a:4:{s:15:"userprefs_mtime";i:1745107357;s:14:"userprefs_type";s:2:"db";s:12:"config_mtime";i:1447170388;s:9:"userprefs";a:1:{s:7:"Console";a:1:{s:4:"Mode";s:8:"collapse";}}}s:13:"server_1_root";a:17:{s:17:"is_create_db_priv";b:1;s:14:"is_reload_priv";b:1;s:12:"db_to_create";s:0:"";s:30:"dbs_where_create_table_allowed";a:1:{i:0;s:1:"*";}s:11:"dbs_to_test";b:0;s:9:"proc_priv";b:1;s:10:"table_priv";b:1;s:8:"col_priv";b:1;s:7:"db_priv";b:1;s:17:"menu-levels-table";a:11:{s:6:"browse";s:6:"Browse";s:9:"structure";s:9:"Structure";s:3:"sql";s:3:"SQL";s:6:"search";s:6:"Search";s:6:"insert";s:6:"Insert";s:6:"export";s:6:"Export";s:6:"import";s:6:"Import";s:10:"privileges";s:10:"Privileges";s:9:"operation";s:10:"Operations";s:8:"tracking";s:8:"Tracking";s:8:"triggers";s:8:"Triggers";}s:11:"binary_logs";a:0:{}s:18:"menu-levels-server";a:13:{s:9:"databases";s:9:"Databases";s:3:"sql";s:3:"SQL";s:6:"status";s:6:"Status";s:6:"rights";s:5:"Users";s:6:"export";s:6:"Export";s:6:"import";s:6:"Import";s:8:"settings";s:8:"Settings";s:6:"binlog";s:10:"Binary log";s:11:"replication";s:11:"Replication";s:4:"vars";s:9:"Variables";s:7:"charset";s:8:"Charsets";s:7:"plugins";s:7:"Plugins";s:6:"engine";s:7:"Engines";}s:14:"menu-levels-db";a:14:{s:9:"structure";s:9:"Structure";s:3:"sql";s:3:"SQL";s:6:"search";s:6:"Search";s:5:"query";s:5:"Query";s:6:"export";s:6:"Export";s:6:"import";s:6:"Import";s:9:"operation";s:10:"Operations";s:10:"privileges";s:10:"Privileges";s:8:"routines";s:8:"Routines";s:6:"events";s:6:"Events";s:8:"triggers";s:8:"Triggers";s:8:"tracking";s:8:"Tracking";s:8:"designer";s:8:"Designer";s:15:"central_columns";s:15:"Central columns";}s:19:"profiling_supported";b:1;s:14:"mysql_cur_user";s:14:"root@localhost";s:12:"is_superuser";b:1;s:12:"is_grantuser";b:1;}}ConfigFile1|a:2:{s:7:"Console";a:1:{s:4:"Mode";s:8:"collapse";}s:7:"Servers";a:1:{i:1;a:2:{s:7:"only_db";s:0:"";s:7:"hide_db";s:0:"";}}}sql_history|a:21:{i:0;a:3:{s:2:"db";s:12:"learning_app";s:5:"table";s:9:"subtitles";s:8:"sqlquery";s:25:"SELECT * FROM `subtitles`";}i:1;a:3:{s:2:"db";s:12:"learning_app";s:5:"table";s:7:"courses";s:8:"sqlquery";s:23:"SELECT * FROM `courses`";}i:2;a:3:{s:2:"db";s:12:"learning_app";s:5:"table";s:9:"subtitles";s:8:"sqlquery";s:25:"SELECT * FROM `subtitles`";}i:3;a:3:{s:2:"db";s:12:"learning_app";s:5:"table";s:8:"sections";s:8:"sqlquery";s:24:"SELECT * FROM `sections`";}i:4;a:3:{s:2:"db";s:12:"learning_app";s:5:"table";s:9:"subtitles";s:8:"sqlquery";s:25:"SELECT * FROM `subtitles`";}i:5;a:3:{s:2:"db";s:12:"learning_app";s:5:"table";s:8:"sections";s:8:"sqlquery";s:24:"SELECT * FROM `sections`";}i:6;a:3:{s:2:"db";s:12:"learning_app";s:5:"table";s:8:"sections";s:8:"sqlquery";s:24:"SELECT * FROM `sections`";}i:7;a:3:{s:2:"db";s:12:"learning_app";s:5:"table";s:8:"sections";s:8:"sqlquery";s:102:"INSERT INTO sections (id, course_id, section_title) VALUES (40, 10, 'Next Steps After Learning Java');";}i:8;a:3:{s:2:"db";s:12:"learning_app";s:5:"table";s:8:"sections";s:8:"sqlquery";s:24:"SELECT * FROM `sections`";}i:9;a:3:{s:2:"db";s:12:"learning_app";s:5:"table";s:9:"subtitles";s:8:"sqlquery";s:25:"SELECT * FROM `subtitles`";}i:10;a:3:{s:2:"db";s:12:"learning_app";s:5:"table";s:9:"subtitles";s:8:"sqlquery";s:25:"SELECT * FROM `subtitles`";}i:11;a:3:{s:2:"db";s:12:"learning_app";s:5:"table";s:9:"subtitles";s:8:"sqlquery";s:25:"SELECT * FROM `subtitles`";}i:12;a:3:{s:2:"db";s:12:"learning_app";s:5:"table";s:9:"subtitles";s:8:"sqlquery";s:25:"SELECT * FROM `subtitles`";}i:13;a:3:{s:2:"db";s:12:"learning_app";s:5:"table";s:9:"subtitles";s:8:"sqlquery";s:25:"SELECT * FROM `subtitles`";}i:14;a:3:{s:2:"db";s:12:"learning_app";s:5:"table";s:9:"subtitles";s:8:"sqlquery";s:25:"SELECT * FROM `subtitles`";}i:15;a:3:{s:2:"db";s:12:"learning_app";s:5:"table";s:9:"subtitles";s:8:"sqlquery";s:25:"SELECT * FROM `subtitles`";}i:16;a:3:{s:2:"db";s:12:"learning_app";s:5:"table";s:9:"subtitles";s:8:"sqlquery";s:25:"SELECT * FROM `subtitles`";}i:17;a:3:{s:2:"db";s:12:"learning_app";s:5:"table";s:8:"sections";s:8:"sqlquery";s:24:"SELECT * FROM `sections`";}i:18;a:3:{s:2:"db";s:12:"learning_app";s:5:"table";s:8:"sections";s:8:"sqlquery";s:24:"SELECT * FROM `sections`";}i:19;a:3:{s:2:"db";s:12:"learning_app";s:5:"table";s:8:"sections";s:8:"sqlquery";s:24:"SELECT * FROM `sections`";}i:20;a:3:{s:2:"db";s:12:"learning_app";s:5:"table";s:9:"subtitles";s:8:"sqlquery";s:25:"SELECT * FROM `subtitles`";}}debug|a:0:{}flashMessages|a:0:{}__upload_status|a:1:{s:7:"handler";s:47:"PhpMyAdmin\Plugins\Import\Upload\UploadNoplugin";}Import_message|a:2:{s:7:"message";N;s:11:"go_back_url";s:64:"index.php?route=/table/structure&db=learning_app&table=subtitles";}is_multi_query|b:1;sql_from_query_box|b:1;errors|a:0:{}
