@@ -171,6 +171,7 @@ if ($user_data['badge'] == 'verified') {
                     alert('Payment window closed');
                 }
             });
+            // Open the Paystack payment window
             handler.openIframe();
         }
 
