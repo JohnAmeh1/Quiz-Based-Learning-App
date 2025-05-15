@@ -33,9 +33,14 @@ Mentors: Access to tutoring requests after successful onboarding.
 Layer	Technologies Used:
 
 Frontend	HTML5, CSS3, JavaScript, Tailwind CSS
+
 Backend	PHP
+
 Database	MySQL
+
 Server	XAMPP (Apache, PHP, MySQL)
+
 Payment	Paystack API Integration
+
 Version Control	Git & GitHub
 
