@@ -133,42 +133,73 @@ var mycomment = {
 		//window.location.href = 'index.php?page=' + mycomment.page_number;
 	},
 
-	delete: function(id)
-	{
-		if(!confirm("Are you sure you want to delete this comment?!"))
-		{
-			return;
-		}
+	delete: function(id) {
+    if (!confirm("Are you sure you want to delete this comment?!")) {
+        return;
+    }
 
-		let form = new FormData();
+    let form = new FormData();
+    form.append('id', id);
+    form.append('data_type', 'delete_post');
 
-		form.append('id', id);
-		form.append('data_type', 'delete_post');
-		var ajax = new XMLHttpRequest();
+    var ajax = new XMLHttpRequest();
 
-		ajax.addEventListener('readystatechange',function(){
+    ajax.addEventListener('readystatechange', function() {
+        if (ajax.readyState === 4) {
+            if (ajax.status === 200) {
+                let obj = JSON.parse(ajax.responseText);
+                alert(obj.message);
 
-			if(ajax.readyState == 4)
-			{
-				if(ajax.status == 200){
+                if (obj.success) {
+                    window.location.reload();
+                }
+            } else {
+                alert("Please check your internet connection");
+            }
+        }
+    });
 
-					//console.log(ajax.responseText);
-					let obj = JSON.parse(ajax.responseText);
-					alert(obj.message);
-
-					if(obj.success){
-						window.location.reload();
-					}
-				}else{
-					alert("Please check your internet connection");
-				}
-			}
-		});
-
-		ajax.open('post','ajax.inc.php', true);
-		ajax.send(form);
-
+    	ajax.open('POST', 'ajax.inc.php', true);
+    	ajax.send(form);
 	},
+
+
+	// delete: function(id)
+	// {
+	// 	if(!confirm("Are you sure you want to delete this comment?!"))
+	// 	{
+	// 		return;
+	// 	}
+
+	// 	let form = new FormData();
+
+	// 	form.append('id', id);
+	// 	form.append('data_type', 'delete_post');
+	// 	var ajax = new XMLHttpRequest();
+
+	// 	ajax.addEventListener('readystatechange',function(){
+
+	// 		if(ajax.readyState == 4)
+	// 		{
+	// 			if(ajax.status == 200){
+
+	// 				//console.log(ajax.responseText);
+	// 				let obj = JSON.parse(ajax.responseText);
+	// 				alert(obj.message);
+
+	// 				if(obj.success){
+	// 					window.location.reload();
+	// 				}
+	// 			}else{
+	// 				alert("Please check your internet connection");
+	// 			}
+	// 		}
+	// 	});
+
+	// 	ajax.open('post','ajax.inc.php', true);
+	// 	ajax.send(form);
+
+	// },
 
 
 };

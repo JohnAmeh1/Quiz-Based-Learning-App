@@ -122,39 +122,57 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['data_type']))
 
 	}else
 	if ($_POST['data_type'] == 'delete_post') {
-		$id = (int)$_POST['id'];
-		$user_id = $_SESSION['USER']['user_id'];
-	
-	
-		// Check if the deleted post was a comment
-		$query = "SELECT parent_id FROM posts WHERE id = '$id' LIMIT 1";
-		$result = query($query);
-	
-		if ($result && $result[0]['parent_id'] > 0) {
-			$parent_id = $result[0]['parent_id'];
-	
-			// Get the new comment count for the parent post
-			$query = "SELECT COUNT(*) AS num FROM posts WHERE parent_id = '$parent_id'";
-			$res = query($query);
-	
-			if ($res) {
-				$num = $res[0]['num'];
-				error_log("Comment Count: $num");
-	
-				// Update the parent post's comment count
-				$query = "UPDATE posts SET comments = '$num' WHERE id = '$parent_id' LIMIT 1";
-				query($query);
-			}
-		}
-	
-		// Delete the post or comment
-		$query = "DELETE FROM posts WHERE id = '$id' AND user_id = '$user_id' LIMIT 1";
-		query($query);
+    $id = (int)$_POST['id'];
+    $user_id = $_SESSION['USER']['user_id'];
 
-		$info['success'] = true;
-		$info['message'] = "Your post or comment was deleted successfully";
-	}else
-	if($_POST['data_type'] == 'load_posts')
+    // First, check if the post/comment exists and belongs to the user
+    $query = "SELECT parent_id FROM posts WHERE id = '$id' AND user_id = '$user_id' LIMIT 1";
+    $result = query($query);
+
+    if ($result) {
+        $parent_id = $result[0]['parent_id'];
+
+		if ($parent_id == 0) {
+			// Main post, delete its comments too
+			$deleteComments = "DELETE FROM posts WHERE parent_id = '$id'";
+			query($deleteComments);
+		}
+
+
+        // If it's a comment (i.e., it has a parent post), update the parent's comment count
+        if ($parent_id > 0) {
+            // Delete the comment
+            $deleteQuery = "DELETE FROM posts WHERE id = '$id' LIMIT 1";
+            query($deleteQuery);
+
+            // Update the comment count of the parent post
+            $countQuery = "SELECT COUNT(*) AS num FROM posts WHERE parent_id = '$parent_id'";
+            $res = query($countQuery);
+
+            if ($res) {
+                $num = $res[0]['num'];
+                $updateQuery = "UPDATE posts SET comments = '$num' WHERE id = '$parent_id' LIMIT 1";
+                query($updateQuery);
+            }
+
+        } else {
+            // It's a main post, delete it (along with any child comments optionally)
+            $deleteQuery = "DELETE FROM posts WHERE id = '$id' LIMIT 1";
+            query($deleteQuery);
+        }
+
+        $info['success'] = true;
+        $info['message'] = "Your post was deleted successfully";
+
+    } else {
+        $info['success'] = false;
+        $info['message'] = "You don't have permission to delete this post or it doesn't exist";
+    }
+
+    echo json_encode($info);
+    exit;
+}else
+if($_POST['data_type'] == 'load_posts')
 	{
  
  		$user_id = $_SESSION['USER']['user_id'] ?? 0;

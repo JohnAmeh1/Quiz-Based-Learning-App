@@ -149,8 +149,8 @@ if ($user_data['badge'] == 'verified') {
 
         function payWithPaystack() {
             const handler = PaystackPop.setup({
-                key: 'pk_live_4f399bf20785fe69402e909561b671795972e56c',
                 // key: 'pk_live_4f399bf20785fe69402e909561b671795972e56c',
+                key: 'pk_live_4f399bf20785fe69402e909561b671795972e56c',
                 email: email,
                 amount: amount, // Amount in kobo
                 currency: "NGN",
