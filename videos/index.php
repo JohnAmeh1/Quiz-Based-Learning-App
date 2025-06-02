@@ -131,11 +131,11 @@ include("./assets/header_1.php");
                         <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                             <i class="fas fa-search text-gray-400"></i>
                         </div>
-                        <button
+                        <!-- <button
                             id="searchButton"
                             class="absolute inset-y-0 right-0 px-6 bg-blue-500 text-white rounded-r-lg hover:bg-blue-600 transition-colors flex items-center">
-                            <i class="fas fa-search text-gray-400"></i>
-                        </button>
+                            <i class="fas fa-search text-white"></i>
+                        </button> -->
                     </div>
                 </div>
             </div>
