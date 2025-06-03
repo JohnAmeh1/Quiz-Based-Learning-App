@@ -92,11 +92,14 @@ $conn->close();
 
                 <!-- Social Media Links -->
                 <div class="mt-4">
-                    <a class="text-blue-500 hover:underline" href="<?= $user_data['fb'] ?>">
+                    <a class="text-blue-700 hover:underline ml-4" href="<?= $user_data['fb'] ?>">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                    <a class="text-blue-500 hover:underline ml-4" href="<?= $user_data['tw'] ?>">
                         <i class="fab fa-twitter"></i>
                     </a>
-                    <a class="text-blue-500 hover:underline ml-4" href="<?= $user_data['fb'] ?>">
-                        <i class="fab fa-linkedin"></i>
+                    <a class="text-red-500 hover:underline ml-4" href="<?= $user_data['yt'] ?? $user_data['youtube'] ?>">
+                        <i class="fab fa-youtube"></i>
                     </a>
                 </div>
 
@@ -115,6 +118,10 @@ $conn->close();
                             Get Pro
                         </a>
                     <?php endif; ?>
+                </div>
+                <div class="mt-3">
+                    <span class="text-gray-500">Member since: </span>
+                    <span class="text-gray-800"><?= date("F j, Y", strtotime($user_data['signup_date'])) ?></span>
                 </div>
             </div>
         </div>
