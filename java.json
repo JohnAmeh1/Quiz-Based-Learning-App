@@ -1,0 +1,202 @@
+[
+    {
+        "question": "Which of these collections allows duplicate elements and maintains insertion order?",
+        "options": [
+            "Set",
+            "List",
+            "Map",
+            "Queue"
+        ],
+        "correct": "List"
+    },
+    {
+        "question": "What is the output of: System.out.println(10 + 20 + \"30\" + 40);?",
+        "options": [
+            "10203040",
+            "303040",
+            "60",
+            "Compile error"
+        ],
+        "correct": "303040"
+    },
+    {
+        "question": "Which exception is thrown when dividing an integer by zero?",
+        "options": [
+            "ArithmeticException",
+            "NullPointerException",
+            "IllegalArgumentException",
+            "DivideByZeroException"
+        ],
+        "correct": "ArithmeticException"
+    },
+    {
+        "question": "What is the default value of a local variable in Java?",
+        "options": [
+            "null",
+            "0",
+            "Depends on type",
+            "Local variables have no default value"
+        ],
+        "correct": "Local variables have no default value"
+    },
+    {
+        "question": "Which design pattern ensures only one instance of a class exists?",
+        "options": [
+            "Factory",
+            "Singleton",
+            "Observer",
+            "Decorator"
+        ],
+        "correct": "Singleton"
+    },
+    {
+        "question": "What is the time complexity of HashMap.get() operation?",
+        "options": [
+            "O(1)",
+            "O(n)",
+            "O(log n)",
+            "O(n^2)"
+        ],
+        "correct": "O(1)"
+    },
+    {
+        "question": "Which keyword is used to prevent method overriding?",
+        "options": [
+            "static",
+            "private",
+            "final",
+            "sealed"
+        ],
+        "correct": "final"
+    },
+    {
+        "question": "What does the volatile keyword ensure?",
+        "options": [
+            "Atomicity",
+            "Visibility",
+            "Ordering",
+            "Both visibility and ordering"
+        ],
+        "correct": "Both visibility and ordering"
+    },
+    {
+        "question": "Which stream class is used for deserialization?",
+        "options": [
+            "FileInputStream",
+            "ObjectInputStream",
+            "DataInputStream",
+            "BufferedInputStream"
+        ],
+        "correct": "ObjectInputStream"
+    },
+    {
+        "question": "What is the output of: System.out.println(Math.min(Double.MIN_VALUE, 0.0d));?",
+        "options": [
+            "0.0",
+            "Double.MIN_VALUE",
+            "Negative infinity",
+            "Compile error"
+        ],
+        "correct": "0.0"
+    },
+    {
+        "question": "Which annotation is used to mark a method as deprecated?",
+        "options": [
+            "@Deprecate",
+            "@Deprecated",
+            "@Override",
+            "@SuppressWarnings"
+        ],
+        "correct": "@Deprecated"
+    },
+    {
+        "question": "What is the diamond operator (<>) used for?",
+        "options": [
+            "Lambda expressions",
+            "Type inference",
+            "Generic type parameters",
+            "Both B and C"
+        ],
+        "correct": "Both B and C"
+    },
+    {
+        "question": "Which functional interface represents a predicate (boolean-valued function)?",
+        "options": [
+            "Function<T,R>",
+            "Consumer<T>",
+            "Predicate<T>",
+            "Supplier<T>"
+        ],
+        "correct": "Predicate<T>"
+    },
+    {
+        "question": "What is the output of: \"hello\".equals(null);?",
+        "options": [
+            "true",
+            "false",
+            "NullPointerException",
+            "Compile error"
+        ],
+        "correct": "false"
+    },
+    {
+        "question": "Which collection is thread-safe by default?",
+        "options": [
+            "ArrayList",
+            "HashSet",
+            "Vector",
+            "LinkedList"
+        ],
+        "correct": "Vector"
+    },
+    {
+        "question": "What is the superclass of all exceptions and errors?",
+        "options": [
+            "RuntimeException",
+            "Exception",
+            "Error",
+            "Throwable"
+        ],
+        "correct": "Throwable"
+    },
+    {
+        "question": "Which method is called when an object is garbage collected?",
+        "options": [
+            "finalize()",
+            "destroy()",
+            "cleanup()",
+            "gc()"
+        ],
+        "correct": "finalize()"
+    },
+    {
+        "question": "What does the try-with-resources statement ensure?",
+        "options": [
+            "Exception handling",
+            "Automatic resource closure",
+            "Both A and B",
+            "Neither A nor B"
+        ],
+        "correct": "Both A and B"
+    },
+    {
+        "question": "Which of these is NOT a valid Java identifier?",
+        "options": [
+            "_variable",
+            "$value",
+            "2ndPlace",
+            "MAX_VALUE"
+        ],
+        "correct": "2ndPlace"
+    },
+    {
+        "question": "What is the output of: System.out.println(0.1 + 0.2 == 0.3);?",
+        "options": [
+            "true",
+            "false",
+            "Compile error",
+            "Runtime exception"
+        ],
+        "correct": "false"
+    }
+]
