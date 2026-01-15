@@ -2,7 +2,7 @@
 
 header('Content-Type: application/json');
 
-$apiKey = 'AIzaSyBIhV5pt5tJMMU153NT5WD1LFdGzAE4fWc'; // Replace with your YouTube API key
+$apiKey = ''; // Replace with your YouTube API key
 $query = $_GET['query'] ?? 'programming'; // Default search query
 $maxResults = 90; // Number of videos to fetch
 
